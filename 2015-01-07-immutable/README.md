@@ -18,7 +18,7 @@ In other words, the following code snippet should only create a single array:
 
 ```CSharp
 var builder = ImmutableArray.CreateBuilder<int>(10);
-for (int i = 0; i < builder.Count; i++)
+for (int i = 0; i < builder.Capacity; i++)
 {
     builder.Add(i);
 }
@@ -78,7 +78,7 @@ The resulting experience will now look like this:
 
 ```CSharp
 var builder = ImmutableArray.CreateBuilder<int>(10);
-for (int i = 0; i < builder.Count; i++)
+for (int i = 0; i < builder.Capacity; i++)
 {
     builder.Add(i);
 }
