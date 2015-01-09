@@ -72,6 +72,49 @@ We decided to go down with the second approach. Reasons:
 2. Fewer concepts / types / APIs.
 3. Easier to migrate code between the two methods
 
+## Developer Experience
+
+The resulting experience will now look like this:
+
+```CSharp
+var builder = ImmutableArray.CreateBuilder<int>(10);
+for (int i = 0; i < builder.Count; i++)
+{
+    builder.Add(i);
+}
+
+ImmutableArray<int> array = builder.ExtractToImmutable();
+```
+
+The API `ExtractToImmutable()` is designed to never allocate; this creates
+issues if the `Capacity` doesn't match `Count` when `ExtractToImmutable()`
+is called.
+
+We decided that the best thing is to throw an `InvalidOperationException`.
+The developer is responsible for making sure that the capacity is correct.
+
+Alternatively, we could have allowed the capacity to be larger (for obvious
+reasons it can't be smaller) and make `ExtractToImmutable()` simply use
+the array as-is, i.e. with trailing null/zero elements. However, this could
+create bugs down the road which is why we went with throwing an exception.
+
+If the developer wants this behavior it's easy to do:
+
+```CSharp
+var builder = ImmutableArray.CreateBuilder<int>(2);
+builder.Add(1);
+builder.Add(2);
+builder.Add(3);
+
+builder.Count = builder.Capacity;
+
+ImmutableArray<int> array = builder.ExtractToImmutable();
+```
+
+In this case, the count is set to the current capacity. This doesn't cause any
+reallocations; it just means that the additional empty slots at the end of the
+array are now considered being part of the immutable array.
+
 ## Open Issues
 
 We need to define a name for this method. We don't like the current proposal
