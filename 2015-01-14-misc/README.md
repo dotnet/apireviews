@@ -48,7 +48,9 @@ In this API review we reviewed the following PRs and proposals:
 
 ### #316: Implement `IList<T>`, `IReadOnlyList<T>`, and `IList` on Regex Collections
 
-Status: **Approved with feedback**
+Status: **Approved with feedback** <br>
+[API Reference](issue-316.md) <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=0m2s)
 
 * We had a general discussion around why we should implement the mutable collection interfaces as well as the read-only interfaces
     - We concluded that, for the most part, the answer is yes, because that's the current design point of collections
@@ -63,7 +65,9 @@ Status: **Approved with feedback**
 
 ### #110: Add async document/element loading for XLinq
 
-Status: **Not ready yet**
+Status: **Not ready yet** <br>
+[API Reference](issue-110.md) <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=30m21s)
 
 * We had a general discussion about whether it's OK to use optional parameters
     - In the past, we've avoided optional parameters because of issues around API versioning
@@ -77,7 +81,8 @@ Status: **Not ready yet**
 
 ### #400: Add `Cast<T>` and `CastFrom<TDerived>` to `ImmutableArray<T>`
 
-Status: **Accepting PRs**
+Status: **Accepting PRs** <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=48m38s)
 
 * We like the proposed APIs
 * However, we just need to work out the naming of those APIs so that they convey what they are doing.
@@ -86,7 +91,8 @@ Status: **Accepting PRs**
 
 ### #394: Add `GetOrAdd` and `AddOrUpdate` overloads to `ConcurrentDictionary<TKey, TValue>` that take a `TArg` factoryArgument
 
-Status: **Not ready yet**
+Status: **Not ready yet** <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=57m36s)
 
 * People can add these on top of the public APIs with similar performance.
 * We've a general concern with APIs that introduce an open-ended, never finished set of utility methods
@@ -97,13 +103,15 @@ Status: **Not ready yet**
 
 ### #382: Add constructor to `HashSet<T>` that allows the initial capacity to be specified
 
-Status: **Accepting PRs**
+Status: **Accepting PRs** <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h11m46s)
 
 * Seems like a no-brainer, let's do it!
 
 ### #304: `Regex` should provide a validation method
 
-Status: **Rejected**
+Status: **Rejected** <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h12m55s)
 
 * We should split this proposal into two:
     - P1: We currently throw an `ArgumentException` for parse errors and we agree we should try to at least add more information like the character index. We should consider adding a `RegexParseException` that inherits from `ArgumentException`.
@@ -116,7 +124,8 @@ Status: **Rejected**
 
 ### #311: Bring back `Console.CancelKeyPress`
 
-Status: **Accepted**
+Status: **Accepted** <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h32m33s)
 
 * There is nothing wrong with the API
 * Only reason it's missing is because we haven't ported it yet
@@ -124,7 +133,8 @@ Status: **Accepted**
 
 ### #306: Make `Process.Start` have a option to change handle inheritance
 
-Status: **Not ready yet**
+Status: **Not ready yet** <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h33m12s)
 
 * There is no good way to disable inhering handles on Linux
 * We should use `System.IO.HandleInheritablility` enum if we expose this property.
@@ -134,13 +144,15 @@ Status: **Not ready yet**
 
 ### #318: Proposal for `ImmutableInterlocked.ApplyChange` API
 
-Status: **Accepting PRs**
+Status: **Accepting PRs** <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h46m50s)
 
 * Looks good, bug we don't like the name. We'll settle on the name when the PR is being reviewed.
 
 ### #373: `BitVector32` should implement `IEquatable<T>`
 
-Status: **Not ready yet**
+Status: **Not ready yet** <br>
+[Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h49m50s)
 
 * `BitVector32` is in `System.Collections.Specialized` which we consider a legacy component
     - We primarily added it make it easier for people to migrate existing code
