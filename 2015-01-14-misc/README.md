@@ -10,7 +10,7 @@ In this API review we reviewed the following PRs and proposals:
 
 * [#316](https://github.com/dotnet/corefx/pull/316): Implement `IList<T>`, `IReadOnlyList<T>`, and `IList` on Regex Collections
     - [API Reference](issue-316.md)
-    - [Notes](#316-implement-ilist-ireadonlylist-and-ilist-on-regex-collections)
+    - [Notes](#316-implement-ilistt-ireadonlylistt-and-ilist-on-regex-collections)
     - [Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=0m2s)
 * [#110](https://github.com/dotnet/corefx/pull/110): Add async document/element loading for XLinq
     - [API Reference](issue-110.md)
@@ -20,13 +20,13 @@ In this API review we reviewed the following PRs and proposals:
 ### Proposals
 
 * [#400](https://github.com/dotnet/corefx/issues/400): Add `Cast<T>` and `CastFrom<TDerived>` to `ImmutableArray<T>`
-    - [Notes](#400-add-cast-and-castfrom-to-immutablearray)
+    - [Notes](#400-add-castt-and-castfromtderived-to-immutablearrayt)
     - [Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=48m38s)
 * [#394](https://github.com/dotnet/corefx/issues/394): Add `GetOrAdd` and `AddOrUpdate` overloads to `ConcurrentDictionary<TKey, TValue>` that take a `TArg` factoryArgument
-    - [Notes](#394-add-getoradd-and-addorupdate-overloads-to-concurrentdictionary-that-take-a-targ-factoryargument)
+    - [Notes](#394-add-getoradd-and-addorupdate-overloads-to-concurrentdictionarytkey-tvalue-that-take-a-targ-factoryargument)
     - [Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=57m36s)
 * [#382](https://github.com/dotnet/corefx/issues/382): Add ctor to `HashSet<T>` that allows the initial capacity to be specified
-    - [Notes](#382-add-ctor-to-hashset-that-allows-the-initial-capacity-to-be-specified)
+    - [Notes](#382-add-constructor-to-hashsett-that-allows-the-initial-capacity-to-be-specified)
     - [Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h11m46s)
 * [#304](https://github.com/dotnet/corefx/issues/304): `Regex` should provide a validation method
     - [Notes](#304-regex-should-provide-a-validation-method)
@@ -41,7 +41,7 @@ In this API review we reviewed the following PRs and proposals:
     - [Notes](#318-proposal-for-immutableinterlockedapplychange-api)
     - [Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h46m50s)
 * [#373](https://github.com/dotnet/corefx/issues/373): `BitVector32` should implement `IEquatable<T>`
-    - [Notes](#373-bitvector32-should-implement-iequatable)
+    - [Notes](#373-bitvector32-should-implement-iequatablet)
     - [Video](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14#time=1h49m50s)
 
 ## Notes
