@@ -1,6 +1,6 @@
 # API Review 2014-01-14
 
-This API review as also recorded and is available on [Channel 9](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14).
+This API review was also recorded and is available on [Channel 9](http://channel9.msdn.com/Series/NET-Framework/NET-Core-API-Review-2015-01-14).
 
 ## Overview
 
