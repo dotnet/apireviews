@@ -164,7 +164,7 @@ Status: **Not ready yet** <br>
 
 ### Follow-ups for API review board
 
-* **[@kcwalina](https://github.com/kcwalina)** wants to add some general purpose tests for collection interfaces to ensure they implement them correctly.
+* **[@KrzysztofCwalina](https://github.com/KrzysztofCwalina)** wants to add some general purpose tests for collection interfaces to ensure they implement them correctly.
 * Work on a design/proposal for allowing default parameters in public APIs.
 * Work on a design/proposal for allowing CancelationToken for sync APIs.
 * Work on a design/proposal for when we throw exceptions or not.
