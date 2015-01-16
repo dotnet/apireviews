@@ -99,7 +99,7 @@ Status: **Not ready yet** <br>
     - It seems that both `GetOrAdd` and `AddOrUpdate` fall into this category, so we're hesitant to just add them
     - The question is: where do we draw the line between adding lots of corner case overload APIs vs just providing sample code for these.
     - If there are no benefits, like performance or very common use cases, for having them as instance methods then we should avoid adding them to the core API set to avoid the bloat on our core types.
-* @stephentoub will investigate if there are performance wins in our current implementations.
+* **[@stephentoub](https://github.com/stephentoub)** will investigate if there are performance wins in our current implementations.
 
 ### #382: Add constructor to `HashSet<T>` that allows the initial capacity to be specified
 
@@ -164,7 +164,7 @@ Status: **Not ready yet** <br>
 
 ### Follow-ups for API review board
 
-* Krzysztof wants to add some general purpose tests for collection interfaces to ensure they implement them correctly.
+* **[@kcwalina](https://github.com/kcwalina)** wants to add some general purpose tests for collection interfaces to ensure they implement them correctly.
 * Work on a design/proposal for allowing default parameters in public APIs.
 * Work on a design/proposal for allowing CancelationToken for sync APIs.
 * Work on a design/proposal for when we throw exceptions or not.
