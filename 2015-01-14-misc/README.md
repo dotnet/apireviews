@@ -27,6 +27,8 @@ In this API review we reviewed the following PRs and proposals:
 * [Notes](#373-bitvector32-should-implement-iequatablet) |
   [#373](https://github.com/dotnet/corefx/issues/373): `BitVector32` should implement `IEquatable<T>`
 
+There are also some [follow-ups for the API review board](#follow-ups-for-api-review-board).
+
 ## Notes
 
 ### #316: Implement `IList<T>`, `IReadOnlyList<T>`, and `IList` on Regex Collections
