@@ -101,7 +101,7 @@ Status: **Accepting PRs** |
 [Issue](https://github.com/dotnet/corefx/issues/1378) |
 [Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
 
-* The implementation should throw if duplicate keys are detected (similar to what `Dictionary<K,V>` does when you pass in a collection with a different comparer when you an enumerable  an `ConcurrentDictionary<K,V>`).
+* The implementation should throw if duplicate keys are detected (similar to what `Dictionary<K,V>` does when you pass in a collection with a different comparer or when you pass an enumerable of key value pairs to `ConcurrentDictionary<K,V>`).
 * We should include the one that takes a comparer
 
 ### #1450 Make TimeZoneInfo.AdjustmentRule.BaseUtcOffsetDelta public
@@ -119,7 +119,7 @@ However, the issue also asks about being able to construct the adjustment rules.
 
 ### #1513 Add String.Split overloads that take a single char and string separator
 
-Status: **Not reviewed** |
+Status: **Accepting PRs** |
 [Issue](https://github.com/dotnet/corefx/issues/1513) |
 [Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
 
