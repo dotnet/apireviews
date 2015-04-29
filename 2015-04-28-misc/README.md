@@ -28,7 +28,7 @@ In this API review we reviewed the following PRs and proposals:
 Status: **Not ready yet** |
 [Issue](https://github.com/dotnet/corefx/pull/1029) |
 [API Reference](issue-#1029.md) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h1m52s)
 
 * The event exposes the items as non-generic, but other collection types already expose this event publicly
 * It's a compile time breaking change, but we believe not many people override this event
@@ -39,7 +39,7 @@ Status: **Not ready yet** |
 
 Status: **Approved** |
 [Issue](https://github.com/dotnet/corefx/issues/271) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h11m20s)
 
 * Last point of contention was whether we should make methods like `Contains` public
 * We're fine with leaving them non-public
@@ -48,7 +48,7 @@ Status: **Approved** |
 
 Status: **Approved** |
 [Issue](https://github.com/dotnet/corefx/issues/394) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h15m51s)
 
 * Last time, three concerns were raised:
     1. **Can those overloads be implemented efficiently on top?** Sort of, but doing it internally can gain a 10% speed-up.
@@ -59,7 +59,7 @@ Status: **Approved** |
 
 Status: **Not ready yet** |
 [Issue](https://github.com/dotnet/corefx/issues/1182) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h25m15s)
 
 * Concerns:
     1. **It's an observable change**. The concern is that Linq may now return instances of well-known interfaces that consumers could cast to. This may make it harder for us in the future to change our chaining. We could eliminate this concern by using a private interface in Linq.
@@ -72,7 +72,7 @@ Status: **Not ready yet** |
 
 Status: **Not ready yet** |
 [Issue](https://github.com/dotnet/corefx/issues/1244) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h48m40s)
 
 * It seems we should provide functionality that removes suffixes and prefixes
 * In particular, looking that linked StackOverflow questions it seems folks want the non-repeating behavior, i.e. "SIdId".RemoveSuffix("Id") should return "SId", not "S"
@@ -88,7 +88,7 @@ Status: **Not ready yet** |
 
 Status: **Accepting PRs** |
 [Issue](https://github.com/dotnet/corefx/issues/1271) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=1h12m24s)
 
 * We should do a holistic pass over `String` to make sure that all methods that compare strings take a `StringComparison`. `Replace` is one, so is `Contains`, maybe there are more.
 * This is a separate issue ([#1565](https://github.com/dotnet/corefx/issues/1565) System.String should be consistent with taking StringComparison arguments) and thus shouldn't block this issue.
@@ -99,7 +99,7 @@ Status: **Accepting PRs** |
 
 Status: **Accepting PRs** |
 [Issue](https://github.com/dotnet/corefx/issues/1378) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=1h20m35s)
 
 * The implementation should throw if duplicate keys are detected (similar to what `Dictionary<K,V>` does when you pass in a collection with a different comparer or when you pass an enumerable of key value pairs to `ConcurrentDictionary<K,V>`).
 * We should include the one that takes a comparer
@@ -108,7 +108,7 @@ Status: **Accepting PRs** |
 
 Status: **Accepting PRs** |
 [Issue](https://github.com/dotnet/corefx/issues/1450) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=1h27m30s)
 
 * It seems we shouldn't expose the delta because that's not actually what people want, instead, they want the UTC offset
 
@@ -121,7 +121,7 @@ However, the issue also asks about being able to construct the adjustment rules.
 
 Status: **Accepting PRs** |
 [Issue](https://github.com/dotnet/corefx/issues/1513) |
-[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h0m0s)
+[Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=1h42m16s)
 
 * Take as proposed
 * The semantics of the overloads that take a string should be identical to the one that uses a `string[]` (when being called with a single element)
