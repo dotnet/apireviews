@@ -27,7 +27,6 @@ In this API review we reviewed the following PRs and proposals:
 
 Status: **Not ready yet** |
 [Issue](https://github.com/dotnet/corefx/pull/1029) |
-[API Reference](issue-#1029.md) |
 [Video](http://channel9.msdn.com/Blogs/dotnet/NET-Core-API-Review-2015-04-28#time=0h1m52s)
 
 * The event exposes the items as non-generic, but other collection types already expose this event publicly
