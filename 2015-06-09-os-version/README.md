@@ -35,6 +35,14 @@ Status: **Approved with feedback** |
       to drop down to the OS API to ask for more details. This is especially
       required on platform like Windows where they added new APIs to avoid
       version checks if the goal is only to ask for the availability of an API.
+* Why don't we use the existing APIs
+  (e.g. [PlatformID](https://msdn.microsoft.com/en-us/library/3a8hyw88.aspx),
+        [OperatingSystem](https://msdn.microsoft.com/en-us/library/system.operatingsystem.aspx))
+    - The existing APIs weren't very well designed
+    - Have a lot of platforms that are no longer relevant
+    - In order to unblock our cross-platform we likely want to evolve this API
+      out of band. If we unify with an existing API we'd be slowed to the
+      cadence of .NET Framework, which is too slow for this area.
 
 ### Follow-ups for API review board
 
