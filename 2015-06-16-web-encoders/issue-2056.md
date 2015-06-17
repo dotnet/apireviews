@@ -1,13 +1,19 @@
 ```diff
 ---D:\git\corefx\bin\Windows_NT.AnyCPU.Debug\System.Text.Encodings.Web\System.Text.Encodings.Web.dll
    namespace System.Text.Encodings.Web {
+  ^ Immo Landwerth: We shouldn't use Encodings. Encoding already exists as a type and the plural is a bit too subtle. Maybe we should just use System.Text.Web.
   public sealed class CodePointFilter : ICodePointFilter {
+    ^ Immo Landwerth: This type is mutable. Do we want such a design? It seems the implementations of TextEncoder are calling the copy .ctor to:
+    | Immo Landwerth: 1. make sure they can't be mutated
+    | Immo Landwerth: 2. Allow the code filter to be flattened into an efficient bitmap.
     public CodePointFilter();
     public CodePointFilter(ICodePointFilter other);
     public CodePointFilter(params UnicodeRange[] allowedRanges);
     public CodePointFilter AllowCharacter(char character);
+    ^ Immo Landwerth: Chaining mutable types is a bad idea. The signature implies immutabiliy. They should be void.
     public CodePointFilter AllowCharacters(params char[] characters);
     public CodePointFilter AllowCharacters(string characters);
+    ^ Immo Landwerth: Should we remove this? We already have the char[].
     public CodePointFilter AllowFilter(ICodePointFilter filter);
     public CodePointFilter AllowRange(UnicodeRange range);
     public CodePointFilter AllowRanges(params UnicodeRange[] ranges);
@@ -19,8 +25,10 @@
     public CodePointFilter ForbidRanges(params UnicodeRange[] ranges);
     public IEnumerable<int> GetAllowedCodePoints();
     public bool IsCharacterAllowed(char character);
+    ^ Immo Landwerth: Remove
   }
   public sealed class DefaultHtmlEncoder : HtmlEncoder {
+    ^ Immo Landwerth: Do we need this one? Should be internal.
     public DefaultHtmlEncoder(CodePointFilter filter);
     public DefaultHtmlEncoder(params UnicodeRange[] allowedRanges);
     public override int MaxOutputCharactersPerInputCharacter { get; }
@@ -29,6 +37,7 @@
     public unsafe override bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten);
   }
   public sealed class DefaultJavaScriptEncoder : JavaScriptEncoder {
+    ^ Immo Landwerth: Do we need this one? Should be internal.
     public DefaultJavaScriptEncoder(CodePointFilter filter);
     public DefaultJavaScriptEncoder(params UnicodeRange[] allowedRanges);
     public override int MaxOutputCharactersPerInputCharacter { get; }
@@ -37,6 +46,7 @@
     public unsafe override bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten);
   }
   public sealed class DefaultUrlEncoder : UrlEncoder {
+    ^ Immo Landwerth: Do we need this one? Should be internal.
     public DefaultUrlEncoder(CodePointFilter filter);
     public DefaultUrlEncoder(params UnicodeRange[] allowedRanges);
     public override int MaxOutputCharactersPerInputCharacter { get; }
@@ -51,6 +61,7 @@
     public static HtmlEncoder Create(params UnicodeRange[] allowedRanges);
   }
   public interface ICodePointFilter {
+    ^ Immo Landwerth: Why is this needed?
     IEnumerable<int> GetAllowedCodePoints();
   }
   public abstract class JavaScriptEncoder : TextEncoder {
@@ -60,13 +71,24 @@
     public static JavaScriptEncoder Create(params UnicodeRange[] allowedRanges);
   }
   public abstract class TextEncoder {
+    ^ Immo Landwerth: How would we allow TextEncoder to encode HTML/JS/json directly to UTF8/UTF16?
+    ^ Immo Landwerth: TextEncoder seems a bit too generic, considering we already have Text.Encoder.
     protected TextEncoder();
     public abstract int MaxOutputCharactersPerInputCharacter { get; }
+    ^ Immo Landwerth: Once we merged TextEncoderExtensions, we should make those protected.
     public abstract bool Encodes(int unicodeScalar);
+    ^ Immo Landwerth: Probably required for perf. We don't like the name but we don't know how it's being used. So:
+    | Immo Landwerth: 1. Why do we need it?
+    | Immo Landwerth: 2. Can we can up with a better name?
+    ^ Immo Landwerth: protected
     public unsafe abstract int FindFirstCharacterToEncode(char* text, int textLength);
+    ^ Immo Landwerth: protected
     public unsafe abstract bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten);
+    ^ Immo Landwerth: Returns false if not is enough space is available. Has nothing to do whether an encoding is required.
+    ^ Immo Landwerth: protected
   }
   public static class TextEncoderExtensions {
+    ^ Immo Landwerth: We should merge these APIs with TextEncoder
     public static void Encode(this TextEncoder encoder, TextWriter output, char[] value, int startIndex, int characterCount);
     public static void Encode(this TextEncoder encoder, TextWriter output, string value);
     public static void Encode(this TextEncoder encoder, TextWriter output, string value, int startIndex, int characterCount);
