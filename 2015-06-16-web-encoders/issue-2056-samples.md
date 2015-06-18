@@ -42,17 +42,17 @@ encoder.Encode(Console.Out, "<hello> <world>".ToCharArray(), 0, 7);
 #### URLs
 
 ```CSharp
-// prints: http://&lt;hello&gt;
+// prints: What%20is%202%20%2B%202%3F
 var encoder = UrlEncoder.Default;
-string encoded = encoder.Encode("http://<hello>");
+string encoded = encoder.Encode("What is 2 + 2?");
 Console.Write(encoded);
 ```
 #### JavaScript
 
 ```CSharp
-// prints: http://&lt;hello&gt;
+// prints: Seattle\u0027s nickname is the \u0022Emerald City\u0022.
 var encoder = JavaScriptEncoder.Default;
-string encoded = encoder.Encode("http://<hello>");
+string encoded = encoder.Encode("Seattle's nickname is the \"Emerald City\".");
 Console.Write(encoded);
 ```
 
