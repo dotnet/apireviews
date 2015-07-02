@@ -14,7 +14,7 @@ There are also some [follow-ups for the API review board](#follow-ups-for-api-re
 
 ### #2199 Review converged configuration APIs
 
-Status: **Not reviewed** |
+Status: **Not ready yet** |
 [Issue](https://github.com/dotnet/corefx/issues/2199) |
 [API Reference](issue-2199.md) |
 [Video](https://plus.google.com/events/ccje4f1n0t8hjvi1vqgdm9j89jk)
