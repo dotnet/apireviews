@@ -4,8 +4,7 @@ This API review was also recorded and is available on [Google+](https://plus.goo
 
 ## Overview
 
-In this API review we reviewed we discussed what we do with `SecureString`
-moving forward.
+In this API review we discussed what we do with `SecureString` moving forward.
 
 ## Problems with `SecureString`
 
@@ -38,7 +37,7 @@ Status: **Under investigation** |
 ### Conclusion
 
 * We probably shouldn't expose `SecureString` in .NET Core
-* The only incoming API dependency is `Process`. The primary consumer of the the
+* The only incoming API dependency is `Process`. The primary consumer of the
   APIs involving `SecureString` is PowerShell
     - We *may* be able remove that entirely
 * Networking also uses `SecureString` but only in its implementation
