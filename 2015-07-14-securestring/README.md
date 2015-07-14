@@ -1,8 +1,18 @@
-# Secure String
+# API Review 2015-07-14
+
+This API review was also recorded and is available on [Google+](https://plus.google.com/events/cms40br51f6vt7eg73grju99690).
+
+## Overview
+
+In this API review we reviewed we discussed what we do with `SecureString`
+moving forward.
 
 ## Problems with `SecureString`
 
-* The purpose of `SecureString` is to avoid having secrets store in the process
+Status: **Under investigation** |
+[Video](https://plus.google.com/events/cms40br51f6vt7eg73grju99690)
+
+* The purpose of `SecureString` is to avoid having secrets stored in the process
   memory as plain text.
 * However, even on Windows `SecureString` doesn't exist as an OS concept
     - It just makes the window getting the plain text shorter; it doesn't fully
@@ -25,7 +35,7 @@
     - APIs would then take the abstraction as opposed to individual pieces of
       of information, such as user name / password.
 
-## Conclusion
+### Conclusion
 
 * We probably shouldn't expose `SecureString` in .NET Core
 * The only incoming API dependency is `Process`. The primary consumer of the the
@@ -33,7 +43,7 @@
     - We *may* be able remove that entirely
 * Networking also uses `SecureString` but only in its implementation
 
-## Follow-ups:
+### Follow-ups
 
 1. @weshaggard will talk to PowerShell to see whether we can remove the `SecureString`
     - Need a contract without user/password which will be a proper subset of the .NET Framework 4.6
