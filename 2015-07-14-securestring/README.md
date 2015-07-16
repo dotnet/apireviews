@@ -48,7 +48,7 @@ Status: **Under investigation** |
     - Need a contract without user/password which will be a proper subset of the .NET Framework 4.6
     - Need another contract that adds new APIs for user/password which will not be supported by .NET Framework 4.6 but a later version
 2. If we can't remove the APIs:
-    - We could could give PowerShell the code to make an implementation dependency
+    - We could give PowerShell the code to make an implementation dependency
     - We should remove encryption from `SecureString` across all platforms in .NET Core
     - We should obsolete `SecureString`
 3. If we need to keep `SecureString` we could try to make it useful *without*
