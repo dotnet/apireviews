@@ -55,7 +55,7 @@ Status: **Design in progress** |
 * Allows legacy device names
 * Does not normalize (`.`, `..``)
 
-## Windows Support: Goals
+### Windows Support: Goals
 
 * Allow long paths without extended syntax to "just work“
   - Facilitates xplat coding with files
@@ -129,4 +129,5 @@ Status: **Design in progress** |
 
 ### Follow-ups
 
-* @JeremyKuhne will follow-up with a more concrete design proposal
+* [JeremyKuhne](http://github.com/JeremyKuhne) will follow-up with a more
+  concrete design proposal
