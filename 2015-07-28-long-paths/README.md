@@ -4,7 +4,7 @@ This API review was also recorded and is available on [Google+](https://plus.goo
 
 ## Overview
 
-In this API review we discussed how we want address long path limitations due
+In this API review we discussed how we want to address long path limitations due
 to `MAX_PATH`.
 
 ## `MAX_PATH` Limitations
@@ -19,7 +19,7 @@ Status: **Design in progress** |
   - Enable CoreCLR (Assembly & resource loading, not done)
 * Also want to support > MAX_PATH on Windows
   - Sharing early thinking, will recircle with deeper dives
-  - Many details need uncovered / answered
+  - Many details need to be uncovered / answered
 
 ### Implementation Order
 
@@ -53,7 +53,7 @@ Status: **Design in progress** |
   - exact path length has to fit when converted to internal NT path
 * Additional characters (trailing spaces, period)
 * Allows legacy device names
-* Does not normalize (`.`, `..``)
+* Does not normalize (`.`, `..`)
 
 ### Windows Support: Goals
 
@@ -87,7 +87,7 @@ Status: **Design in progress** |
 ### Allow Extended Syntax (`\\?\`)
 
 * Don't attempt to normalize
-* Very basic correctness checks (invalid chars, `.`, `..``)
+* Very basic correctness checks (invalid chars, `.`, `..`)
 * Only throw PathTooLong if > 32,767 (don't try and guess internal translation)
 * CoreFx work has begun, key scenarios unblocked (>260 not done yet)
 * CoreCLR work about to start
