@@ -126,6 +126,11 @@ Status: **Design in progress** |
       are insensitive
 * How does Java handle these issues?
     - Linux & Mac both a have C API 'real path' that returns a canonical pat
+* We should consider changing the behavior of the existing APIs (such as
+  `Path.Combine`, `Path.GetFileName`, `Path.GetDirectory`, `Path.GetExtension`)
+  to not check for invalid characters
+    - This allows breaking user input apart that contains, for example,
+      wildcards: `Path.GetDirectory(@"C:\temp\*.cs") == "C:\temp"`
 
 ### Follow-ups
 
