@@ -9,4 +9,4 @@ the notes after the reviews took place.
 
 The way you contribute to this is by proposing APIs to be added. To do this,
 you simply follow the contribution process as
-[described here](https://github.com/dotnet/corefx/wiki/Contributing).
+[described here](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/contributing.md).
