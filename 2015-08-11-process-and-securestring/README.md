@@ -108,7 +108,7 @@ processes with different credentials. This avoids the problem of having two
 overloads on desktop that have both, `string` versions as well as `SecureString`
 versions.
 
-The only downside is that this may make people`s life harder when they port
+The only downside is that this may make people's life harder when they port
 .NET Framework code to .NET Core. However, none of the apps in our compat lab
 are using the existing static methods that take credentials.
 
