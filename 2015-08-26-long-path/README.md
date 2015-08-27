@@ -2,8 +2,11 @@
 
 This API review was also recorded and is available on Google+:
 
-* [Part 1](https://plus.google.com/events/c3bs3mqme23isi005bhlcv6nu68)
-* [Part 2](https://plus.google.com/events/ccj5m9oheonldrlp2hg59mhevtk)
+* [Part 1]
+* [Part 2]
+
+[part 1]: https://plus.google.com/events/ccj5m9oheonldrlp2hg59mhevtk
+[part 2]: https://plus.google.com/events/c3bs3mqme23isi005bhlcv6nu68
 
 ## Overview
 
@@ -12,9 +15,8 @@ In this API review we reviewed [a proposal](NET API FullPath Proposal.md).
 ## .NET API Proposal for handling full paths
 
 Status: **Design in progress** |
-[Video 1](https://plus.google.com/events/c3bs3mqme23isi005bhlcv6nu68) |
-[Video 2](https://plus.google.com/events/ccj5m9oheonldrlp2hg59mhevtk)
-
+[Video 1][part 1] |
+[Video 2][part 2]
 
 * Apps that are broken today, will continue to be broken regardless of whether
   we fix that issue or not.
