@@ -16,7 +16,7 @@ In this API review we reviewed:
 Status: **Proposal Pending**
 
 * We'll probably change our design review process as our current approach
-  clearly doesn't scale. @terrajobst is on the hook to make a prosposal.
+  clearly doesn't scale. @terrajobst is on the hook to make a proposal.
 
 ### Serialization
 
@@ -29,20 +29,20 @@ Status: **Proposal Approved**
 * Our stance on this topic is that we don't want to make serialization a
   technology that the core has to know about. In particular, we don't want to
   add types that require core framework types, such as exceptions and
-  collections having to implement serialization logic.
+  collections, having to implement serialization logic.
 * The reason being that serialization technologies have a tendency to come and
-  go and we think that tying the platform core to a volatile are like this
-  isn't a recipe for success.
+  go and we think that tying the platform core to volatile technologies isn't a
+  recipe for success.
 * Of course, we want the .NET platform to be able to provide the right building
   blocks for serialization, which includes reflection and design time code
   generation.
 * We believe the right model for serialization is make it so that consumers can
-  register handlers for serialization/serialization of types. Of course, it
+  register handlers for serialization/deserialization of types. Of course, it
   should come with pre-hooked handlers for common types such as primitives
-  and collections, but it should be extensible for customers, too. This way
+  and collections, but it should be extensible for consumers too. This way,
   anybody can add code that makes any type serializable while it decouples
-  the types from the serialization technologies. This model is referred to
-  as *surrogates* and it's already supported by serializes, such as data
+  the types and serialization technologies. This model is referred to
+  as *surrogates* and it's already supported by some serializers, such as data
   contract serializer.
 
 ### Support for IDataContractSurrogate in .NET
@@ -50,7 +50,7 @@ Status: **Proposal Approved**
 * The current way to hook up surrogates for data contract serialization is via
   [IDataContractSurrogate](https://msdn.microsoft.com/en-us/library/system.runtime.serialization.idatacontractsurrogate(v=vs.110).aspx)
 * Unfortunately, `IDataContractSurrogate` depends on CodeDOM which we consider
-  legacy and replaced by Roslyn
+  legacy and is replaced by Roslyn
 * The proposal is to add a new type, `ISerializationSurrogateProvider` that
   doesn't have the CodeDOM dependency but supports the scenario:
 
