@@ -23,6 +23,6 @@ Status: **Approved with Feedback** |
     - We concluded that it shouldn't be split -- it shares a bunch of infrastructure
 * Some very generic names, especially Document
     - We should qualify them, e.g. `SourceDocument`
-* Should `DebugMetadataHeader` be collapsed and expose `EntryPoint` as a method
-  on `MetadataReader`, e.g. `GetDebugEntryPoint()` or something?
-    - It seems the underlying format doesn't have accordances to grow anyways
+* ~~Should `DebugMetadataHeader` be collapsed and expose `EntryPoint` as a method
+  on `MetadataReader`, e.g. `GetDebugEntryPoint()` or something?~~
+    - Now has an extra `Id` property, so it's fine as-is.

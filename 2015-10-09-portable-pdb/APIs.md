@@ -12,7 +12,6 @@
   }
 + [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
   public struct CustomDebugInformation {
-    ^ Immo Landwerth: CustomDebugInfo
 +   public GuidHandle Kind { get; }
 +   public EntityHandle Parent { get; }
 +   public BlobHandle Value { get; }
@@ -294,7 +293,6 @@
 +   public MethodBodyHandleCollection MethodBodies { get; }
 +   public CustomDebugInformation GetCustomDebugInformation(CustomDebugInformationHandle handle);
 +   public CustomDebugInformationHandleCollection GetCustomDebugInformation(EntityHandle handle);
-    ^ Immo Landwerth: Needs to be plural
 +   public Document GetDocument(DocumentHandle handle);
 +   public ImportScope GetImportScope(ImportScopeHandle handle);
 +   public ImportsBlobReader GetImportsReader(BlobHandle handle);
@@ -318,7 +316,7 @@
   }
 + [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
   public struct MethodBody {
-    ^ Immo Landwerth: MethodDebugInfo
+    ^ Immo Landwerth: MethodDebugInfomation
 +   public StandaloneSignatureHandle LocalSignature { get; }
 +   public BlobHandle SequencePoints { get; }
 +   public MethodDefinitionHandle GetStateMachineKickoffMethod();
@@ -326,7 +324,7 @@
   }
 + [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
   public struct MethodBodyHandle : IEquatable<MethodBodyHandle> {
-    ^ Immo Landwerth: MethodDebugInfoHandle
+    ^ Immo Landwerth: MethodDebugInformationHandle
 +   public bool IsNil { get; }
 +   public override bool Equals(object obj);
 +   public bool Equals(MethodBodyHandle other);
@@ -340,7 +338,7 @@
   }
 + [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
   public struct MethodBodyHandleCollection : IEnumerable, IEnumerable<MethodBodyHandle>, IReadOnlyCollection<MethodBodyHandle> {
-    ^ Immo Landwerth: MethodDebugInfoHandleCollection
+    ^ Immo Landwerth: MethodDebugInformationHandleCollection
 +   public int Count { get; }
 +   public MethodBodyHandleCollection.Enumerator GetEnumerator();
 +   IEnumerator<MethodBodyHandle> System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MethodBodyHandle>.GetEnumerator();
