@@ -9,7 +9,7 @@ buffer pool.
 
 ## Notes
 
-### Portable PDB
+### Managed Buffer Pool
 
 Status: **Approved with Feedback** |
 [Proposal](https://github.com/dotnet/corefx/issues/4547) |
