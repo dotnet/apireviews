@@ -27,4 +27,4 @@ Status: **Approved with Feedback** |
     - There are dependency issues for the arguments; there is no good contract
       in which we could put the named delegate
 * `SocketReceiveFromResult` and `SocketReceiveMessageFromResult` both use
-  public fields -- shouldn't those be structs
+  public fields -- shouldn't those be properties?
