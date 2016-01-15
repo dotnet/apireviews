@@ -15,18 +15,46 @@ There are also some [follow-ups for the API review board](#follow-ups-for-api-re
 
 ### #5202 [API Proposal] Support for constructing and copying Vector\<T> from pointers
 
-Status: **Approved with feedback** |
+Status: **Rejected** |
 [APIs](VectorOfT.md) |
 [Issue](https://github.com/dotnet/corefx/issues/5202) |
 
-* We should probably get rid of `IntPtr` overloads because the code is inherently unsafe
-* We should get rid of the `offset` parameter, because it's unclear whether it's a byte offset or an index.
-* Should we include a `length` for the constructors and/or the `CopyTo` method?
-    - @terrajobst will follow u
+* ~~We should probably get rid of `IntPtr` overloads because the code is inherently unsafe~~
+* ~~We should get rid of the `offset` parameter, because it's unclear whether it's a byte offset or an index.~~
+* ~~Should we include a `length` for the constructors and/or the `CopyTo` method?~~
+    - ~~@terrajobst will follow up~~
 * Should we include a ctor that allows padding?
     - Is a separate feature, filed [#5360](https://github.com/dotnet/corefx/issues/5360)
 
-For agreed upon shape, see [APIs](VectorOfT.md).
+~~For agreed upon shape, see [APIs](VectorOfT.md).~~
+
+After [extensive discussion](https://github.com/dotnet/apireviews/pull/23) after the meeting, we decided not to add the members on `Vector<T>`. Instead, we'll offer a generic API to read and write from a pointer, like so:
+
+```C#
+public static class Unsafe
+{
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+      public static T Read<T>(void * p)
+      {
+          // Can't be expressed in C#, thus in IL:
+          ldarg.0
+          ldobj !!T
+          ret
+      }
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+      public static void Write<T>(void * p, T value)
+      {
+          // Can't be expressed in C#, thus in IL:
+          ldarg.0
+          ldarg.1
+          stobj !!T
+          ret
+      }
+}
+```
+
+This feature is tracked in issue [#5474](https://github.com/dotnet/corefx/issues/5474).
 
 #### Q & A
 
