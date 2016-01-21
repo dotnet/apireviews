@@ -39,7 +39,7 @@ As outlined in our [porting notes](https://github.com/dotnet/corefx/pull/5480), 
 @@ -1,41 +1,44 @@
 -    public abstract class TypeInfo : MemberInfo {
 +    public abstract class Type : MemberInfo {
-         // Should already be in .NET Core's Type
+         // Expose on Type
 +        public static readonly char Delimiter;
          // Should already be in .NET Core's Type
 +        public static readonly object Missing;
