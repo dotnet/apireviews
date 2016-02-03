@@ -33,6 +33,7 @@ The proposal is available in [this Gist](https://gist.githubusercontent.com/saur
     - We'll have two different implementations for the extension method:
         1. The .NET Framework version will be implemented by calling the existing method that returns the schema information via a `DataTable`.
         2. On .NET Core, we rely on the `DbReader` derivatives to implement the interface.
+    - In the next version of the .NET Framework/.NET Core we'll add a virtual to `DbReader` has the same signature as the extension method. In order to do so, the .NET Core implementers need to implement this interface explicitly.
 * Next steps: Saurabh will update the proposal
 
 ### #1039 Why is DataTable/View/Set absent?
