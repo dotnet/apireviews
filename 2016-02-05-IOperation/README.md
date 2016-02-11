@@ -35,4 +35,14 @@ The entry point APIs for analyzers are [RegisterOperationAction](http://source.r
     - `BinaryOperatorKind` seems a bit big, like it multiplies the operators, the specific argument types, and the specific semantics (like VB equals vs regular equals)
 * `IExpression` and `IStatement` should be purely abstract, i.e. there shouldn't be instances whose only public type is `IExpression`/`IStatement`. There should be specific subtypes, even if they have no members. This makes visitors much more logical.
 
+Additional comments from @nguerrera:
+
+* `IInstanceReferenceExpression` is currently also an `IParameterReferenceExpression` to the hidden 'this' parameter. AFAICT, the hidden 'this' parameter is not otherwise exposed from `IMethodSymbol` and isn't really very useful so we might prefer `IInstanceReferenceExpression` inheriting directly from `IReferenceExpression`. This would resolve another case of a node-type that can be both interior and leaf, which came up as something to avoid across the board.
+
+* Nodes of type `ICase` have `OperationKind.SwitchSection` and nodes of type `ICatch` have `OperationKind.CatchHandler`. These are rare departures from the 1:1 between interface names and operation kinds. We should rename one way or the other to make them match.
+
+* Consider having a single `OperationKind.Branch` for `IBranchStatement` with a separate `BranchKind` enum member with `GoTo`, `Break`, `Exit` and `Continue` values. In general, I'd fined a strict 1:1 between the operation kinds and the leaf-node interfaces cleaner and easier for analyzer authors to internalize as a pattern.
+
+* There are both `ILabeledStatement` and `ILabelStatement` corresponding to differences in C#/VB. `IOperation` should choose one representation or the other and normalize accordingly.
+
 More comments are in the [API reference](IOperation.md).
