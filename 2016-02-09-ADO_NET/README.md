@@ -16,7 +16,9 @@ More notes:
 
 * `DbColumn`
     - Setters should be `protected`
-    - Should the indexer throw for non existing keys or return `null`?
+    - Should the indexer throw for non existing keys or return `null`? We should do one of the following:
+        1. Agree that `null` is a good enough value for non-existing keys.
+        2. Follow `Dictionary<K,V>` and throw for non-existing keys and also offer `TryGetValue` to avoid exceptions.
     - The indexer exposes properties defined on the derived type, which allows consumers to light up for specific providers without having a static dependency on the derived type
 * No virtual for V2
     - Provider will continue to provide schema by implementing the interface
