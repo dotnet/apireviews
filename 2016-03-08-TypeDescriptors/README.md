@@ -21,7 +21,7 @@ Status: **Approved with feedback** |
   because we can't remove `ICustomTypeDescriptor.GetEditor(Type)`. The implementation
   should match desktop which basically says: `return _parent?.GetEditor(type)`
 * **Do** Expose
-    - All `static readonly fields that have pre-constructed attributes -- they designer relies on reference equality
+    - All `static readonly fields` that have pre-constructed attributes -- the designer relies on reference equality
     - `PropertyDescriptor.SerializationVisibility`
     - `TypeDescriptor.AddEditorTable`
     - `TypeDescriptor.GetEditor`
