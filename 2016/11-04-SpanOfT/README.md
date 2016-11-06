@@ -2,7 +2,7 @@
 
 Status: **Approved** | [Issue](https://github.com/dotnet/corefxlab/issues/951)
 
-We agreed on the following API shape for `Span<T>`:
+We agreed on the following initial API shape for `Span<T>`:
 
 ```C#
 public struct Span<T>
@@ -16,6 +16,7 @@ public struct Span<T>
     public ref T this[int index] { get; }
     public int Length { get; }
     public void CopyTo(Span<T> destination);
+    public bool TryCopyTo(Span<T> destination);
     [Obsolete("This operation is not supported.", IsError=True)]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public override bool Equals(object obj);
@@ -24,7 +25,7 @@ public struct Span<T>
     public override int GetHashCode();
     [EditorBrowsable(EditorBrowsableState.Never)]
     public ref T int DangerousGetPinnableReference();
-    public static Span<T> DangerousCreate(object obj, IntPtr offset, int length); 
+    public static Span<T> DangerousCreate(object obj, ref T rawPointer, int length); 
     public static implicit operator Span<T> (ArraySegment<T> arraySegment);
     public static implicit operator Span<T> (T[] array);
     public static bool operator ==(Span<T> left, Span<T> right);
@@ -38,17 +39,10 @@ public struct Span<T>
 ## `Span<T>` and 64-bit
 
 It was suggested to allow `Span<T>` to represent spans that are larger than
-32-bit.
-
-Before discussion the options it's important to consider that even on 64-bit
-machines, most apps should (and thus will) run as 32-bit because they don't need
-a 64-bit address space and will therefore benefit from smaller working sets as
-the pointers aren't inflated.
-
-In order to support 64-bit spans we have these options:
+32-bit. We have these options:
 
 1. **Only expose 64-bit APIs**. This would mean having the indexer and `Length`
-   would return `long`.
+   would use `long`.
 
 2. **Expose 32-bit and 64-bit APIs**. This would mean we'd have two indexers
    (one accepting `int`, the other `long`) and a `Length` property returning
@@ -195,7 +189,11 @@ if (!source.TryCopyTo(target))
 
 The scenario makes sense, but it shouldn't be a constructor as it's quite
 advanced. We'd like to make it a method so that we can convey that's unsafe.
-Thus, we decided to make this `Span<T>.DangerousCreate(object, IntPtr, length)`.
+Thus, we decided to make this `Span<T>.DangerousCreate(object, ref T, length)`.
+
+Using `ref T` over `IntPtr` for the second argument would save the callers from
+the tricky pointer arithmetic needed to compute the offset. Coming up with a
+`ref T` is much easier.
 
 ## `Span<T>(T[], int start)`
 
@@ -237,7 +235,7 @@ enables the `fixed` statement to work for any types that offer this method:
 ```C#
 Span<byte> buffer = ...;
 
-fixed (byte* pBuffer = &buffer)
+fixed (byte* pBuffer = buffer)
 {
     // Use the pointer
 }
