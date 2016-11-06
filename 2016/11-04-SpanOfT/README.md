@@ -230,7 +230,7 @@ However, the API is inherently unsafe as assigning to the returned value is
 possible but incorrect in case the span has zero-length. Thus, we follow the
 convention and use the term `Dangerous` in the API.
 
-We don't expect user code to call this API directly. Thus, we'll marke this API
+We don't expect user code to call this API directly. Thus, we'll make this API
 as hidden in IntelliSense. Instead, we'd like to add a compiler feature that
 enables the `fixed` statement to work for any types that offer this method:
 
