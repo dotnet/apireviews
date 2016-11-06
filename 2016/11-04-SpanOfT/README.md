@@ -13,7 +13,7 @@ public struct Span<T>
     public Span(T[] array, int start, int length);
     public static Span<T> Empty { get; }
     public bool IsEmpty { get; }
-    public ref T this[int index] { get; set; }
+    public ref T this[int index] { get; }
     public int Length { get; }
     public void CopyTo(Span<T> destination);
     [Obsolete("This operation is not supported.", IsError=True)]
