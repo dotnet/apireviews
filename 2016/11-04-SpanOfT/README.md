@@ -24,7 +24,7 @@ public struct Span<T>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public override int GetHashCode();
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public ref T int DangerousGetPinnableReference();
+    public ref T DangerousGetPinnableReference();
     public static Span<T> DangerousCreate(object obj, ref T rawPointer, int length); 
     public static implicit operator Span<T> (ArraySegment<T> arraySegment);
     public static implicit operator Span<T> (T[] array);
