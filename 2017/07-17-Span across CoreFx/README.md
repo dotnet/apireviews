@@ -42,9 +42,9 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
       don't want to call the existing array one, because perf tanks. We'll
       call `Sample` as that's the true primitive and doesn't allocate.
 * Primitive parse
-    - We'll use `ReadOnlySpan<chan>` as a slicable string, always in UTF16
+    - We'll use `ReadOnlySpan<char>` as a slicable string, always in UTF16
     - We'll use `TryFormat` as span-based `ToString`
-    - For cases where `ParseExcat` exists, we should offer `Span` based versions
+    - For cases where `ParseExact` exists, we should offer `Span` based versions
       too
     - `TryFormat`: we should rename `chars` to `destination`
         ```C#
@@ -59,10 +59,10 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 * `Guid`
     - `TryCopyTo` should be `TryWriteBytes(Span<bytes> destination)`
 * `String`
-    - The constructor taking the delegate is fine. Ideally, we'd use `Action<TState, Span<chan>>` but
+    - The constructor taking the delegate is fine. Ideally, we'd use `Action<TState, Span<char>>` but
       `Span<T>` cannot be used a generic arguments, so we have to create a custom delegate type.
       We should probably make this a nested type or put it in a different namespace.
-    - We could make a set of `Func` and `Action` that already uses `Span<T>` in one of the signatures
+    - We could make a set of `Func<>` and `Action<>` that already uses `Span<T>` in one of the signatures
     - Right now, the compiler doesn't allow lambdas and `Span<T>` in the same scope,
       regardless of whether it's captured or not.
     - Maybe we should make this a separate issue.
@@ -71,7 +71,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
     - Async overloads take `Buffer<byte>`
     - The implementation on `Stream` will call the existing ones that take `byte[]`,
       but we'll probably acquire the array from the pool
-    - Out our own derivatives of `Stream` will override the new method to do something smarter
+    - Our own derivatives of `Stream` will override the new method to do something smarter
     - We'll also have to change our code that consumes `Stream` to use `Span<T>` based overloads when appropriate
 * `BufferStream` and `ReadOnlyBufferStream`
     - These are "type-based overloads" of `MemoryStream`
