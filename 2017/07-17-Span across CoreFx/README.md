@@ -14,10 +14,15 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 
 ## Notes
 
-* Consistency in naming
-    - If we add logical overloads to existing types, we should stick to
-      existing naming conventions on the type
-* BitConverter
+* Principles:
+    - Consistency in naming: if we add logical overloads to existing types, we
+      should stick to existing naming conventions on the type
+    - Keep existing behavior of the types as much as possible
+    - Logically, provide overloads for byte[]
+* `BitConverter`
+    - Should take endianess into account and provide overloads that allows
+      consumers to specify the endianess they want
+    - Should offer a method that allows arbitrary Ts to be read/written
     - `TryCopyBytes`
         + Should be called `TryWriteBytes`
         + Then naming the first argument `value` makes sense. If we stick
