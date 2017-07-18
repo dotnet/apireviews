@@ -22,7 +22,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 * `BitConverter`
     - Should take endianess into account and provide overloads that allows
       consumers to specify the endianess they want
-    - Should offer a method that allows arbitrary Ts to be read/written
+    - Should offer a method that allows arbitrary `T`s to be read/written
     - `TryCopyBytes`
         + Should be called `TryWriteBytes`
         + Then naming the first argument `value` makes sense. If we stick
@@ -76,8 +76,8 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 * `Stream`
     - Sync overloads take `Span<byte>`
     - Async overloads take `Buffer<byte>`
-    - The implementation on `Stream` will call the existing ones that take `byte[]`,
-      but we'll probably acquire the array from the pool
+    - The implementation on `Stream` will call the existing ones that take
+      `byte[]`, but we'll probably acquire the array from the pool
     - Our own derivatives of `Stream` will override the new method to do
       something smarter
     - We'll also have to change our code that consumes `Stream` to use `Span<T>`
@@ -85,5 +85,5 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 * `BufferStream` and `ReadOnlyBufferStream`
     - These are "type-based overloads" of `MemoryStream`
     - Instead of public types these could be internal and we can have factor
-      methods that return you a `Stream`. Would probably require the `IHasBuffer<T>`
-      pattern to make it as versatile as explicit types.
+      methods that return you a `Stream`. Would probably require the
+      `IHasBuffer<T>` pattern to make it as versatile as explicit types.
