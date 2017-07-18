@@ -25,6 +25,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 * `BitConverter`
     - Should take endianness  into account and provide overloads that allows
       consumers to specify the endianness they want
+      [corefx#22405](https://github.com/dotnet/corefx/issues/22405)
     - Should offer a method that allows arbitrary `T`s to be read/written
     - `TryCopyBytes`
         + Should be called `TryWriteBytes`
