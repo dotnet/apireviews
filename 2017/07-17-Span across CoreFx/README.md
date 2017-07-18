@@ -64,20 +64,24 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 * `Guid`
     - `TryCopyTo` should be `TryWriteBytes(Span<bytes> destination)`
 * `String`
-    - The constructor taking the delegate is fine. Ideally, we'd use `Action<TState, Span<char>>` but
-      `Span<T>` cannot be used a generic arguments, so we have to create a custom delegate type.
-      We should probably make this a nested type or put it in a different namespace.
-    - We could make a set of `Func<>` and `Action<>` that already uses `Span<T>` in one of the signatures
-    - Right now, the compiler doesn't allow lambdas and `Span<T>` in the same scope,
-      regardless of whether it's captured or not.
+    - The constructor taking the delegate is fine. Ideally, we'd use
+      `Action<TState, Span<char>>` but `Span<T>` cannot be used a generic
+      arguments, so we have to create a custom delegate type. We should probably
+      make this a nested type or put it in a different namespace.
+    - We could make a set of `Func<>` and `Action<>` that already uses `Span<T>`
+      in one of the signatures
+    - Right now, the compiler doesn't allow lambdas and `Span<T>` in the same
+      scope, regardless of whether it's captured or not.
     - Maybe we should make this a separate issue.
 * `Stream`
     - Sync overloads take `Span<byte>`
     - Async overloads take `Buffer<byte>`
     - The implementation on `Stream` will call the existing ones that take `byte[]`,
       but we'll probably acquire the array from the pool
-    - Our own derivatives of `Stream` will override the new method to do something smarter
-    - We'll also have to change our code that consumes `Stream` to use `Span<T>` based overloads when appropriate
+    - Our own derivatives of `Stream` will override the new method to do
+      something smarter
+    - We'll also have to change our code that consumes `Stream` to use `Span<T>`
+      based overloads when appropriate
 * `BufferStream` and `ReadOnlyBufferStream`
     - These are "type-based overloads" of `MemoryStream`
     - Instead of public types these could be internal and we can have factor
