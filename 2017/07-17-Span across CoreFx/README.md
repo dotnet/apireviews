@@ -23,8 +23,8 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
     - Keep existing behavior of the types as much as possible
     - Logically, provide overloads for byte[]
 * `BitConverter`
-    - Should take endianess into account and provide overloads that allows
-      consumers to specify the endianess they want
+    - Should take endianness  into account and provide overloads that allows
+      consumers to specify the endianness they want
     - Should offer a method that allows arbitrary `T`s to be read/written
     - `TryCopyBytes`
         + Should be called `TryWriteBytes`
@@ -110,7 +110,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
      - When introducing `Span<T>`-base overloads to existing types, try to match
        the semantics and signature of existing overloads.
 * `BitConverter`
-    - Should we provide an overload that returns the `writteBytes` as an `out`
+    - Should we provide an overload that returns the `bytesWritten` as an `out`
       parameter?
 * `TextReader`/`TextWriter`
     - The challenge is deciding what the new virtual methods should do and how
@@ -126,7 +126,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
     - We believe the `Read` methods are neither convenient nor performant, so we
       shouldn't have it.
     - The `WriteAllBytes` seem fine, but at the same time since we scrapped all
-      the other APIs, we believe we should just scrape of all of `File` for now.
+      the other APIs, we believe we should just scrap of all of `File` for now.
 * `StringBuilder`
     - We should fix `StringBuilder` to make it for efficient for encoding
       primitives, right now it called `value.ToString()` and writes the result
