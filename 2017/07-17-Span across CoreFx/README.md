@@ -87,3 +87,11 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
     - Instead of public types these could be internal and we can have factor
       methods that return you a `Stream`. Would probably require the
       `IHasBuffer<T>` pattern to make it as versatile as explicit types.
+    - We should `MemoryStream`, `UnmanagedMemoryStream`, `BufferStream`,
+      and `ReadOnlyBufferStream` should all implement `IHasBuffer<T>`. So
+      regardless of whether we make `BufferStream` & `ReadOnlyBufferStream`
+      public.
+    - Alternatively, we could make the `IHasBuffer<T>.TryGetBuffer()` to the
+      `Stream` class. This would make delegation scenario where one dynamically
+      delegates to an unknown instance.
+
