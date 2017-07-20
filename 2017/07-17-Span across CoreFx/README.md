@@ -1,7 +1,8 @@
 # API Review: Adding `Span<T>`/`Buffer<T>`-based APIs across CoreFX
 
 Status: **Review In Progress** | [Issue](https://github.com/dotnet/corefx/issues/21281) |
-[Video](https://www.youtube.com/watch?v=VKnHYFIQpOs)
+[Video 1](https://www.youtube.com/watch?v=VKnHYFIQpOs)
+[Video 2](https://www.youtube.com/watch?v=jKQWMCPZ08Y)
 
 With the advent of `Span<T>` and `Buffer<T>`, there are a multitude of
 improvements we'll want to make to types across CoreCLR/CoreFX. Some of these
@@ -12,7 +13,9 @@ code. This [issue](https://github.com/dotnet/corefx/issues/21281) isn't about
 either of those. Rather, this issue is about what new APIs we want to expose
 across CoreFX (with some implementations in CoreCLR/CoreRT).
 
-## Notes
+## Notes 1
+
+[Video 1](https://www.youtube.com/watch?v=VKnHYFIQpOs)
 
 * Principles:
     - Consistency in naming: if we add logical overloads to existing types, we
@@ -20,9 +23,10 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
     - Keep existing behavior of the types as much as possible
     - Logically, provide overloads for byte[]
 * `BitConverter`
-    - Should take endianess into account and provide overloads that allows
-      consumers to specify the endianess they want
-    - Should offer a method that allows arbitrary Ts to be read/written
+    - Should take endianness  into account and provide overloads that allows
+      consumers to specify the endianness they want
+      [corefx#22405](https://github.com/dotnet/corefx/issues/22405)
+    - Should offer a method that allows arbitrary `T`s to be read/written
     - `TryCopyBytes`
         + Should be called `TryWriteBytes`
         + Then naming the first argument `value` makes sense. If we stick
@@ -76,8 +80,8 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 * `Stream`
     - Sync overloads take `Span<byte>`
     - Async overloads take `Buffer<byte>`
-    - The implementation on `Stream` will call the existing ones that take `byte[]`,
-      but we'll probably acquire the array from the pool
+    - The implementation on `Stream` will call the existing ones that take
+      `byte[]`, but we'll probably acquire the array from the pool
     - Our own derivatives of `Stream` will override the new method to do
       something smarter
     - We'll also have to change our code that consumes `Stream` to use `Span<T>`
@@ -85,5 +89,65 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
 * `BufferStream` and `ReadOnlyBufferStream`
     - These are "type-based overloads" of `MemoryStream`
     - Instead of public types these could be internal and we can have factor
-      methods that return you a `Stream`. Would probably require the `IHasBuffer<T>`
-      pattern to make it as versatile as explicit types.
+      methods that return you a `Stream`. Would probably require the
+      `IHasBuffer<T>` pattern to make it as versatile as explicit types.
+    - We should `MemoryStream`, `UnmanagedMemoryStream`, `BufferStream`,
+      and `ReadOnlyBufferStream` should all implement `IHasBuffer<T>`. So
+      regardless of whether we make `BufferStream` & `ReadOnlyBufferStream`
+      public.
+    - Alternatively, we could make the `IHasBuffer<T>.TryGetBuffer()` to the
+      `Stream` class. This would make delegation scenario where one dynamically
+      delegates to an unknown instance.
+
+## Notes 2
+
+[Video 2](https://youtu.be/jKQWMCPZ08Y?t=1355)
+
+* We need general for principles for how `Span<T>`-based APIs should be exposed:
+     - If you have a single span and a single error condition (buffer too
+       small), us the `TryXxx` pattern
+     - If you have multiple buffers or multiple error conditions the transform
+       pattern should be used
+     - When introducing `Span<T>`-base overloads to existing types, try to match
+       the semantics and signature of existing overloads.
+* `BitConverter`
+    - Should we provide an overload that returns the `bytesWritten` as an `out`
+      parameter?
+* `TextReader`/`TextWriter`
+    - The challenge is deciding what the new virtual methods should do and how
+      we handle the overrides in the BCL to make sure we correctly deal with
+      instances of types that don't override the new methods.
+    - We don't believe these issues will be as bad the `XxxAsync` methods where
+      we ran into deadlocks, so we don't expect a bug tail functionally, but
+      there is likely going to be a performance bug tail.
+* `File`
+    - We decided against adding overloads for string that takes
+      `ReadOnlySpan<char>`. We're not convinced it's common enough.
+    - We believe `AppendAllBytes` might be a performance issue.
+    - We believe the `Read` methods are neither convenient nor performant, so we
+      shouldn't have it.
+    - The `WriteAllBytes` seem fine, but at the same time since we scrapped all
+      the other APIs, we believe we should just scrap of all of `File` for now.
+* `StringBuilder`
+    - We should fix `StringBuilder` to make it for efficient for encoding
+      primitives, right now it called `value.ToString()` and writes the result
+      to the underlying array. This would not require new APIs on
+      `StringBuilder`
+    - We should also have a separate meeting to discuss how we can make general
+      string formatting more efficient.
+* `Encoding`
+    - The proposed APIs makes sense, but we should consider aligning the shape
+      of the APIs with the general `Transform` pattern
+        ```C#
+        `TransformationStatus` Transform(ReadOnlySpan<T1> source, Span<T2> destination, out int bytesConsumed, out int bytesWritten)
+        ```
+    - We could also match the existing pointer-based overload, which would look
+      like this:
+        ```C#
+        int GetBytes(ReadOnlySpan<char> source, Span<bytes> destination)
+        ```
+      It would still throw for invalid data (bad encoding).
+* `BigInteger`
+    - `TryCopyTo` -> `bool TryWriteBytes(Span<bytes> destination, out int bytesWritten)`
+    - We should expose a method that computes the size of the needed output
+      buffer
