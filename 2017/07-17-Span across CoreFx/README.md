@@ -1,6 +1,6 @@
 # API Review: Adding `Span<T>`/`Buffer<T>`-based APIs across CoreFX
 
-Status: **Review In Progress** | [Issue](https://github.com/dotnet/corefx/issues/21281) |
+Status: **Approved with Feedback** | [Issue](https://github.com/dotnet/corefx/issues/21281) |
 [Video 1](https://www.youtube.com/watch?v=VKnHYFIQpOs) |
 [Video 2](https://www.youtube.com/watch?v=jKQWMCPZ08Y) |
 [Video 3](https://www.youtube.com/watch?v=10w3tS03W60)
