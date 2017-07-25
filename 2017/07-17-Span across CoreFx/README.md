@@ -3,6 +3,7 @@
 Status: **Review In Progress** | [Issue](https://github.com/dotnet/corefx/issues/21281) |
 [Video 1](https://www.youtube.com/watch?v=VKnHYFIQpOs)
 [Video 2](https://www.youtube.com/watch?v=jKQWMCPZ08Y)
+[Video 3](https://www.youtube.com/watch?v=10w3tS03W60)
 
 With the advent of `Span<T>` and `Buffer<T>`, there are a multitude of
 improvements we'll want to make to types across CoreCLR/CoreFX. Some of these
@@ -147,3 +148,69 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
     - `TryCopyTo` -> `bool TryWriteBytes(Span<bytes> destination, out int bytesWritten)`
     - We should expose a method that computes the size of the needed output
       buffer
+
+## Notes 3 | [Video](https://www.youtube.com/watch?v=10w3tS03W60)
+
+* `IPAddress`
+    - `TryWriteBytes` should have `out int bytesWritten`
+    - Should we add a `TryFormat` to have symmetry, i.e. if we add a
+      `Span<T>`-based parsing, we should have `Span<T>`-based formatting.
+* `Socket`
+    - `flags` should match the existing `Receive` method and thus be
+      `socketFlags`
+    - We should add the overloads that return the `SocketError` as an `out`
+      parameter, looking at telemetry it seems those are popular
+* `SocketTaskExtensions`
+    - Fun fact: for .NET Core, these are calling internal APIs directly on
+      `Socket`
+    - Nothing on `Socket` supports cancellation today; we should investigate
+      whether we can support cancellation in principle and add the APIs now.
+* `SocketASyncEventArgs`
+    - When the CoreFxLab representation for multiple buffers is stable, we
+      should probably add an alternative for `BufferList`.
+* `WebSocket`
+    - Currently no support for avoiding allocations when the operation completed
+      synchronously. Proposal is use `ValueTask` and a struct-based alternative
+      `WebSocketReceiveResult`, called `ValueWebSocketReceiveResult`.
+* `HttpClient`
+    - Skipped for now; it's unclear how we want to handle this given this type
+      heavily on `Stream`. Maybe this is addressed by spanifying `Stream`?
+* `HashAlgorithm`
+    - We shouldn't spanify `TryTransformBlock` and `TryTransformBlockFinal`
+      because we only broad back `TransformBlock` and `TransformBlockFinal`
+      back for compat. Customers should use `IncrementalHash` instead.
+* `RSA`
+    - Remove `DecryptValue` and `EncrypValue` -- they always throw
+    - `HashData` should be protected, not public
+    - The methods `Encrypt`, `Decrypt`, `HashData`, `SignData`, `SignHash`
+      should follow the `Try` pattern and return `bool `and return the numbers
+      of bytes written as `out` parameter
+* `DSA`
+    - The methods `CreateSignature`, `HashData`, `SignData` should follow the
+      `Try` pattern and return `bool `and return the numbers of bytes written as
+      `out` parameter
+    - `HashData` should be protected, not public
+* `ECDsa`
+    - The methods `HashData`, `SignData`, `SignHash` should follow the `Try`
+      pattern and return `bool `and return the numbers of bytes written as `out`
+      parameter
+    - `HashData` should be protected, not public
+* `ICryptoTransform`
+    - Used by our `CryptoStream`
+    - Ideally, we'd leverage default implementations of interfaces to add
+      overloads for `TransformBlock` and `TransformBlockFinal` that operate on
+      spans.
+    - Option 1: Do nothing
+    - Option 2: Add a second interface
+    - Option 3: Add a second interface implement it on our types
+    - Option 4: Wait for default implementations of interfaces
+    - Option 5: Do some internal magic
+    - Consensus go with (1) and wait for a compelling use case and then see
+      whether we can go with 4. Otherwise, a combination of (3) and (4) later
+      seems appealing.
+* Open Issues / Other APIs
+    - Collections / Immutable / Metadata
+    - `ImmuatableArray<T>` is probably the only one that's super interesting
+        + We should add an implicit conversion to `ReadOnlySpan<T>`
+    - We should do another pass to make we accept `CancellationToken` everywhere
+      where we should
