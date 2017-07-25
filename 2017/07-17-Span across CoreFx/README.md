@@ -13,9 +13,7 @@ code. This [issue](https://github.com/dotnet/corefx/issues/21281) isn't about
 either of those. Rather, this issue is about what new APIs we want to expose
 across CoreFX (with some implementations in CoreCLR/CoreRT).
 
-## Notes 1
-
-[Video 1](https://www.youtube.com/watch?v=VKnHYFIQpOs)
+## Notes 1 | [Video](https://www.youtube.com/watch?v=VKnHYFIQpOs)
 
 * Principles:
     - Consistency in naming: if we add logical overloads to existing types, we
@@ -99,9 +97,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
       `Stream` class. This would make delegation scenario where one dynamically
       delegates to an unknown instance.
 
-## Notes 2
-
-[Video 2](https://youtu.be/jKQWMCPZ08Y?t=1355)
+## Notes 2 | [Video](https://youtu.be/jKQWMCPZ08Y?t=1355)
 
 * We need general for principles for how `Span<T>`-based APIs should be exposed:
      - If you have a single span and a single error condition (buffer too
