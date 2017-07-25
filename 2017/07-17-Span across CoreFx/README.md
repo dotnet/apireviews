@@ -165,7 +165,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
       `Socket`
     - Nothing on `Socket` supports cancellation today; we should investigate
       whether we can support cancellation in principle and add the APIs now.
-* `SocketASyncEventArgs`
+* `SocketAsyncEventArgs`
     - When the CoreFxLab representation for multiple buffers is stable, we
       should probably add an alternative for `BufferList`.
 * `WebSocket`
@@ -177,22 +177,22 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
       heavily on `Stream`. Maybe this is addressed by spanifying `Stream`?
 * `HashAlgorithm`
     - We shouldn't spanify `TryTransformBlock` and `TryTransformBlockFinal`
-      because we only broad back `TransformBlock` and `TransformBlockFinal`
+      because we only brought `TransformBlock` and `TransformBlockFinal` back
       back for compat. Customers should use `IncrementalHash` instead.
 * `RSA`
-    - Remove `DecryptValue` and `EncrypValue` -- they always throw
+    - Remove `DecryptValue` and `EncryptValue` -- they always throw
     - `HashData` should be protected, not public
     - The methods `Encrypt`, `Decrypt`, `HashData`, `SignData`, `SignHash`
-      should follow the `Try` pattern and return `bool `and return the numbers
+      should follow the `Try` pattern and return `bool` and return the numbers
       of bytes written as `out` parameter
 * `DSA`
     - The methods `CreateSignature`, `HashData`, `SignData` should follow the
-      `Try` pattern and return `bool `and return the numbers of bytes written as
+      `Try` pattern and return `bool` and return the numbers of bytes written as
       `out` parameter
     - `HashData` should be protected, not public
 * `ECDsa`
     - The methods `HashData`, `SignData`, `SignHash` should follow the `Try`
-      pattern and return `bool `and return the numbers of bytes written as `out`
+      pattern and return `bool` and return the numbers of bytes written as `out`
       parameter
     - `HashData` should be protected, not public
 * `ICryptoTransform`
@@ -210,7 +210,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
       seems appealing.
 * Open Issues / Other APIs
     - Collections / Immutable / Metadata
-    - `ImmuatableArray<T>` is probably the only one that's super interesting
+    - `ImmutableArray<T>` is probably the only one that's super interesting
         + We should add an implicit conversion to `ReadOnlySpan<T>`
     - We should do another pass to make we accept `CancellationToken` everywhere
       where we should
