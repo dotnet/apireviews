@@ -135,7 +135,7 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
     - The proposed APIs makes sense, but we should consider aligning the shape
       of the APIs with the general `Transform` pattern
         ```C#
-        `TransformationStatus` Transform(ReadOnlySpan<T1> source, Span<T2> destination, out int bytesConsumed, out int bytesWritten)
+        TransformationStatus Transform(ReadOnlySpan<T1> source, Span<T2> destination, out int bytesConsumed, out int bytesWritten)
         ```
     - We could also match the existing pointer-based overload, which would look
       like this:
