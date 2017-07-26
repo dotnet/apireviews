@@ -173,8 +173,10 @@ across CoreFX (with some implementations in CoreCLR/CoreRT).
       synchronously. Proposal is use `ValueTask` and a struct-based alternative
       `WebSocketReceiveResult`, called `ValueWebSocketReceiveResult`.
 * `HttpClient`
-    - Skipped for now; it's unclear how we want to handle this given this type
-      heavily on `Stream`. Maybe this is addressed by spanifying `Stream`?
+    - We decided to skip `GetBytesArray` for now; it's unclear how we want to
+      handle this given this type heavily on `Stream`. Maybe this is addressed
+      by spanifying `Stream`?
+    - The `ReadOnlyBufferContent` type looks good as proposed.
 * `HashAlgorithm`
     - We shouldn't spanify `TryTransformBlock` and `TryTransformBlockFinal`
       because we only brought `TransformBlock` and `TransformBlockFinal` back
