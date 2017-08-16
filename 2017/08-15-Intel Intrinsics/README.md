@@ -10,12 +10,12 @@ We recently approved a [design proposal][Design] to expose hardware intrinsics.
 In this context, an *intrinsic* is a special API that doesn't actually have an
 implementation in IL form but is specialized by the code generator (JIT, AOT).
 
-This allows exposing specialized CPU instructions, such as SIMD or Crc32,
+This allows exposing specialized CPU instructions, such as SIMD or CRC32,
 without having to drop to the assembly level. Developers can write regular code,
 think in expressions and local variables, and the code generator can still apply
 the usual optimizations. This approach differs from our existing SIMD
 infrastructure, especially `Vector<T>`, in that these API are hardware specific.
-In other words, code using it is no longer portable across CPU architectures.
+In other words, code using it is no longer portable between CPU architectures.
 Furthermore, we do not provide a software fallback. The developer is expected to
 guard calls using a provided capability API. Failing to do so will cause
 `PlatformNotSupportedException` at runtime.
@@ -38,13 +38,13 @@ We decided to tie capability checks to instruction set specifications. That's
 because instruction set specifications are expected to be implemented whole sale
 or not at all by a given CPU model. Also, developers using intrinsics have to be
 familiar with the specification in order to put them to use. Hence, the
-specifications can be expected to be a part of the developer's domain.
+specifications can be expected to be a part of the developer's domain knowledge.
 
 We'll provide one type per instruction set specification which includes a single
 capability API to check for the entire set. For instance, the namespace `X86`
 will contain the types `Sse`, `Sse2`, and `Avx`. In order to use SSE2 specific
 functionality, the developer only has to check for `Sse2.IsSupported` and can
-then assume that all intrinsics provided on `Sse2` will work. To use both SSE2
+then assume that all intrinsics provided for `Sse2` will work. To use both SSE2
 and AVX the developer has to check for `Sse2.IsSupported && Avx.IsSupported`.
 
 This approach minimizes the number of capability checks and makes it easy for
@@ -58,39 +58,38 @@ the developer to reason about the granularity and associated guarantees.
   are specific for the Intel x86 architecture.
 
 **Note:** We decided not to use the `CompilerServices` namespace as this
-namespace is designed not to be used directly by developers but by compiler to
-aid the code generation. For instances, it includes helper types for the async
+namespace is designed not to be used directly by developers but by compilers to
+aid the code generation. For instance, it includes helper types for the async
 state machine.
 
 ## Just-in-time (JIT) vs. ahead-of-time (AOT) compilation
 
-In the JIT scenario the runtime will populate internal datastructures during
+In the JIT scenario the runtime will initialize internal data structures during
 startup that effectively populate the `IsSupported` checks into compile time
 constants. During JIT, code blocks guarded by unsupported capability checks are
-simply thrown away. This results in small code sizes and even allows granularity
+simply thrown away. This results in smaller code sizes and even allows granular
 checks inside of loops.
 
 In the case of AOT, there are basically two options:
 
 1. **No light-up**. This is logically equivalent to run the JIT for a specific
    environment and persist the output. This means all the capability checks are
-   effectively evaluated at build time. Code will not light up on newer CPU
-   models with more features.
+   effectively evaluated at build time. Code will not light up on CPU models
+   with more features.
 
-2. *With light-up**. This would mean the build is producing for a specific CPU
-   architecture with dynamic checks for possible architecture set. This allows
-   resulting code, for instance, leverage AVX instructions while still running a
-   CPUs that only support SSE2.
-
-This poses interesting questions no how this impacts the granularity of the
-checks because hot loops should have to evaluate capability checks on every
-iteration. Ideally, this would be solved with a smart AOT compiler.
+2. **With light-up**. This would mean the build is produced for a specific CPU
+   architecture with dynamic checks for specific instruction sets. This allows
+   resulting code, for instance, to leverage AVX instructions while still
+   running on CPUs that only support SSE2. This poses interesting questions to
+   how this impacts the granularity of the checks because hot loops shouldn't
+   have to evaluate capability checks on every iteration. Ideally, this would be
+   solved with a smart AOT compiler.
 
 ## C# language feature: Requiring parameters to be literals
 
 Certain intrinsics require the operand to become part of the encoded instruction
 and thus have to be literals (i.e. these can't be dynamic values which are
-stored in a memory or register). There is currently no way in C# to require a
+stored in memory or a register). There is currently no way in C# to require a
 parameter value to be a literal.
 
 The idea is to have a way to mark a parameter (e.g. using `const` syntax or via
@@ -100,12 +99,14 @@ impact overload resolution.
 
 Some addition comments:
 
-* C++ doesn't honor `modreq` (they will still allow the call)
-* F# doesn't honor it either, but they seem to be open to change that
-* C# and VB honor them correctly (meaning it doesn't allow binding to methods
-  unless it understands all applied `modreq`s)
-* We cannot reuse the existing `IsConst` because we need stronger guarantees (we
-  need literals, C++ constants aren't the same as C#'s)
+* C++ doesn't honor `modreq`s it doesn't understand, i.e. it will simply ignore
+  them and allow the code to call the API.
+* F# is the same as C++, but they
+  [seem to be open to change that](https://github.com/Microsoft/visualfsharp/issues/3105)
+* C# and VB honor them correctly, i.e. they generate errors for calls to APIs
+  where at least one of the applied `modreq`s isn't understood.
+* We cannot reuse the existing C++ `IsConst` modifier because we need stronger
+  guarantees (we need literals, C++ constants aren't the same as C#'s)
 * For now, we don't care about enforcing well-formed bit patterns
 
 ## Notes
