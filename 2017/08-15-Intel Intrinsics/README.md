@@ -13,12 +13,21 @@ implementation in IL form but is specialized by the code generator (JIT, AOT).
 This allows exposing specialized CPU instructions, such as SIMD or CRC32,
 without having to drop to the assembly level. Developers can write regular code,
 think in expressions and local variables, and the code generator can still apply
-the usual optimizations. This approach differs from our existing SIMD
-infrastructure, especially `Vector<T>`, in that these API are hardware specific.
-In other words, code using it is no longer portable between CPU architectures.
-Furthermore, we do not provide a software fallback. The developer is expected to
-guard calls using a provided capability API. Failing to do so will cause
+the usual optimizations.
+
+This approach differs from our existing SIMD infrastructure, especially
+`Vector<T>`, in that these API are hardware specific. In other words, code using
+it is no longer portable between CPU architectures. Furthermore, we do not
+provide a software fallback. Instead, the developer is expected to guard calls
+using a provided capability API. Failing to do so will cause
 `PlatformNotSupportedException` at runtime.
+
+In order to remain portable, the developer must provide a software fallback.
+While this sounds like we're putting the burden on the developer, we learned
+that we simply can't provide an efficient enough software fallback at the
+granularity level of intrinsics. Vectorized and non-vectorized approaches are
+fundamentally different and running a software-implemented vectorized algorithm
+is often several factors slower than a native non-vectorized version.
 
 Today, we looked at a concrete proposal from our friends at Intel to expose SIMD
 building blocks. We've also used this proposal to refine our general approach on
