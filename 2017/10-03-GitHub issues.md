@@ -6,7 +6,7 @@ Recording: https://www.youtube.com/watch?v=m4BUM3nJZRw
 
 * https://youtu.be/m4BUM3nJZRw?t=38
   * [#24144](https://github.com/dotnet/corefx/issues/24144) - **Add Span\<T\> Binary Reader/Writer APIs** - More work needed
-  * Detailed notes and remaining feedback: [System.Binary notes](https://github.com/dotnet/apireviews/pull/44)
+  * Detailed notes and remaining feedback: [System.Binary notes](https://github.com/dotnet/apireviews/tree/master/2017/10-03-System.Binary)
   * Duration: 70 min
 * https://youtu.be/m4BUM3nJZRw?t=4299
   * [#22417](https://github.com/dotnet/corefx/issues/22417) - **Add Convert Span-based APIs** - Postponed
