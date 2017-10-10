@@ -3,6 +3,7 @@
 2 hours API review session of GitHub issues on 2017/10/10.
 
 Recording: https://www.youtube.com/watch?v=b96co3sNzNI
+  * Note: The video is frozen at few places and there are few audio hiccups
 
 * https://youtu.be/b96co3sNzNI?t=51
   * [#22412](https://github.com/dotnet/corefx/issues/22412) - **Add TransformationStatus enum from corefxlab** - Blocked
@@ -30,5 +31,5 @@ Recording: https://www.youtube.com/watch?v=b96co3sNzNI
 
   * Left-to-right on the video at start: [@bartonjs](https://github.com/bartonjs), [@karelz](https://github.com/karelz), [@weshaggard](https://github.com/weshaggard), [@terrajobst](https://github.com/terrajobst)
   * On call without video: [@stephentoub](https://github.com/stephentoub), [@JeremyKuhne](https://github.com/JeremyKuhne)
-  * Later appeareances: TODO (Olia, AlexG)
+  * Later appeareances: [@Olia-Gavrysh-MS](https://github.com/Olia-Gavrysh-MS) (at [9:45](https://youtu.be/b96co3sNzNI?t=585)), [@AlexGhiondea](https://github.com/AlexGhiondea) (at [56:50](https://youtu.be/b96co3sNzNI?t=3410))
  
