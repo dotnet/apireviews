@@ -36,4 +36,4 @@ Recording: https://www.youtube.com/watch?v=m4BUM3nJZRw
 
   * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@KrzysztofCwalina](https://github.com/KrzysztofCwalina), [@ahsonkhan](https://github.com/ahsonkhan), [@danmosemsft](https://github.com/danmosemsft), [@karelz](https://github.com/karelz), [@joshfree](https://github.com/joshfree), [@bartonjs](https://github.com/bartonjs)
   * On call without video: [@stephentoub](https://github.com/stephentoub)
-  * Later appeareances: [@weshaggard](https://github.com/weshaggard) (at [2:28](https://youtu.be/m4BUM3nJZRw?t=148))
+  * Later appearances: [@weshaggard](https://github.com/weshaggard) (at [2:28](https://youtu.be/m4BUM3nJZRw?t=148))
