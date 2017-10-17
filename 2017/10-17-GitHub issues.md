@@ -20,6 +20,7 @@ Recording: https://www.youtube.com/watch?v=BEBq3__WfDc
   * [#24568](https://github.com/dotnet/corefx/issues/24568) - **Add Base64 conversion APIs that support UTF-8 for Span\<T\>** - Needs more work
   * Duration: 60 min
 
+
 ### Participants
 
   * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@bartonjs](https://github.com/bartonjs), [@KrzysztofCwalina](https://github.com/KrzysztofCwalina), [@karelz](https://github.com/karelz), [@AtsushiKan](https://github.com/AtsushiKan), [@weshaggard](https://github.com/weshaggard), [@GrabYourPitchforks](https://github.com/GrabYourPitchforks)
