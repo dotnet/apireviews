@@ -19,4 +19,4 @@ Recording: https://www.youtube.com/watch?v=W_r6oG7nnK4
 
   * Left-to-right on the video at start: [@karelz](https://github.com/karelz), [@bartonjs](https://github.com/bartonjs), [@KrzysztofCwalina](https://github.com/KrzysztofCwalina), [@danmosemsft](https://github.com/danmosemsft)
   * On call without video: [@stephentoub](https://github.com/stephentoub)
-  * Later appeareances: [@weshaggard](https://github.com/weshaggard) (at [7:13](https://youtu.be/W_r6oG7nnK4?t=434)), [@ahsonkhan](https://github.com/ahsonkhan) (at [12:03](https://youtu.be/W_r6oG7nnK4?t=723)), [@mellinoe](https://github.com/mellinoe) (at [34:30](https://youtu.be/W_r6oG7nnK4?t=2070)), [@tannergooding](https://github.com/tannergooding) (at [47:11](https://youtu.be/W_r6oG7nnK4?t=2831))
+  * Later appearances: [@weshaggard](https://github.com/weshaggard) (at [7:13](https://youtu.be/W_r6oG7nnK4?t=434)), [@ahsonkhan](https://github.com/ahsonkhan) (at [12:03](https://youtu.be/W_r6oG7nnK4?t=723)), [@mellinoe](https://github.com/mellinoe) (at [34:30](https://youtu.be/W_r6oG7nnK4?t=2070)), [@tannergooding](https://github.com/tannergooding) (at [47:11](https://youtu.be/W_r6oG7nnK4?t=2831))
