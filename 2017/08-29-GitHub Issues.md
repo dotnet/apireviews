@@ -27,4 +27,7 @@
   * [#20497](https://github.com/dotnet/corefx/issues/20497) - **Add ProcessStartInfo.StandardInputEncoding property** (Approved)
   * Duration: 5 min
 
-Participants: @stephentoub @terrajobst @weshaggard @bartonjs @danmosemsft @karelz @KrzysztofCwalina @AtsushiKan
+
+### Participants
+
+[@stephentoub](https://github.com/stephentoub), [@terrajobst](https://github.com/terrajobst), [@weshaggard](https://github.com/weshaggard), [@bartonjs](https://github.com/bartonjs), [@danmosemsft](https://github.com/danmosemsft), [@karelz](https://github.com/karelz), [@KrzysztofCwalina](https://github.com/KrzysztofCwalina), [@AtsushiKan](https://github.com/AtsushiKan)
