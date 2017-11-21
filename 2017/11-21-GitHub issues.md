@@ -1,6 +1,6 @@
 # API Review session for GitHub issues
 
-2 hours API review session of GitHub issues on 2017/11/14.
+2 hours API review session of GitHub issues on 2017/11/21.
 
 Recording: https://www.youtube.com/watch?v=o5JFZtgaJLs
 
