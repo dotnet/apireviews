@@ -30,6 +30,6 @@ Recording: https://www.youtube.com/watch?v=o5JFZtgaJLs
 
 ### Participants
 
-  * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@bartonjs](https://github.com/bartonjs), [@Olia-Gavrysh-MS](https://github.com/Olia-Gavrysh-MS), [@karelz](https://github.com/karelz)
+  * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@bartonjs](https://github.com/bartonjs), [@OliaG](https://github.com/OliaG), [@karelz](https://github.com/karelz)
   * On call without video: [@stephentoub](https://github.com/stephentoub)
   * Later appearances: [@VSadov](https://github.com/VSadov) (at [47:47](https://youtu.be/o5JFZtgaJLs?t=2867)), [@jaredpar](https://github.com/jaredpar) (at [55:01](https://youtu.be/o5JFZtgaJLs?t=3301) - video frozen from now on)
