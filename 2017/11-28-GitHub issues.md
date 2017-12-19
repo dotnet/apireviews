@@ -23,6 +23,6 @@ Recording: https://www.youtube.com/watch?v=9F_NsviGT0Y
 
 ### Participants
 
-  * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@Olia-Gavrysh-MS](https://github.com/Olia-Gavrysh-MS), [@ViktorHofer](https://github.com/ViktorHofer), [@tannergooding](https://github.com/tannergooding), [@pjanotti](https://github.com/pjanotti), [@karelz](https://github.com/karelz)
+  * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@OliaG](https://github.com/OliaG), [@ViktorHofer](https://github.com/ViktorHofer), [@tannergooding](https://github.com/tannergooding), [@pjanotti](https://github.com/pjanotti), [@karelz](https://github.com/karelz)
   * On call without video: [@JeremyKuhne](https://github.com/JeremyKuhne), [@stephentoub](https://github.com/stephentoub)
   * Later appearances: [@bartonjs](https://github.com/bartonjs) (at [1:27](https://youtu.be/9F_NsviGT0Y?t=87)), [@weshaggard](https://github.com/weshaggard) (at [4:43](https://youtu.be/9F_NsviGT0Y?t=283))
