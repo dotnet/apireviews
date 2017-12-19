@@ -30,5 +30,5 @@ Recording: https://www.youtube.com/watch?v=b96co3sNzNI (the video is frozen at f
 
   * Left-to-right on the video at start: [@bartonjs](https://github.com/bartonjs), [@karelz](https://github.com/karelz), [@weshaggard](https://github.com/weshaggard), [@terrajobst](https://github.com/terrajobst)
   * On call without video: [@stephentoub](https://github.com/stephentoub), [@JeremyKuhne](https://github.com/JeremyKuhne)
-  * Later appearances: [@Olia-Gavrysh-MS](https://github.com/Olia-Gavrysh-MS) (at [9:45](https://youtu.be/b96co3sNzNI?t=585)), [@AlexGhiondea](https://github.com/AlexGhiondea) (at [56:50](https://youtu.be/b96co3sNzNI?t=3410))
+  * Later appearances: [@OliaG](https://github.com/OliaG) (at [9:45](https://youtu.be/b96co3sNzNI?t=585)), [@AlexGhiondea](https://github.com/AlexGhiondea) (at [56:50](https://youtu.be/b96co3sNzNI?t=3410))
  
