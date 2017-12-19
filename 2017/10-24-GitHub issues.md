@@ -31,4 +31,4 @@ Recording: https://www.youtube.com/watch?v=OZnaGV2omvI
 
   * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@bartonjs](https://github.com/bartonjs), [@KrzysztofCwalina](https://github.com/KrzysztofCwalina), [@AtsushiKan](https://github.com/AtsushiKan), [@danmosemsft](https://github.com/danmosemsft), [@karelz](https://github.com/karelz), [@weshaggard](https://github.com/weshaggard), [@GrabYourPitchforks](https://github.com/GrabYourPitchforks)
   * On call without video: [@stephentoub](https://github.com/stephentoub)
-  * Later appearances: [@Olia-Gavrysh-MS](https://github.com/Olia-Gavrysh-MS) (at [2:25](https://youtu.be/OZnaGV2omvI?t=145)), [@ahsonkhan](https://github.com/ahsonkhan) (at [11:08](https://youtu.be/OZnaGV2omvI?t=668))
+  * Later appearances: [@OliaG](https://github.com/OliaG) (at [2:25](https://youtu.be/OZnaGV2omvI?t=145)), [@ahsonkhan](https://github.com/ahsonkhan) (at [11:08](https://youtu.be/OZnaGV2omvI?t=668))
