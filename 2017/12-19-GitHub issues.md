@@ -1,8 +1,8 @@
 # API Review session for GitHub issues
 
-2 hours API review session of GitHub issues on 2017/12/19.
+2x2 hours API review sessions of GitHub issues on 2017/12/19.
 
-Recording: https://www.youtube.com/watch?v=ZrT0uOsqQlI
+Recording: https://www.youtube.com/watch?v=ZrT0uOsqQlI and https://www.youtube.com/watch?v=IIKqOagRdWA
 
 * https://youtu.be/ZrT0uOsqQlI?t=46
   * [#17299](https://github.com/dotnet/corefx/issues/17299) - **HttpMethod should include "PATCH" as a property** - Approved
@@ -19,13 +19,25 @@ Recording: https://www.youtube.com/watch?v=ZrT0uOsqQlI
 * https://youtu.be/ZrT0uOsqQlI?t=4774
   * [#24445](https://github.com/dotnet/corefx/issues/24445) - **Add Dictionary\<TKey, TValue\>.Capacity to let you resize map after created** - Approved
   * Duration: 30 min
-* https://youtu.be/ZrT0uOsqQlI?t=6541
-  * [#25785](https://github.com/dotnet/corefx/issues/25785) - **Add Brotli Compression to CoreFX** - Rescheduled
-  * Duration: 5 min
+* https://youtu.be/ZrT0uOsqQlI?t=6541 and https://www.youtube.com/watch?v=IIKqOagRdWA
+  * [#25785](https://github.com/dotnet/corefx/issues/25785) - **Add Brotli Compression to CoreFX** - Approved
+  * Duration:
+    * 5 min (https://youtu.be/ZrT0uOsqQlI?t=6541)
+    * 1h 43min (https://www.youtube.com/watch?v=IIKqOagRdWA) - mostly frozen video
 
 
 ### Participants
 
+#### [First 2h session](https://www.youtube.com/watch?v=ZrT0uOsqQlI)
+
   * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@OliaG](https://github.com/OliaG), [@KrzysztofCwalina](https://github.com/KrzysztofCwalina), [@karelz](https://github.com/karelz), [@GrabYourPitchforks](https://github.com/GrabYourPitchforks)
   * On call without video: N/A
   * Later appearances: [@divega](https://github.com/divega) (at [16:18](https://youtu.be/ZrT0uOsqQlI?t=978) on video)
+
+#### [Second 2h session - Brotli Compression](https://www.youtube.com/watch?v=IIKqOagRdWA)
+
+Video mostly frozen
+
+  * Left-to-right on the video at start: [@terrajobst](https://github.com/terrajobst), [@OliaG](https://github.com/OliaG), [@KrzysztofCwalina](https://github.com/KrzysztofCwalina), [@ianhays](https://github.com/ianhays), [@karelz](https://github.com/karelz), [@GrabYourPitchforks](https://github.com/GrabYourPitchforks)
+  * On call without video: N/A
+  * Later appearances: N/A
