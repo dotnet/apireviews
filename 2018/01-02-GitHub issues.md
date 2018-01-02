@@ -20,7 +20,7 @@ Recording: https://www.youtube.com/watch?v=dOpH6bUNbcw
   * [#16493](https://github.com/dotnet/corefx/issues/16493) - **X509Certificate GetCertHash and GetCertHashString with SHA256** - Approved
   * Duration: 2 min
 * https://youtu.be/dOpH6bUNbcw?t=2391
-  * [#17135](https://github.com/dotnet/corefx/issues/17135) - **Helper class for dealing with native shared libraries and function pointers** - Needs more work
+  * [#17135](https://github.com/dotnet/corefx/issues/17135) - **Helper class for dealing with native shared libraries and function pointers** - Postponed
   * Duration: 5 min
 
 
