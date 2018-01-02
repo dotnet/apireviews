@@ -16,7 +16,7 @@ Recording: https://www.youtube.com/watch?v=dOpH6bUNbcw
 * https://youtu.be/dOpH6bUNbcw?t=1567
   * [#1593](https://github.com/dotnet/corefx/issues/1593) - **XPathNodeIterator should implement IEnumerable<XPathNavigator>** - Needs more work
   * Duration: 8 min
-* https://www.youtube.com/watch?v=dOpH6bUNbcw
+* https://youtu.be/dOpH6bUNbcw?t=2235
   * [#16493](https://github.com/dotnet/corefx/issues/16493) - **X509Certificate GetCertHash and GetCertHashString with SHA256** - Approved
   * Duration: 2 min
 * https://youtu.be/dOpH6bUNbcw?t=2391
