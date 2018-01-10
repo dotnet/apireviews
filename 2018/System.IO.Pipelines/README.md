@@ -5,7 +5,7 @@ Status: **Needs more work** |
 [Presentation](System.IO.Pipelines.pptx) |
 [Video](https://www.youtube.com/watch?v=tLnQsNTfl9Q)
 
-## Intro
+## Context
 
 * There are multiple categories of types (see columns in slide #2)
 * This review we're focusing on (part) of the first column, specifically:
@@ -24,12 +24,6 @@ Status: **Needs more work** |
   avoid redundant (and hidden) buffers and copies.
 
 ## API Feedback
-
-### `Position`
-
-* `Position` (used to be `ReadCursor`) is a very generic name, maybe we should
-  consider prefixing it with something, e.g. `BufferPosition`, in order to avoid
-  naming collisions.
 
 ### `ReadOnlyBuffer`
 
@@ -54,3 +48,9 @@ Status: **Needs more work** |
 * Should `IBufferList` be read-only? Downside is that we couldn't reuse it for
   a (hypothetical) type `ReadWriteBuffer` without adding a mutable version of
   `IBufferList` too.
+
+### `Position`
+
+* `Position` (used to be `ReadCursor`) is a very generic name, maybe we should
+  consider prefixing it with something, e.g. `BufferPosition`, in order to avoid
+  naming collisions.
