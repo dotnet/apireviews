@@ -7,7 +7,7 @@ Status: **Needs more work** |
 
 ## Intro
 
-* There are are multiple categories of types (see columns in slide #2)
+* There are multiple categories of types (see columns in slide #2)
 * This review we're focusing on (part) of the first column, specifically:
     - `ReadOnlyBuffer`
     - `Position`
@@ -38,8 +38,11 @@ Status: **Needs more work** |
   confusion as it implies mutation.
 * Lots of `Position` parameters are still called cursor
 * We should add `Slice` overloads that take `int` in addition to `long`
-* `ReadOnlyBuffer` shouldn't take `OwnedMemory<T>` (will be easier after
-  `ReadOnlyBuffer` is moved to `System.Memory.dll`).
+* `ReadOnlyBuffer` shouldn't take `OwnedMemory<T>`. It should take
+  `ReadOnlyMemory<T>` (will be easier after `ReadOnlyBuffer` is moved to
+  `System.Memory.dll`) and array overloads.
+* `IsSingleSpan` should be called `IsSingleSegment` (span happens to be a type
+  and a single contiguous buffer can logically contain many spans).
 
 ### `IBufferList`
 
