@@ -41,10 +41,8 @@ Status: **Needs more work** |
 ### `IBufferList`
 
 * Should be generic
-* `IBufferList` is really a `IMemoryList`, so we should either change the
-  property name or the type name (changing the type name seems more logical).
-* `VirtualIndex` seems to be a name folks don't understand. Maybe it should be
-  `GlobalIndex` or maybe even just `Index` or `Offset`.
+* Should be named `IMemoryNodeList`
+* `VirtualIndex` should be `RunningLength`.
 * Should `IBufferList` be read-only? Downside is that we couldn't reuse it for
   a (hypothetical) type `ReadWriteBuffer` without adding a mutable version of
   `IBufferList` too.
