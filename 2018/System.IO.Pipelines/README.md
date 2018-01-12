@@ -20,8 +20,8 @@ Status: **Needs more work** |
 * Writing is generally easier and thus has fewer types; thus full API-by-API
   symmetry between reading and writing might be hard.
 * .NET has multiple layers of buffers, many of which are implementation details
-  of a particular class. Pipelines makes makes buffers a first-class concern to
-  avoid redundant (and hidden) buffers and copies.
+  of a particular class. Pipelines makes buffers a first-class concern to avoid
+  redundant (and hidden) buffers and copies.
 
 ## API Feedback
 
