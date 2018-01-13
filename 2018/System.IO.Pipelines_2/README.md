@@ -1,3 +1,10 @@
+# System.IO.Pipelines Review: Core APIs
+
+Status: **Approved with Feedback** | 
+[API](System.IO.Pipelines2.md) |
+[Presentation](System.IO.Pipelines2.pptx) |
+[Video](https://www.youtube.com/watch?v=1t_a9fbB3jY)
+
 # System.IO.Pipelines 2
 
 ## Minor review items ( and String like Extension Methods)
