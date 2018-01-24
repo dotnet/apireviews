@@ -22,7 +22,7 @@ while (true)
     try
     {
         var memory = pipe.Writer.GetMemory();
-        // ... wrire to memory
+        // ... write to memory
         pipe.Writer.Advance(bytesWritten);
 
         if (/* data completion condition */)
