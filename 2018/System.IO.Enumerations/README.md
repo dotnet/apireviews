@@ -18,3 +18,12 @@ Status: **Needs more work** |
       fact that everything is a delegate. Consider making them virtual methods
       and let users derive from `FindEnumerable<TResult, TState>`.
     - Collapse the static types holding the matchers into a single type.
+  
+## Requirements from CPS/MSBuild
+
+* Required for CPS and benefit for MSBuild: `BeginDirectoryEnumeration` /
+  `EndDirectoryEnumeration` callbacks.
+* Benefit for MSBuild: enumeration overload accepting a `RecurseDirectory`
+  callback that also returns a new state object to use for that subtree (either
+  this or we'll have to use a global dictionary in the global state object to
+  keep the state per subtree).
