@@ -89,3 +89,16 @@ while (true)
     - In order to settle on `IOutput` as the key constraint for writers, we need
       a way get a `Span<T>` as this is often more efficient.
     - We could split into `IOutput` into `ISpanOutput` `IMemoryOutput`
+
+## Decisions
+
+* Rename `Position` to `SequenceIndex`
+* Rename `IPipeConnection` to `IDuplexPipe`
+* Make `Pipe` non-abstract
+    - Add `Reset` method
+    - Has an internal ctor
+    - Customers building their own pipes should create their own type
+* Rename `Scheduler` to `PipeScheduler` and move to `System.IO.Pipelines`
+* We should try to align the namespaces between channels and pipes. Ideally,
+  they should be peers under the same common root.
+  
