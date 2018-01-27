@@ -1,69 +1,67 @@
 # System.IO.Pipelines
 
 ```csharp
-public interface IPipe {
-    IPipeReader Reader { get; }
-    IPipeWriter Writer { get; }
-}
-public interface IPipeReader {
-    ValueAwaiter<ReadResult> ReadAsync(CancellationToken cancellationToken=default(CancellationToken));
-    bool TryRead(out ReadResult result);
-
-    void Advance(Position consumed);
-    void Advance(Position consumed, Position examined);
-
-    void CancelPendingRead();
-    void Complete(Exception exception=null);
-    void OnWriterCompleted(Action<Exception, object> callback, object state);
-}
-public interface IPipeWriter : IOutput {
-    ValueAwaiter<FlushResult> FlushAsync(CancellationToken cancellationToken=default(CancellationToken));
-    void Commit();
-
-    void CancelPendingFlush();
-    void Complete(Exception exception=null);
-    void OnReaderCompleted(Action<Exception, object> callback, object state);
-}
-
-public interface IPipeConnection : IDisposable {
-    IPipeReader Input { get; }
-    IPipeWriter Output { get; }
-}
-
-public struct FlushResult {
-    public bool IsCancelled { get; }
-    public bool IsCompleted { get; }
-}
-public struct ReadResult {
-    public ReadResult(ReadOnlyBuffer buffer, bool isCancelled, bool isCompleted);
-    public ReadOnlyBuffer Buffer { get; }
-    public bool IsCancelled { get; }
-    public bool IsCompleted { get; }
-}
-public class Pipe : IAwaiter<FlushResult>, IAwaiter<ReadResult>, IOutput, IPipe, IPipeReader, IPipeWriter {
-    public Pipe(PipeOptions options);
-    public IPipeReader Reader { get; }
-    public IPipeWriter Writer { get; }
-    public void Reset();
-}
-
-public class PipeOptions {
-    public PipeOptions(MemoryPool<byte> pool, Scheduler readerScheduler=null, Scheduler writerScheduler=null, long maximumSizeHigh=0, long maximumSizeLow=0, int minimumSegmentSize=2048);
-    public long MaximumSizeHigh { get; }
-    public long MaximumSizeLow { get; }
-    public int MinimumSegmentSize { get; }
-    public MemoryPool<byte> Pool { get; }
-    public Scheduler ReaderScheduler { get; }
-    public Scheduler WriterScheduler { get; }
-} 
-
-public static class PipelineExtensions {
-    public static Task WriteAsync(this IPipeWriter output, byte[] source);
-    public static Task WriteAsync(this IPipeWriter output, ReadOnlyMemory<byte> source);
-    }
-
-public interface IOutput {
-     void Advance(int bytes);
-     Memory<byte> GetMemory(int minimumSize=0);
+namespace System.IO.Pipelines {
+ public readonly struct FlushResult {
+   public bool IsCancelled { get; }
+   public bool IsCompleted { get; }
+ }
+ public interface IDuplexPipe : IDisposable {
+   PipeReader Input { get; }
+   PipeWriter Output { get; }
+ }
+ public class Pipe : IAwaiter<FlushResult>, IAwaiter<ReadResult> {
+   public Pipe();
+   public Pipe(PipeOptions options);
+   public PipeReader Reader { get; }
+   bool System.Threading.IAwaiter<System.IO.Pipelines.FlushResult>.IsCompleted { get; }
+   bool System.Threading.IAwaiter<System.IO.Pipelines.ReadResult>.IsCompleted { get; }
+   public PipeWriter Writer { get; }
+   public void Reset();
+   FlushResult System.Threading.IAwaiter<System.IO.Pipelines.FlushResult>.GetResult();
+   void System.Threading.IAwaiter<System.IO.Pipelines.FlushResult>.OnCompleted(Action continuation);
+   ReadResult System.Threading.IAwaiter<System.IO.Pipelines.ReadResult>.GetResult();
+   void System.Threading.IAwaiter<System.IO.Pipelines.ReadResult>.OnCompleted(Action continuation);
+ }
+ public static class PipelineExtensions {
+   public static Task WriteAsync(this PipeWriter output, ReadOnlyMemory<byte> source);
+ }
+ public class PipeOptions {
+   public PipeOptions(MemoryPool<byte> pool=null, PipeScheduler readerScheduler=null, PipeScheduler writerScheduler=null, long pauseWriterThreshold=0, long resumeWriterThreshold=0, int minimumSegmentSize=2048);
+   public static PipeOptions Default { get; }
+   public int MinimumSegmentSize { get; }
+   public long PauseWriterThreshold { get; }
+   public MemoryPool<byte> Pool { get; }
+   public PipeScheduler ReaderScheduler { get; }
+   public long ResumeWriterThreshold { get; }
+   public PipeScheduler WriterScheduler { get; }
+ }
+ public abstract class PipeReader {
+   protected PipeReader();
+   public abstract void AdvanceTo(SequencePosition consumed);
+   public abstract void AdvanceTo(SequencePosition consumed, SequencePosition examined);
+   public abstract void CancelPendingRead();
+   public abstract void Complete(Exception exception=null);
+   public abstract void OnWriterCompleted(Action<Exception, object> callback, object state);
+   public abstract ValueAwaiter<ReadResult> ReadAsync(CancellationToken cancellationToken=default);
+   public abstract bool TryRead(out ReadResult result);
+ }
+ public abstract class PipeWriter : IBufferWriter {
+   protected PipeWriter();
+   public abstract void Advance(int bytes);
+   public abstract void CancelPendingFlush();
+   public abstract void Commit();
+   public abstract void Complete(Exception exception=null);
+   public abstract ValueAwaiter<FlushResult> FlushAsync(CancellationToken cancellationToken=default);
+   public abstract Memory<byte> GetMemory(int minimumLength=0);
+   public abstract Span<byte> GetSpan(int minimumLength=0);
+   public abstract void OnReaderCompleted(Action<Exception, object> callback, object state);
+ }
+ public readonly struct ReadResult {
+   public ReadResult(ReadOnlyBuffer<byte> buffer, bool isCancelled, bool isCompleted);
+   public ReadOnlyBuffer<byte> Buffer { get; }
+   public bool IsCancelled { get; }
+   public bool IsCompleted { get; }
+ }
 }
 ```

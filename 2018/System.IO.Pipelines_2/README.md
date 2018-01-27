@@ -80,8 +80,8 @@ while (true)
     - Sounds like we've settled on `IPipeConnection`
 * `PipeOptions`
     - Should expose a static readonly property `Default` that uses the default memory pool
-    - `maximumSizeLow` -> `backPressureEnds`
-    - `maximumSizeHigh` -> `backPressureStarts`
+    - `maximumSizeLow` -> `pauseWriterThreshold`
+    - `maximumSizeHigh` -> `resumeWriterThreshold`
 * `Pipe`
     - Offer an constructor with notarguments that passes in
       `PipeOptions.Default`
@@ -92,7 +92,8 @@ while (true)
 
 ## Decisions
 
-* Rename `Position` to `SequenceIndex`
+* Rename `Position` to `SequencePosition`
+* Rename `IOutput` to `IBufferWriter`
 * Rename `IPipeConnection` to `IDuplexPipe`
 * Make `Pipe` non-abstract
     - Add `Reset` method
@@ -101,4 +102,4 @@ while (true)
 * Rename `Scheduler` to `PipeScheduler` and move to `System.IO.Pipelines`
 * We should try to align the namespaces between channels and pipes. Ideally,
   they should be peers under the same common root.
-  
+* Remove `PipelineExtensions.WriteAsync(this IPipeWriter output, byte[] source)`
