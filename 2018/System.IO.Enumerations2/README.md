@@ -1,7 +1,7 @@
 # System.IO.Enumerations
 
 Status: **Approved with Feedback** | 
-[API](System.IO.FileSystem.md)
+[API](System.IO.Enumeration.md)
 
 ## Notes
 
