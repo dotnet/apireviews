@@ -218,7 +218,7 @@
 +   public MatchType MatchType { get; set; }
 +   public bool Recurse { get; set; }
   }
-+ public struct FileSystemEntry {
++ public ref struct FileSystemEntry {
 +   public FileAttributes Attributes { get; }
 +   public DateTimeOffset CreationTimeUtc { get; }
 +   public ReadOnlySpan<char> Directory { get; }
