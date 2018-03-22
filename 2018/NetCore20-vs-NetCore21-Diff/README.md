@@ -1,7 +1,7 @@
 # API diff between .NET Core 2.0 and .NET Core 2.1
 
-To the best of my knowledge this is an accureate diff between .NET Core 2.0 and
-.NET Core 2.1, excluding ASP.NET Core as well as the Windows Compaptibility
+To the best of my knowledge this is an accurate diff between .NET Core 2.0 and
+.NET Core 2.1, excluding ASP.NET Core as well as the Windows Compatibility
 pack.
 
 Sources:
