@@ -19,6 +19,9 @@ Major types:
     - Not reviewed today, but logically an 8-bit representation for a code point
       in `Utf8String`
 
+Please note that none of these names are final. This is a preliminary review and
+we're focusing on the concepts and their shape, rather than their names.
+
 ## Default arguments vs. overloads for Ordinal
 
 Logically, we want all methods that take a `StringComparison` to default its
