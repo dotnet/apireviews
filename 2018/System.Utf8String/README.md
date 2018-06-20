@@ -16,8 +16,7 @@ Major types:
     - We probably want to change `String` and `StringBuilder` to also accept and
       return `UnicodeScalar`
 * `Char8`
-    - Not reviewed today, but logically an 8-bit representation for a code point
-      in `Utf8String`
+    - Not reviewed today, but logically an 8-bit code unit in `Utf8String`
 
 Please note that none of these names are final. This is a preliminary review and
 we're focusing on the concepts and their shape, rather than their names.
