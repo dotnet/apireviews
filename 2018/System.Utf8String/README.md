@@ -12,9 +12,6 @@ Major types:
     - Is a designed to be a user-visible exchange type that can store data to
       the heap (as opposed to `Span<Char8>`) but there is still some debate
       whether that's the correct design.
-    - We should default all `StringComparison` arguments to `Ordinal`.
-    - In fact, we should use optional parameters across the board to reduce
-      number of overloads.
 * `UnicodeScalar`
     - We probably want to change `String` and `StringBuilder` to also accept and
       return `UnicodeScalar`
@@ -22,15 +19,25 @@ Major types:
     - Not reviewed today, but logically an 8-bit representation for a code point
       in `Utf8String`
 
+## Default arguments vs. overloads for Ordinal
+
+Logically, we want all methods that take a `StringComparison` to default its
+argument to `Ordinal`.
+
+But exposing the simple operation that is expected to be as fast as possible via
+default parameters introduces a fixed performance overhead that is hard to get
+rid of. We have the same design bug in the UTF8 formatter
+[dotnet/corefx#25425](https://github.com/dotnet/corefx/issues/25425).
+
+Hence, we'll not default `StringComparison` and instead add overloads.
+
 ## Notes
 
 * Constructors will copy data and validate
 * Equality is ordinal (like `String`)
 * Comparisons are ordinal (unlike `String` which is culture specific)
     - `CompareOrdinal` might be confusing as it implies the default isn't
-      ordinal. Maybe we should just drop the `Ordinal` suffix. Instead of making
-      it an overload to `Compare` we should just default the comparison
-      parameter.
+      ordinal. Maybe we should just drop the `Ordinal` suffix.
 * **Open issue**: how do we do interpolated strings with `Utf8String`? Do we
   need `FormattableUtf8String`?
 * **Open issue**: it looks like we need `Utf8StringBuilder` as the method like
