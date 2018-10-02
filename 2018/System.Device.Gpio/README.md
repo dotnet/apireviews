@@ -22,6 +22,17 @@ Status: **Needs more work** |
   extended in the future.
 * What happens if people open multiple drivers or controllers? Should we block
   this?
+* There is no way to read / write multiple bits of a GPIO port at once - the
+  GPIO devices usually consist of ports with certain number of bits (most often
+  8) and accessing the port as a whole is useful in case when it is being used
+  e.g. for parallel data transfer. From [@janvorli](https://github.com/janvorli):
+  > I am not referring to I2C or SPI. I am referring to parallel output of data
+  > to the whole port. GPIO pins are grouped to ports that can be read / written
+  > at once, as I've mentioned. So basically, you read / write an 8 bit value
+  > from / to the port and it reads / sets all the 8 corresponding pins. E.g.
+  > Arduino has PORTB and PORTD with digital I/O pins and it allows you to
+  > access them both as individual pins like what you propose here and as the
+  > ports as a whole, 8 bits at once.
 
 Lots of discussion around the factories. We'd like to make things consistent
 between the controller and the pin. Also, we'd like to have the pins open ended,
