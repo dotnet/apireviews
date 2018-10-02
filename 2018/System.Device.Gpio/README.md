@@ -7,8 +7,8 @@ Status: **Needs more work** |
 
 ## Notes
 
-* `EnableRasingEvents` looks like a usability trap. Could we do this
-  automtaically, e.g. when a callback is registered, when `NotifyFilter` is set,
+* `EnableRaisingEvents` looks like a usability trap. Could we do this
+  automatically, e.g. when a callback is registered, when `NotifyFilter` is set,
   or when `WaitForEvent` is called
 * Should we also offer `WaitForEventAsync`?
 * `WaitForEvent` has race condition, unless the system buffers events.
@@ -23,7 +23,7 @@ Status: **Needs more work** |
 * What happens if people open multiple drivers or controllers? Should we block
   this?
 
-Lots of dicussion around the factories. We'd like to make things consistent
+Lots of discussion around the factories. We'd like to make things consistent
 between the controller and the pin. Also, we'd like to have the pins open ended,
 i.e. support derived types. We have two options:
 

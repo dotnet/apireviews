@@ -2,7 +2,7 @@
 
 The goal of this API is to allow .Net Core developers to access General Purpose
 IO (GPIO) pins of IoT devices like Raspberry Pi, Hummingboard, or Odroid. This
-will allow applications to read and write data from/to sensors, leds and other
+will allow applications to read and write data from/to sensors, LEDs and other
 kind of peripherals connected to those pins. This API should also support most
 commonly used serial communication protocols like SPI and I2C.
 
@@ -27,7 +27,7 @@ controller for the device you are running in. You can specify the driver that
 you want to use in order to perform all the low level operations, or you can
 instead call the default factory method which will return the default controller
 for the platform you are running on. The controller will support both the
-physical pin numbering scheme, and the Logical Gpio pin numbering scheme. The
+physical pin numbering scheme, and the Logical GPIO pin numbering scheme. The
 controller will also contain a Dispose method that will take care of all of the
 cleanup required, like closing and disposing all of the open pins for that
 controller. For this reason, the common pattern will be that whenever we want to
@@ -111,7 +111,7 @@ Each controller will internally have a driver which is the one in charge of
 actually interacting with the pins and performing all of the actions at the low
 level. We have two types of these drivers, generic ones(platform-specific) and
 specific ones (board-specific). The specific drivers will be more performant, as
-they will be fliping bits in registers directly, but they won't be usable on
+they will be flipping bits in registers directly, but they won't be usable on
 other microcontrollers. The generic ones, will use SYSFS in order to perform its
 operations, which means that they will work on different boards.
 
@@ -146,7 +146,7 @@ var controller = GpioController.Open(PinNumberingScheme.Board);
 
 ### Communicating with sensors using SPI and I2C
 
-*TODO: These two protocols will be discussed in the next iteration of the Api
+*TODO: These two protocols will be discussed in the next iteration of the API
 Review*
 
 ## Proposed API
@@ -240,7 +240,7 @@ public class UnixDriver : GpioDriver
 public class RaspberryPi3Driver : GpioDriver
 {
     // Driver that implements the GpioDriver actions by using the Raspberry Pi's
-    // BCM2835 Peripheral regisers.
+    // BCM2835 Peripheral registers.
 }
 
 public class WindowsIOTDriver : GpioDriver
