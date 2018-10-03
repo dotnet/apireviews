@@ -85,16 +85,4 @@ namespace System.Device.Gpio {
     MARK_SPACE = 0,
   }
 }
-namespace System.Device.Gpio.Samples {
-  public static class Examples {
-    public static void DefaultDriver_TurnLEDOn();
-    public static void DoSomething(object sender, EventArgs args);
-    public static void InitializeLightTurnedOn();
-    public static void PullUpButton();
-    public static void RaspberryPiDriver_TurnLEDOn();
-    public static void ReadButton();
-    public static void RegisterACallbackWhenButtonPressed();
-    public static void WaitForAButtonToBePressed();
-  }
-}
 ```
