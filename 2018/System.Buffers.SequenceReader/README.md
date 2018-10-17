@@ -1,6 +1,7 @@
 # System.Buffers.SequenceReader
 
 Status: **Needs more work** | 
+[API Ref](System.Buffers.SequenceReader.md)
 [Issue](https://github.com/dotnet/corefx/issues/32588) |
 [Video](https://www.youtube.com/watch?v=0WN1OXKBMl8)
 
@@ -15,7 +16,7 @@ Status: **Needs more work** |
   in turn has regressed some micro benchmarks by 80%.
 * The downside of having two types is that the API surface bifurcates, i.e. some
   APIs will take `SequenceReader<T>`, some will take `SpanReader<T>`. An author
-  of a parsing API will have to decided. Supporting both would cause duplication
+  of a parsing API will have to decide. Supporting both would cause duplication
   as you can't funnel them (easily) through the same code path.
 * We could do these things:
     - We can ship a third type that can wrap either a sequence or a span
@@ -34,10 +35,17 @@ Status: **Needs more work** |
 * `Advance` is perf critical because the actual reader methods that need to
   advance are extension methods.
 * `Peek(Span<T>)` might be a performance trap as callers would want to avoid the
-  cost of zeroing out the passed in scratch buffer as it's rarely used.
+  cost of zeroing out the passed in scratch buffer as it's rarely used. Counter
+  argument from @stephentoub:
+  > If `Peek` returned the number of `T`s actually peeked, why would the span
+  > need to be zero'd out beforehand? (It looks like it's currently defined to
+  > return a `ReadOnlySpan<T>`, and presumably that logically incorporates that
+  > by being of the correct length?)
 * `IsNext` is a bit weird. Maybe we should we use `StartsWith` and
-  `StartsWithAny`.
+  `StartsWithAny`. Also, remove the `advancePast` bool parameter.
 * Skip method:
   - `SkipPast` -> `AdvancePast`
   - `TrySkipTo` -> `AdvanceTo`
-  - We shouldn't make them `Advance` for cases where `T` is `long`.
+  - We shouldn't name them `Advance` as they could conflict with the existing
+    `Advance(long)` method when `T` is `long`.
+
