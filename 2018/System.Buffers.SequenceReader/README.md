@@ -5,7 +5,9 @@ Status: **Needs more work** |
 [Issue](https://github.com/dotnet/corefx/issues/32588) |
 [Video](https://www.youtube.com/watch?v=0WN1OXKBMl8)
 
-## Notes
+## Session 1
+
+### Notes
 
 * Two types are being proposed here:
     - `SequenceReader<T>`: wraps a `ReadOnlySequence<T>`
@@ -27,7 +29,7 @@ Status: **Needs more work** |
 * None of this is accessible to languages that do not support `ref structs`,
   such as Visual Basic.
 
-## API feedback
+### API feedback
 
 * `Rewind` seems a bit weird
 * Can we unify `Advance` and `Rewind` into `Seek()` where the offset can be
