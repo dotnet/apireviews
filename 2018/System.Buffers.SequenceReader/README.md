@@ -51,3 +51,46 @@ Status: **Needs more work** |
   - We shouldn't name them `Advance` as they could conflict with the existing
     `Advance(long)` method when `T` is `long`.
 
+## Session 2
+
+### SequenceReader\<T>
+
+* Should we remove the `unamanged` constrained and replace with a `.ctor` check?
+    - Done for pinning and being able to take a pointer?
+* Can we have some sample code that uses a `ReadOnlySpan<T>`-based reader vs. a
+  `ReadOnlySequence<T>`-based reader?
+    - We can then compare the per gains
+    - We can then compare the usability gains
+* `AtLastSegment`. The logic outlined in the comment is wrong, you need to honor
+  position, and not check whether there is next segment.
+* `Allocator` seems odd. If we need it, should we promote the delegate or move
+  it elsewhere? We can't use a `Func` due to the generic instantiation issue
+  with `Span<T>`.
+    - Should the allocator be passed in as argument? Storing it as a field might
+      cause additional memory barrier
+* `AreAnyNext` -> `IsNextAny`
+* Suggestion from last time was to rename `IsNext` to `StartsWith` but the
+  latter isn't clear whether it's relative to the current position vs. the
+  buffer's start.
+* We may want to make `advancePastDelimiter` different methods to avoid the perf
+  issue due to the extra branches.
+* The struct has to be passed by `ref` or you have bugs. Also, since it's large,
+  passing it by value would also tank perf.
+
+### SequenceReaderExtensions
+
+* All methods have a limit of reading 128 bytes maximum
+    - This allows stack allocated buffers to be used and seemed rationale
+    - Might be too small for specialized scenarios, such as many leading zeros
+    - We cannot really expose APIs with sizes as this would likely destroy perf
+* No APIs can produce strings, we should probably add that as dealing with
+  things going across buffers is hard and we don't want folks to go through an
+  intermediary array.
+
+## BufferExtensions
+
+* Can't we make this an instance method?
+
+## UnsafeGetPositionWithinSegment
+
+* Move to `SequenceMarshal`
