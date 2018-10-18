@@ -38,7 +38,7 @@ Status: **Needs more work** |
   cost of zeroing out the passed in scratch buffer as it's rarely used. Counter
   argument from @stephentoub:
   > If `Peek` returned the number of `T`s actually peeked, why would the span
-  > need to be zero'd out beforehand? (It looks like it's currently defined to
+  > need to be zeroed out beforehand? (It looks like it's currently defined to
   > return a `ReadOnlySpan<T>`, and presumably that logically incorporates that
   > by being of the correct length?)
 * `IsNext` is a bit weird. Maybe we should we use `StartsWith` and
