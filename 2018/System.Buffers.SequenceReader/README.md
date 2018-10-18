@@ -1,7 +1,7 @@
 # System.Buffers.SequenceReader
 
 Status: **Needs more work** | 
-[API Ref](System.Buffers.SequenceReader.md)
+[API Ref](System.Buffers.SequenceReader.md) |
 [Issue](https://github.com/dotnet/corefx/issues/32588) |
 [Video](https://www.youtube.com/watch?v=0WN1OXKBMl8)
 
