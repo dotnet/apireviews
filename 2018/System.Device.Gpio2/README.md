@@ -13,7 +13,7 @@ Links:
 ## Notes
 
 * We'll want to expose other protocols too (a, b, c), hence we probably don't
-  want to name the assembly `System.Device.Gpip`. We need a more general name,
+  want to name the assembly `System.Device.Gpio`. We need a more general name,
   `System.Device` is too broad (and conflicts with an existing .NET Framework
   assembly).
 * Should the APIs be static? Right now there are no scenarios for multiple
@@ -30,5 +30,6 @@ Links:
       object that has a lifetime that manages a queue) and what Python does.
     - Jan's proposal is set beginners on the path of `while (true) { /* check state */ }` pattern.
     > Sure, the chip gets a bit hotter, but who cares?
-* We need to think about we can expose new pins, e.g. MCP23008, which is a GPIO
-  extender. The question is why how e model this in the API. Is it inheritance?
+* We need to think about how we can expose new protocols, e.g. *MCP23008*, which
+  is a GPIO extender. The question is why how we model this in the API. Is it
+  inheritance?
