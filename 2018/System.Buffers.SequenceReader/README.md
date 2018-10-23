@@ -61,6 +61,32 @@ Status: **Needs more work** |
   `ReadOnlySequence<T>`-based reader?
     - We can then compare the per gains
     - We can then compare the usability gains
+    - From [@stephentoub](https://github.com/stephentoub):
+    > And specifically (since I'm not sure I was clear in the meeting), here's
+    > what I was hoping to see. Given some common scenario that reads from /
+    > parses data from a pipeline:
+    > 
+    > * Use the BufferReader that only supports span, and have a single method
+    >   (written as we would in production code as best we can) with all of the
+    >   relevant boilerplate that handles interaction both with the pipeline and
+    >   with managing sequences/calls to the span-based reader.
+    > * Use the BufferReader that supports sequence, and have a single method
+    >   (written as we would in production code as best we can) with all of the
+    >   relevant boilerplate that handles interaction both with the pipeline and
+    >   with the sequence-based reader.
+    > 
+    > I'd like to us to be able to look at the code the provides the same
+    > functionality and the benchmarks on it and compare side-by-side both
+    > usability and performance. If we could do the test as part of kestrel
+    > (e.g. two different runnable commits off of master) and look at plaintext
+    > benchmarks and what the kestrel code looks like both ways, even better.
+    > 
+    > If the version with the span-based reader is totally incomprehensible and
+    > provides only modest gains, then that leads us one way. If the version
+    > with the span-based reader is only mildly more cumbersome and provides
+    > significant gains, then that leads us another way. Etc. I just want to
+    > make sure we're all in agreement on the goals, seeing the same data, and
+    > then coming to a joint conclusion.
 * `AtLastSegment`. The logic outlined in the comment is wrong, you need to honor
   position, and not check whether there is next segment.
 * `Allocator` seems odd. If we need it, should we promote the delegate or move
@@ -79,7 +105,7 @@ Status: **Needs more work** |
 
 ### SequenceReaderExtensions
 
-* All methods have a limit of reading 128 bytes maximum
+* All methods have a limit of reading 128 `T`s
     - This allows stack allocated buffers to be used and seemed rationale
     - Might be too small for specialized scenarios, such as many leading zeros
     - We cannot really expose APIs with sizes as this would likely destroy perf
