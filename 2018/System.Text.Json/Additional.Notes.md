@@ -5,7 +5,7 @@
 [JSON RFC](https://tools.ietf.org/html/rfc8259)
 
 * We have several different input sources that we could receive JSON data from:
-    - Pipe (sync/async)
+    - Pipe (async)
     - Stream (sync/async)
     - ReadOnlySequence (sync)
     - ReadOnlySpan (sync)
@@ -19,20 +19,18 @@
   Sequence and hence it is not worth adding separate types. This leads to a
   single type having some fields/properties that are not relevant for both
   inputs but provides a single layer for the bottom of the JSON stack.
-* It is possible to build **synchronous** stream and pipe-based readers on top
-  of the low level "span and sequence" JsonReader. Stream would use the
-  span-based ctor, while Pipe would use the sequence-based ctor. However, we
-  don't plan to provide any pipe based higher-level type. Depending on
-  System.IO.Pipelines would be inverting the expected layering.
+* It is possible to build **synchronous** stream-based readers on top of the low
+  level "span and sequence" JsonReader.
 * It is possible, though not trivial, to build **asynchronous** stream and pipe
   support on top of the low level "span and sequence" JsonReader. It will
   require new internal static methods and careful construction of the state
   structs. Creating a new instance of the ref struct on every Read/ReadAsync is
-  not a viable solution since it is too slow.
+  not a viable solution since it is too slow (2-3x slower). Stream would use the
+  span-based ctor, while Pipe would use the sequence-based ctor.
 * We plan to provide stream support by providing a higher-level convenience type
   that uses the `Utf8JsonReader` as the work horse to make stitching left over
   data easier for the caller.
-* There are plans to ship a Pipe to Stream adapter to help with the
+* There are plans to ship a Pipe <-> Stream adapter to help with the
   interoperability with these types in general: https://github.com/dotnet/corefx/issues/27246
 
 ### Questions
@@ -41,7 +39,7 @@
    1.3, and provide a portable library).
    - YSharp already has a package named [System.Text.Json](https://www.nuget.org/packages/System.Text.Json/) published on nuget.
      We would need to replace it.
-2) Should we pick the curretn API design or go with the alternative (B, below)?
+2) Should we pick the current API design or go with the alternative (B, below)?
 3) Is the type name `Utf8JsonReader` acceptable?
 4) ~Should the name of "Value" `ReadOnlySpan<byte>` property be different since
    `value` has a different meaning in terms of JSON semantics. RawValue?~
