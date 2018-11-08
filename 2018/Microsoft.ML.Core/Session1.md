@@ -102,6 +102,7 @@ ML.NET.
     - Weekly review (Thursdays)
     - 2 x four hours with lunch in between
 * Review other core assemblies:
-    - `Microsoft.ML.CpuMath`
+    - `Microsoft.ML.Core`
     - `Microsoft.ML.Data`
     - `Microsoft.ML.Transforms`
+    - `Microsoft.ML.CpuMath`
