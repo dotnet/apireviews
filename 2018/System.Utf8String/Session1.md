@@ -1,4 +1,4 @@
-# UTF8 String
+# UTF8 String (Session 1)
 
 Status: **Needs more work** | 
 [API](https://github.com/dotnet/corefx/issues/30503) |
