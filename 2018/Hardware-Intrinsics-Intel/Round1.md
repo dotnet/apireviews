@@ -1,4 +1,4 @@
-# Intel Hardware Intrinsics
+# Intel Hardware Intrinsics (Round 1)
 
 Status: **Needs more work** | 
 [Presentation](HWIntrinsicAPIReview.pptx) |
