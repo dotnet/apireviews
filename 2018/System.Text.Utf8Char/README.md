@@ -1,4 +1,4 @@
-# System.Text.Utf8Char8
+# System.Text.Utf8Char
 
 Status: **Needs more work** | 
 [API Ref](https://github.com/dotnet/corefx/issues/34094)
@@ -11,7 +11,7 @@ We discussed several names. Best candidates right now:
 * `Microsoft.Bcl.Json.Sources`
 * `Microsoft.Text.Json.Sources`
 
-## Char8
+## Utf8Char
 
 * We need to think about what a down-level port would look like. I don't believe
   we can rev `System.Memory` package without breaking compat.
@@ -20,7 +20,7 @@ We discussed several names. Best candidates right now:
       have a few overloads, but they are mostly in buffer land or on brand new
       APIs.
 * While there is some validation for individual values, this type doesn't in
-  itself guaranteeing that any `ReadOnlySpan<UtfChar>` is a valid UTF8 string
+  itself guaranteeing that any `ReadOnlySpan<Utf8Char>` is a valid UTF8 string
   (for example, it can break multi-byte sequences apart). So if UTF8 text
   well-formedness is critical, users still have validate. The primary benefit of
   having the type is to express to callers of an API what the data is supposed
