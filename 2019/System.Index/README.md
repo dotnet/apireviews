@@ -1,7 +1,7 @@
 # System.Index and System.Range
 
 Status: **Review not complete** | 
-[API Ref](https://github.com/dotnet/corefx/issues/34076)
+[API Ref](https://github.com/dotnet/corefx/issues/34076) |
 [Video](https://www.youtube.com/watch?v=NYliXLGGBwc)
 
 ## Notes
