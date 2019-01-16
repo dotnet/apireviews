@@ -36,21 +36,26 @@ parameters) that allows the caller to use syntax at the call site.
 Given this method:
 
 ```C#
+[IndexMethod]
+public T this[int index];
+
 [RangeMethod]
-public Slice(int start, int length)
+public Slice(int start, int length);
 ```
 
 Code like this could work:
 
 ```C#
 x.Slice(start..end);
+x.Slice(start..^1);
+x[^index]
 ```
 
-There would be limitations though:
+The idea would be to code spit the appropriate translation, using the receiver's
+`Length`/`Count` properties.
 
-* The `^` syntax wouldn't be supported
-* Use of `Index` and `Range` types wouldn't be supported
-* Extracting the expression `start..end` into a local variable wouldn't be supported
-
-We could make those things, with an understanding that they would impact
-performance, which seem to make them somewhat questionable.
+It's unclear how or if this would work when the expressions aren't inline but
+are extracted to local variables. However, this probably require the compiler to
+synthesize appropriate members that take `Index` and `Range` so that
+IntelliSense and symbol lookup works in a sane way (similar to how the compilers
+deals with extension methods).
