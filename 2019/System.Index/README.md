@@ -57,5 +57,9 @@ The idea would be to code spit the appropriate translation, using the receiver's
 It's unclear how or if this would work when the expressions aren't inline but
 are extracted to local variables. However, this probably require the compiler to
 synthesize appropriate members that take `Index` and `Range` so that
-IntelliSense and symbol lookup works in a sane way (similar to how the compilers
+IntelliSense and symbol lookup works in a sane way (similar to how the compiler
 deals with extension methods).
+
+The primary reason why this would be cheaper is the elimination of multiple
+layers of bounds checking and throw statements that the JIT isn't likely to be
+able to eliminate easily.
