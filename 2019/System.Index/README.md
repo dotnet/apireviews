@@ -15,7 +15,8 @@ Status: **Review not complete** |
   the developer's program.
     - We should `ArgumentOutOfRangeException` from the implicit operator (as
       opposed to `InvalidCastException`)
-* Do the types `Index` and `Range` any value over conventions for method/indexer parameter list?
+* Do the types `Index` and `Range` add any value over conventions for
+  method/indexer parameter list?
     - Yes, because they allow languages to model the special syntax as
       expressions, which makes them composable, like being able to extract them
       as variables.
