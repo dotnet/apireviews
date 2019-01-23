@@ -48,8 +48,8 @@ We need this method:
 ```C#
 struct Index
 {
-    static readonly Index Start = new Index(0, false);
-    static readonly Index End = new Index(0, true);
+    static Index Start => new Index(0, false);
+    static Index End => new Index(0, true);
     Index(int value, bool isFromEnd = false) {}
     static Index FromStart(int value) {}
     static Index FromEnd(int value) {}
