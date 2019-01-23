@@ -4,7 +4,7 @@ Status: **Review not complete** |
 [API Ref](https://github.com/dotnet/corefx/issues/34076) |
 [Video](https://www.youtube.com/watch?v=NYliXLGGBwc)
 
-## Notes
+## Round 1
 
 * `Index` has an implicit conversion to `int`. However, it will fail for
   negative numbers. We normally don't allow implicit conversions to fail;
@@ -23,6 +23,58 @@ Status: **Review not complete** |
 * We still have some open questions, such as:
     - We need a method that can *close* the range, given a container size
     - Performance issues (see below)
+
+## Round 2
+
+* Andy pointed out that the proposal with the attribute (see blow) might not
+  easily work if we ship syntax support for high performance APIs in .NET Core
+  3.0. We might want to review the plan at least enough to make a decision on
+  this.
+* Andy asked whether the compiler should consolidate all constructions of
+  `Range` into create; however, we feel it might be cheaper at runtime if the
+  compiler calls specialized methods so we can avoid bounds checking for the
+  missing side. On the other hand, we believe we can add them later if
+  necessary. Not making them known to the compiler has the advantage that we can
+  decide on naming without involving the compiler.
+* Having the implicit operator throw is an artifact of the encoding (we use the
+  sign to indicate `fromEnd`) which prevents us from delaying the exception to
+  the argument validation of the indexer. However, we still believe the
+  developer experience doesn't suffer meaningfully.
+
+### Index
+
+We need this method:
+
+```C#
+struct Index
+{
+    static Index Start => new Index(0, false);
+    static Index End => new Index(0, true);
+    Index(int value, bool isFromEnd = false) {}
+    static Index FromStart(int value) {}
+    static Index FromEnd(int value) {}
+    bool IsFromEnd { get; }
+    int GetOffset(int length) {}
+}
+```
+
+* No operators. We believe having them throw would be problematic; let's wait
+  and see.
+* No deconstruct for `Index`
+
+### Range
+
+We need a method to compute the effective values.
+
+```C#
+var (start, length) = range.GetOffsetLength(Length);
+```
+
+* Replace `Create` with a regular constructor that takes two `Index`
+    - We'll keep the `All`, `FromStart` and `ToEnd` methods for VB/F#
+    - `All` should be a field/property
+    - Rename `FromStart` to `StartAt`, `ToEnd` to `EndAt`
+* We should add a `Range` based indexer to the memory classes
 
 ## Convenient use of high-performance APIs
 
