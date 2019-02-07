@@ -11,7 +11,7 @@ Status: **Approved with feedback** |
 * We should change the API as follows:
 
 ```C#
-public static OperationStatus ToBytes(ReadOnlySpan<char> source, Span<byte> destination, out int numCharsRead, out int numBytesWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true);
-public static OperationStatus ToChars(ReadOnlySpan<byte> source, Span<char> destination, out int numBytesRead, out int numCharsWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true);
+public static OperationStatus FromUtf16(ReadOnlySpan<char> source, Span<byte> destination, out int numCharsRead, out int numBytesWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true);
+public static OperationStatus ToUtf16(ReadOnlySpan<byte> source, Span<char> destination, out int numBytesRead, out int numCharsWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true);
 ```
 
