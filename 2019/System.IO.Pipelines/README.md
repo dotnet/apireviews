@@ -6,11 +6,11 @@ Status: **Approved with Feedback** |
 
 # Notes
 
-* The proposal is to throw an exception when a anybody uses synchronous
-  (blocking) APIs on the returned `Stream`.
+* The proposal is to throw an exception when anybody uses synchronous (blocking)
+  APIs on the returned `Stream`.
     - The reason being that the blocking APIs don't perform as well.
     - We should reverse the default so that synchronous APIs work by default but
-      advanced customers can opt out so they can a "slap on the wrist" when the
+      advanced customers can opt out so they get a "slap on the wrist" when the
       stack accidentally uses synchronous APIs.
     - Actually, we decided to get rid of the argument so that we can make the
       method `AsStream` idempotent.
