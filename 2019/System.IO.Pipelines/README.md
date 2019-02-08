@@ -16,8 +16,8 @@ Status: **Approved with Feedback** |
       method `AsStream` idempotent.
 * Extension methods vs. virtual methods
     - We'd make `AsStream()` virtual methods on `PipeReader` and `PipeWriter`.
-    - Since we don't have default interface methods yet, we should not expose
-      an extension method to avoid behavior inconsistencies.
+    - Since we don't have default interface methods yet, we should not expose an
+      extension method on `IDuplexPipe` to avoid behavior inconsistencies.
 * `AsStream()` should return the same instance when called multiple times on the
   same instance (will be idempotent)
 * We decided against making them structs so that it's consistent `PipeOptions`
