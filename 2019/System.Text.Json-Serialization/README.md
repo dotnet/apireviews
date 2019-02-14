@@ -14,7 +14,19 @@ Status: **Review not complete** |
 * We shouldn't return `Span<T>`; we should let the caller pass in the buffer to
   fill. This likely also requires `out` parameters to indicate how many bytes
   were written.
+    - Make them regular static methods (rather than extension methods).
 * The APIs returning `ValueTask` should probably return `Task`
+* The writer APIs should take the value and then the writer (source -> destination)
+    - IOW, this:
+    ```C#
+    public static ValueTask ToJsonAsync(this PipeWriter writer, object value, JsonConverterOptions options = null, CancellationToken cancellationToken = default);
+    public static ValueTask ToJsonsync(this Stream stream, object value, JsonConverterOptions options = null, CancellationToken cancellationToken = default);
+    ```
+    - Should be this:
+    ```C#
+    public static ValueTask ToJsonAsync(object value, PipeWriter writer, JsonConverterOptions options = null, CancellationToken cancellationToken = default);
+    public static ValueTask ToJsonsync(object value, Stream stream, JsonConverterOptions options = null, CancellationToken cancellationToken = default);
+    ```
 * We should avoid the `To` and `From` prefixes, we should go with something simpler 
     - e.g. `JsonSerializer.Read`, `JsonSerializer.ReadAsync`, `JsonSerializer.Write`, `JsonSerializer.WriteAsync`
 * Should we have `Utf8` in the name somewhere? How would we grow the serializer
