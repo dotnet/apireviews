@@ -27,6 +27,9 @@ Status: **Review not complete** |
     public static ValueTask ToJsonAsync(object value, PipeWriter writer, JsonConverterOptions options = null, CancellationToken cancellationToken = default);
     public static ValueTask ToJsonsync(object value, Stream stream, JsonConverterOptions options = null, CancellationToken cancellationToken = default);
     ```
+* The APIs taking `PipeWriter` might be problematic because it implies that the
+  JSON component depends on pipelines. We probably want this the other way
+  around.
 * We should avoid the `To` and `From` prefixes, we should go with something simpler 
     - e.g. `JsonSerializer.Read`, `JsonSerializer.ReadAsync`, `JsonSerializer.Write`, `JsonSerializer.WriteAsync`
 * Should we have `Utf8` in the name somewhere? How would we grow the serializer
