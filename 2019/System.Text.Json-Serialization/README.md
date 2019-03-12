@@ -1,10 +1,11 @@
 # System.Text.Json (Serialization)
 
 Status: **Review not complete** | 
-[API Ref](https://github.com/dotnet/corefx/issues/34372) |
-[Video](https://www.youtube.com/watch?v=I_CNwnkNDNA)
+[API Ref](https://github.com/dotnet/corefx/issues/34372)
 
-## Notes
+## Round 1
+
+[Video](https://www.youtube.com/watch?v=I_CNwnkNDNA)
 
 * We're shooting for an MVP in the .NET Core 3.0 timeframe, mostly due to
   time constraints but also because baking a serializer takes time
@@ -44,3 +45,40 @@ Status: **Review not complete** |
     - `DeserializeNullValues`: `true`
     - `CaseInsensitivePropertyName`: `false`
 * We should consider moving `MaxDepth` into reader/writer options
+
+## Round 2
+
+[Video](https://www.youtube.com/watch?v=mAg2UGrkJdA)
+
+* `JsonSerializer`
+    - The `Write` methods are weird because they produce a `byte[]`, we'll want
+      a name that indicates a value is being produced (e.g. `ToBytes()`). We
+      also discussed not having the API and instead take `Span<T>` but that's
+      hard as the caller has no way of knowing how big the buffer would be and
+      the callee can't easily be made incremental. However, we probably want an
+      API like this which probably requires us to expose a state value that the
+      caller has to pass in, similar to how the `JsonReader` works.
+    - Let's remove these methods for now; callers can just construct a
+      `MemoryStream`, and call the `Write` method that takes a stream.
+    - The `Write` method (by-design). It seems that *might* not be desirable. We
+      might want to redesign this part.
+    - We should rename `WriteString` to `ToString`
+    - We should rename `ReadString` to `Parse`
+    - We should rename the names taking text `Parse`
+    - We should remove the `Read` method that takes `ReadOnlySequence<T>`
+    - We should remove the `Read` method that takes `Span<T>`
+    - Do we ever want to make this type instantiable? If so we'll have to think
+      about the name of the methods and the type because they would clash.
+* `JsonSerializerOptions`
+    - `SkipNullValueOnRead` -> `SkipNullPropertyOnRead`
+    - `SkipNullValueOnWrite` -> `SkipNullPropertyOnWrite`
+    - `DefaultBufferSize` should be nullable
+    - We've talked a lot about how to customize the serialization behavior, such
+      as whether attributes, reflection context, or callbacks would be better.
+      This isn't trivial; we'll have to determine what caching granularity we
+      need and whether it would work well for AOT scenarios.
+    - Krzysztof will submit a proposal for a policy API that would be useful for
+      Azure SDK.
+* Open Issues:
+    - We need to think about AOT generation in the context of policies more
+    - We need to think about version resiliency / (overflow/underflow roundtripping)
