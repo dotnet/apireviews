@@ -1,4 +1,4 @@
-# Adapter for System.IO.Pipelines
+# System.Numerics.Tensors interfaces
 
 Status: **Needs more work** | 
 [API Ref](https://github.com/dotnet/corefx/issues/35765) |
