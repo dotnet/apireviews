@@ -41,5 +41,7 @@ forcing consumers to call different APIs.
 
 ## Next steps
 
-* Fowler/Pavel: propose API shape for `AsyncBufferedReader<T>` /
+* Fowler/Pavel: propose API shape for `AsyncBufferedReader<T>` and
   `AsyncBufferedWriter<T>`
+* Clarify how to handle sync. We might want to add synchronous APIs to the new
+  `AsyncBufferedReader<T>` and `AsyncBufferedWriter<T>` types.
