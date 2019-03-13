@@ -12,10 +12,10 @@ between `Stream` and pipelines because streams don't manage buffers -- you need
 to pass a buffer in. That causes copies (i.e. CPU time) and some amount of
 allocations (although those can likely be amortized by e.g. using a pool).
 
-Right now, there is a desire to make the JSON reader/writer APIs directly take
-a `IPipeReader` and `IPipeWriter` to avoid this overhead. However, this means that
-the JSON APIs have to depend on pipelines, thus begging the question if pipelines
-should be considered a suitable low-level IO primitive.
+Right now, there is a desire to make the JSON serializer/deserializer APIs
+directly take a `IPipeReader` and `IPipeWriter` to avoid this overhead. However,
+this means that the JSON APIs have to depend on pipelines, thus begging the
+question if pipelines should be considered a suitable low-level IO primitive.
 
 ## Option 1 - Declare it good
 
