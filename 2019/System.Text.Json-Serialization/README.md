@@ -82,3 +82,39 @@ Status: **Review not complete** |
 * Open Issues:
     - We need to think about AOT generation in the context of policies more
     - We need to think about version resiliency / (overflow/underflow roundtripping)
+
+## Round 3
+
+[Video](https://www.youtube.com/watch?v=_CdV75tEsVk)
+
+* We currently don't expose pipeline-based APIs but there is a
+  [separate issue](https://github.com/dotnet/corefx/issues/35808) for that.
+* Attribute programming model
+    - Adding attributes to the options feels strange
+    - It seems the current naming policies don't support handling properties vs.
+      dictionary keys differently.
+    - The camel casing rules are lot more complicated. We should take a look at
+      what custom rules JSON.NET has to make sure we've sane default for common
+      strings like ID and URL.
+* `JsonSerializerOptions`
+    - The constructor argument should be a property as it's more in-line with
+      our guidance.
+    - The challenge is that this isn't a setting that can (or even should) be
+      changed after `GetClassInfo()` was called.
+    - Maybe we should just throw exceptions if options are changed after objects
+      have been serialized. This gives people the easiest way to set the options
+      (all just properties that can be set in order) while having deterministic
+      behavior that informs the developer when they are doing things that are
+      most likely wrong.
+    - `GetClassInfo()` we should change to `GetTypeInfo()` as it's not specific
+      to classes.
+* `JsonPropertyInfo`
+    - We shouldn't be exposing UTF8 strings here; they are just internal caches
+    - It's unclear how to ignore properties, e.g. the representation for
+      `[DoNotSerializer]`.
+
+
+
+
+
+
