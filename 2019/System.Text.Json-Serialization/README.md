@@ -113,8 +113,24 @@ Status: **Review not complete** |
     - It's unclear how to ignore properties, e.g. the representation for
       `[DoNotSerializer]`.
 
+## Round 4
 
+[Video](https://www.youtube.com/watch?v=I8jzQ2oMf_o) |
+[Reader/Writer based deserialization](https://github.com/dotnet/corefx/issues/34372) |
+[Property name policy](https://github.com/dotnet/corefx/issues/36351)
 
-
-
-
+* We should add an abstract base type for all JSON related attributes, such as
+  `JsonSerializationAttribute` that all others derive from
+    - Groups them nicely in docs
+    - Avoids having to take literally any attribute or having to add a gazillion
+      overloads.
+* We should consider splitting the `JsonIgnorePropertyAttribute` into separate attributes
+    - It's confusion that applying that attribute without setting an properties
+      is a no-op, especially because the name implies that something is being
+      ignored.
+* We should revisit the namespace layout
+    - Right now, the reader/writer are very low-level types
+* There is an issue with merging attributes with multiple values across the
+  hierarchy
+* We should consider whether we need attributes at all or whether we can we can
+  get away without having any attributes and rely on global configuration.
