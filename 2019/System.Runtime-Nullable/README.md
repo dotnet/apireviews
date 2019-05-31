@@ -8,11 +8,11 @@ Status: **Review in progress** |
 
 ## General rules
 
-* We shouldn't implement `IComparable<SomeType?>` and `IEqutable<SomeType?>`
-  because many other things are constrained to `where T: IEquable<T>` which
+* We shouldn't implement `IComparable<SomeType?>` and `IEquatable<SomeType?>`
+  because many other things are constrained to `where T: IEquatable<T>` which
   the instantiation can't satisfy.
 * All `TryParse` method should accept nullable input. The `out` should be
-  nullable and marked with `[NotNullWhenTrue]`.
+  nullable and marked with `[NotNullWhen(true)]`.
 * All `IFormatProviders` should be nullable
 * All exception should have nullable `message`, `inner`, and `paramName`
 * `Delegate` constructor: should `target` be nullable?
