@@ -7,7 +7,8 @@ Status: **Needs more work** |
 ## Notes
 
 * The current proposal uses interfaces; which are very hard to version, even
-  with DIMs this might be hard due to the fact there is a hierarchy.
+  with Default Interface Methods (DIM) this might be hard due to the fact there
+  is a hierarchy.
 * The original proposal used abstract classes but external libraries weren't
   able to easily retrofit their existing types over ours; interfaces would
   easier to inject.
