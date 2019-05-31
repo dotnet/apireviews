@@ -1,6 +1,6 @@
 # Adapter for System.IO.Pipelines
 
-Status: **Needs more work** | 
+Status: **Needs more work** |
 [API Ref](https://github.com/dotnet/corefx/issues/35765) |
 [Video](https://www.youtube.com/watch?v=aaFcBs6cFqg)
 
@@ -12,7 +12,7 @@ Status: **Needs more work** |
 * The original proposal used abstract classes but external libraries weren't
   able to easily retrofit their existing types over ours; interfaces would
   easier to inject.
-* Most libraries have their tensors baked by native memory. Given that tensors
+* Most libraries have their tensors backed by native memory. Given that tensors
   inherently have different shapes, most of them have a class hierarchy.
   However, some of the libraries use structs to keep the overhead on the managed
   side as low as possible. For that case, interface might be a better fit.
