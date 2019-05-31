@@ -1,6 +1,6 @@
 # Intel Hardware Intrinsics (Round 2)
 
-Status: **Needs more work** | 
+Status: **Needs more work** |
 [Issue](https://github.com/dotnet/corefx/issues/32721) |
 [Video](https://www.youtube.com/watch?v=gkQxqUa7KLc)
 
@@ -10,7 +10,7 @@ Status: **Needs more work** |
    and decide the nested class name (e.g., `X64`, `X64Only`, etc.)
 
 2. To dive into [SSE4.2 STTNI API design](https://github.com/dotnet/coreclr/pull/19958)
-    
+
     * In the last review, we decided to have 3 enums `StringComparisonMode`,
       `IndexStringComparisonMode`, and `MaskStringComparisonMode`. They have
       some overlapped values and a few unique values to provide "safer"
@@ -25,14 +25,11 @@ Status: **Needs more work** |
 
 3. To review the redesigned [helper intrinsic APIs in vector classes](https://github.com/dotnet/coreclr/pull/20147).
 
-    * the redesigned helper intrinsic does not provide genetic cast intrinsic
+    * the redesigned helper intrinsic does not provide generic cast intrinsic
       (i.e., `As<T>`) and let users write their own ones via `Unsafe.As<TFrom,
       TTo>`.
-    * In my opinion, it is better to provide the genetic cast intrinsic in
-      vector classes, which makes 1) the feature more self-contained 2) more
-      stable perf with tiered JIT (Tiered0 does not inline Unsafe.As).
 
-Regarding 
+Regarding
 
 1. **Approved**. Only concerns was how this will blend with the inheritance
    model, but the corresponding nested type could mirror that.
@@ -41,7 +38,9 @@ Regarding
 
 3. **Approved**.
     - We should name them `CreateScalarUnsafe` as that follows our pattern.
-    - The create method that convers from Vector64/128 to Vector128/256 should be `AsVectorXxx`
-    - The unsafe version would be `AsVectorXxxUnsafe`
-    - The `GetElement`/`SetElement` methods should be an indexer
+    - The create method that convers from Vector64/128 to Vector128/256 should
+      be `ToVectorXxx`
+    - The unsafe version would be `ToVectorXxxUnsafe`
+    - The `GetElement`/`SetElement` methods normally should be an indexer, but
+      this wouldn't work because the type is immutable.
     - We should add a `As<U>()` instance method
