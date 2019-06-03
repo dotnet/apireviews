@@ -45,3 +45,26 @@ forcing consumers to call different APIs.
   `AsyncBufferedWriter<T>`
 * Clarify how to handle sync. We might want to add synchronous APIs to the new
   `AsyncBufferedReader<T>` and `AsyncBufferedWriter<T>` types.
+
+## Discussion
+
+Rough proposal:
+
+```C#
+partial class Stream
+{
+    public virtual bool CanProvideBuffers { get; }
+
+    // Read
+    public virtual ValueTask<ReadResult<byte>> ReadBufferedAsync(CancellationToken cancellationToken = default);
+    public virtual void AdvanceReader(SequencePosition consumed, SequencePosition examined);
+
+    // Write
+    public virtual Memory<byte> GetMemory(int minSize = 0);
+    public virtual Span<byte> GetSpan(int minSize = 0);
+    public virtual void AdvanceWriter(int count);
+}
+```
+
+David Fowler will prototype this in CoreFx with a few key classes. He'll do that
+during his vacation to Hawaii, because why the heck not.
