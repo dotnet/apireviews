@@ -57,12 +57,12 @@ partial class Stream
 
     // Read
     public virtual ValueTask<ReadResult<byte>> ReadBufferedAsync(CancellationToken cancellationToken = default);
-    public virtual void AdvanceTo(SequencePosition consumed, SequencePosition examined);
+    public virtual void AdvanceReader(SequencePosition consumed, SequencePosition examined);
 
     // Write
     public virtual Memory<byte> GetMemory(int minSize = 0);
     public virtual Span<byte> GetSpan(int minSize = 0);
-    public virtual void Advance(int count);
+    public virtual void AdvanceWriter(int count);
 }
 ```
 
