@@ -47,7 +47,7 @@ Status: **Review in progress** |
 * `Assembly.GetType` should all return nullable, even the one without `throwOnError`
 * `Assembly.LoadFrom` should all accept non-null names.
 * `Assembly.LoadModule(name, rawModule)` should accept non-nullables
-* `Assembly.ReflectionOnlyLoad/From` should only accept null inputs
+* `Assembly.ReflectionOnlyLoad/From` should only accept non-rnull inputs
 * `AssemblyName.GetPublicKeyToken()` should be marked nullable
 * `CustomAttributeData.AttributeType` should be marked non-null
 * Should our derivatives of `MemberInfo` assert `DeclaringType` to be non-null?
