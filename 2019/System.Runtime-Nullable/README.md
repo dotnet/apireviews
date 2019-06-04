@@ -5,6 +5,7 @@ Status: **Review in progress** |
 [Video 1](https://youtu.be/O1LGUD8jL5M?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=411) |
 [Video 2](https://youtu.be/MevY_iX6_TQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=97) |
 [Video 3](https://youtu.be/nZraFvZgz_Y?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=241) |
+[Video 4](https://www.youtube.com/watch?v=Oi442B_VQEQ&list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&index=1) |
 
 ## General rules
 
@@ -18,6 +19,16 @@ Status: **Review in progress** |
 * `Delegate` constructor: should `target` be nullable?
 * All operators `==`, `!=` should accept nullable reference types
 * `BeginXxx`, `EndXxx` should take a nullable callback and nullable state
+* Most attributes should probably a non-null values, even though we can't really
+  enforce that because the constructors don't run unless someone pulls on the
+  attribute. So while the values can be null, we should disallow. Unless, an
+  overload exits that makes the value optional, in which case it's probably
+  going to return `null` from the property, in which case we might as well
+  accept `null`.
+* `params` should generally not allow for the array to be `null`, elements could
+  be, though. Also, if the calls has no `params`, the compiler will fill in
+  `Array.Empty<T>()`.
+* Events should accept a null sender
 
 ## Notes
 
@@ -58,6 +69,24 @@ Status: **Review in progress** |
   nullable because it's a valid default value.
 * `PropertyInfo.SetValue` should take a null index, so `object?[]?`
 * `TypeFilter` should take nullable criteria
+* `AssemblyTargetedPatchBandAttribute` should take non-null.
+* `TargetedPatchingOptOutAttribute` should take non-null.
+* `StringBuilder.AppendFormat` should accept a null `IFormatProvider`
+* `RuntimeHelpers.GetObjectValue()` should accept null and return null and the
+  parameter should be marked with `[NotNullIfNotNull]`
+* ~~`RuntimeWrappedException` constructor and property should probably allow
+  `null`, but this seems like something we might want to test with C++/CLI or
+  IL~~. Runtime doesn't allow for that.
+* `IDeserializationCallback.OnDeserialization()` should accept nullable.
+* `Encoding`. `BodyName`, `EncodingName`, `HeaderName`, `WebName` should
+  probably all return non-null.
+* `WaitHandle.SafeWaitHandle` should be marked as a not nullable, with allowing
+  the setter to accept null.
+* `WaitHandleExtensions.GetSafeWaitHandle()` should return non nullable.
+* `AppDomain.ExecuteAssemblyByName` the `params` should be non-null.
+* `Environemnt.Exit` should be marked with `[DoesNotReturnAttribute]`
+* `ResolveEventHandler` should return a nullable
+* Continue with `System.CodeDom.Compiler`
 
 ## Follow-ups
 
@@ -65,3 +94,10 @@ Status: **Review in progress** |
 * We need to revisit what to do with `: class?` we could also decide to make it
   `: class` and put the question marks in the usage.
 * We need another review for the attributes
+* Do `AssemblyTargetedPatchBandAttribute` and `TargetedPatchingOptOutAttribute`
+  still make sense in .NET Core?
+* When `nameof()` is used in attribute applied to the return type, the
+  parameters should be in scope. This could break existing scope.
+* Should implementations of `IComparer<T>` and `IEqualityComparer<>` follow what
+  we do for `IComparable<T>` and `IEqualityComparable<T>` and not use nullable
+  annotations but use the attributes?
