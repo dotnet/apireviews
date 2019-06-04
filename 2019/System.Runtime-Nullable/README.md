@@ -51,8 +51,7 @@ Status: **Review in progress** |
 * `AssemblyName.GetPublicKeyToken()` should be marked nullable
 * `CustomAttributeData.AttributeType` should be marked non-null
 * Should our derivatives of `MemberInfo` assert `DeclaringType` to be non-null?
-* `AssemblyMetadataAttribute` should be applicable
-* `FieldInfo.SetInfo(object, object)` should allow both values to be null
+* `FieldInfo.SetValue(object, object)` should allow both values to be null
 * `IReflect.Invoke`: `args` should be `object?[]?`
 * `MethodInfo.ReturnType` should be non-null.
 * `PropertyInfo.GetRawConstantValue()` and `GetConstantValue()` should be
