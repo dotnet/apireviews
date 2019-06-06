@@ -27,6 +27,8 @@ Status: **Review in progress**
 * Properties whose backing fields are nulled out after `Dispose()` shouldn't be
   marked as nullable. Instead, the implementation should bang the nulling out.
   After `Dispose()`, the behavior is undefined.
+* Extensions on nullable receivers seem odd, but the compiler will do the right
+  thing.
 
 ## System.Runtime
 
@@ -126,12 +128,23 @@ Status: **Review in progress**
 * ~~`Vector128<T>.ToString()` shouldn't accept a nullable~~. Nullable is correct.
 * ~~`Vector256<T>.ToString()` shouldn't accept a nullable~~. Nullable is correct.
 
-<!--
-
 ## System.Memory
 
 [API Ref](System.Memory.md) |
-[Video]()
+[Video](https://youtu.be/ux-NsNHHHD4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=182)
+
+* `MemoryExtensions.BinarySearch` should mark the comparer as nullable, but the
+  code today throws.
+* `MemoryExtensions.BinarySearch` currently crashes when looking for a null
+  value, which seems broken. We should check what `Array.BinarySearch` does and
+  make sure consistent. It seems they should take `null` or we need to change
+  the annotation to disallow null.
+* Right now the `MemoryExtensions` don't seem to accept spans that can contain
+  `null` values, due to the way the generics are expressed. From giving it a
+  quick glance in the review, we may want to change that. However, we're unsure
+  whether that's even possible.
+
+<!--
 
 ## System.Numerics.Vectors
 
