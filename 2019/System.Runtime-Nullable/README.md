@@ -7,11 +7,11 @@ Status: **Review in progress**
 * We shouldn't implement `IComparable<SomeType?>` and `IEquatable<SomeType?>`
   because many other things are constrained to `where T: IEquatable<T>` which
   the instantiation can't satisfy.
-* All `TryParse` method should accept nullable input. The `out` should be
-  nullable and marked with `[NotNullWhen(true)]`.
+* All `TryParse` method should accept nullable input.
+* All `out` parameters should be nullable and marked with `[NotNullWhen(true)]`.
 * All `IFormatProviders` should be nullable
 * All exception should have nullable `message`, `inner`, and `paramName`
-* `Delegate` constructor: should `target` be nullable?
+* `Delegate` constructor: `target` should be nullable
 * All operators `==`, `!=` should accept nullable reference types
 * `BeginXxx`, `EndXxx` should take a nullable callback and nullable state
 * Most attributes should probably a non-null values, even though we can't really
@@ -24,6 +24,9 @@ Status: **Review in progress**
   be, though. Also, if the calls has no `params`, the compiler will fill in
   `Array.Empty<T>()`.
 * Events should accept a null sender
+* Properties whose backing fields are nulled out after `Dispose()` shouldn't be
+  marked as nullable. Instead, the implementation should bang the nulling out.
+  After `Dispose()`, the behavior is undefined.
 
 ## System.Runtime
 
@@ -111,7 +114,7 @@ Status: **Review in progress**
 [API Ref](System.Collections.md) |
 [Video 1](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3572) |
 
-* CollectionExtensions: all methods should be constrained to where: `TKey : nonullable`
+* CollectionExtensions: all methods should be constrained to where: `TKey : notnull`
 * `HashSet<T>(int, IEqualityComparer<T>)` should accept a null comparer
 
 ## System.Runtime.Intrinsics
