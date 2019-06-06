@@ -94,7 +94,17 @@ Status: **Review in progress**
 * `AppDomain.ExecuteAssemblyByName` the `params` should be non-null.
 * `Environemnt.Exit` should be marked with `[DoesNotReturnAttribute]`
 * `ResolveEventHandler` should return a nullable
-* Continue with `System.CodeDom.Compiler`
+* It's a bit odd that `BinaryWriter.Write(string)` doesn't accept `null` when
+  `TextWriter.WriteString` does.
+* `BufferedStream.UnderlyingStream` should be non-nullable. The implementation
+  should bang the nulling out. After `Dispose`, the behavior is undefined.
+* `TextWriter.Write[Async][Line](char[], int, int)` should accept a `null`
+   buffer because there is an overload that accepts nulls. And that's the
+   pattern we've used in other places.
+* `WebUtility.HtmlDecode` and `HtmlEncode` should be marked with
+  `[NotNullIfNotNull]`
+* `WebUtility.UrlDecode`, `UrlDecodeToBytes`, `UrlEncode`, and `UrlEncodeBytes`
+  should be marked with `[NotNullIfNotNull]`
 
 <!--
 
