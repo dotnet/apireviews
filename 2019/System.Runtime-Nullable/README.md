@@ -109,3 +109,6 @@ Status: **Review in progress**
 * Should implementations of `IComparer<T>` and `IEqualityComparer<>` follow what
   we do for `IComparable<T>` and `IEqualityComparable<T>` and not use nullable
   annotations but use the attributes?
+* ~~Does `nonullable` mean non-nullable reference types only or does it also
+  excluded nullable values type?~~ Yes.
+* Fix API Reviewer to not crash on attributes.
