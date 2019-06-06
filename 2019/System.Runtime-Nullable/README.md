@@ -106,6 +106,14 @@ Status: **Review in progress**
 * `WebUtility.UrlDecode`, `UrlDecodeToBytes`, `UrlEncode`, and `UrlEncodeBytes`
   should be marked with `[NotNullIfNotNull]`
 
+## System.Collections
+
+[API Ref](System.Collections.md) |
+[Video 1](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3572) |
+
+* CollectionExtensions: all methods should be constrained to where: `TKey : nonullable`
+* `HashSet<T>(int, IEqualityComparer<T>)` should accept a null comparer
+
 <!--
 
 ## System.Memory
