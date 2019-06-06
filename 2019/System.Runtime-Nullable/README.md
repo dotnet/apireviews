@@ -114,6 +114,15 @@ Status: **Review in progress**
 * CollectionExtensions: all methods should be constrained to where: `TKey : nonullable`
 * `HashSet<T>(int, IEqualityComparer<T>)` should accept a null comparer
 
+## System.Runtime.Intrinsics
+
+[API Ref](System.Runtime.Intrinsics.md) |
+[Video 1](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=237) |
+
+* `Vector64<T>.ToString()` shouldn't accept a nullable
+* `Vector128<T>.ToString()` shouldn't accept a nullable
+* `Vector256<T>.ToString()` shouldn't accept a nullable
+
 <!--
 
 ## System.Memory
