@@ -36,7 +36,7 @@ Status: **Review in progress**
 [Video 1](https://youtu.be/O1LGUD8jL5M?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=411) |
 [Video 2](https://youtu.be/MevY_iX6_TQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=97) |
 [Video 3](https://youtu.be/nZraFvZgz_Y?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=241) |
-[Video 4](https://youtu.be/Oi442B_VQEQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=170) |
+[Video 4](https://youtu.be/Oi442B_VQEQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=170)
 
 * `AppContext.BaseDirectory`: shouldn't be `null`
 * `Array.SetValue`: one overload misses a question mark
@@ -94,7 +94,7 @@ Status: **Review in progress**
 
 [API Ref](System.Runtime.Extensions.md) |
 [Video 1](https://youtu.be/Oi442B_VQEQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=5045) |
-[Video 2](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=237) |
+[Video 2](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=237)
 
 * `AppDomain.ExecuteAssemblyByName` the `params` should be non-null.
 * `Environemnt.Exit` should be marked with `[DoesNotReturnAttribute]`
@@ -114,7 +114,7 @@ Status: **Review in progress**
 ## System.Collections
 
 [API Ref](System.Collections.md) |
-[Video 1](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3572) |
+[Video](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3572)
 
 * CollectionExtensions: all methods should be constrained to where: `TKey : notnull`
 * `HashSet<T>(int, IEqualityComparer<T>)` should accept a null comparer
@@ -122,7 +122,7 @@ Status: **Review in progress**
 ## System.Runtime.Intrinsics
 
 [API Ref](System.Runtime.Intrinsics.md) |
-[Video 1](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=237) |
+[Video](https://youtu.be/CJLCnj82kSA?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=237)
 
 * ~~`Vector64<T>.ToString()` shouldn't accept a nullable~~. Nullable is correct.
 * ~~`Vector128<T>.ToString()` shouldn't accept a nullable~~. Nullable is correct.
