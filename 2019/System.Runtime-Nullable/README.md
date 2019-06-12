@@ -151,6 +151,55 @@ Status: **Review in progress**
 
 * `Overlapped` the `IAsyncResult` should be nullable
 
+## System.Runtime.Loader
+
+[API Ref](System.Runtime.Loader.md) |
+[Video](https://youtu.be/se235MK9PFY?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=203)
+
+* `AssemblyLoadContext.LoadFromAssemblyName(AssemblyName assemblyName)` is
+  marked as non-null. How does that work when the protected worker method
+  returns a nullable?
+
+## System.Runtime.InteropServices
+
+[API Ref](System.Runtime.InteropServices.md) |
+[Video](https://youtu.be/se235MK9PFY?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=928)
+
+* It seems that `BStrWrapper` should accept null values
+* It seems `Marshal.GetObjectsForNativeVariants(IntPtr aSrcNativeVariant, int
+  cVars)` an return a null array.
+
+## System.Runtime.InteropServices.WindowsRuntime
+
+[API Ref](System.Runtime.InteropServices.WindowsRuntime.md) |
+[Video](https://youtu.be/se235MK9PFY?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3768)
+
+* Looks good
+
+## System.Diagnostics.Debug
+
+[API Ref](System.Diagnostics.Debug.md) |
+[Video](https://youtu.be/se235MK9PFY?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=4135)
+
+* Why is `Debugger.DefaultCategory` return null?
+* Why does `DebuggerDisplayAttribute.ctor` accept null?
+
+## System.Diagnostics.StackTrace
+
+[API Ref](System.Diagnostics.StackTrace.md) |
+[Video](https://youtu.be/se235MK9PFY?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=4816)
+
+* Why is `Stack.GetMethod()` nullable? .NET Framework has a
+  `Contract.EnsuresNotNull()` promise.
+* `StackFrame.GetFrames()` should return an empty array, not null.
+
+## System.Diagnostics.Contracts
+
+[API Ref](System.Diagnostics.Contracts.md) |
+[Video](https://youtu.be/se235MK9PFY?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=5267)
+
+* Assuming everything is meant to be non-null, that looks good.
+
 <!--
 
 ## System.Numerics.Vectors
@@ -183,21 +232,6 @@ Status: **Review in progress**
 [API Ref](System.Resources.ResourceManager.md) |
 [Video]()
 
-## System.Runtime.InteropServices
-
-[API Ref](System.Runtime.InteropServices.md) |
-[Video]()
-
-## System.Runtime.InteropServices.WindowsRuntime
-
-[API Ref](System.Runtime.InteropServices.WindowsRuntime.md) |
-[Video]()
-
-## System.Runtime.Loader
-
-[API Ref](System.Runtime.Loader.md) |
-[Video]()
-
 ## System.Security.Principal
 
 [API Ref](System.Security.Principal.md) |
@@ -216,21 +250,6 @@ Status: **Review in progress**
 ## System.Collections.Concurrent
 
 [API Ref](System.Collections.Concurrent.md) |
-[Video]()
-
-## System.Diagnostics.Contracts
-
-[API Ref](System.Diagnostics.Contracts.md) |
-[Video]()
-
-## System.Diagnostics.Debug
-
-[API Ref](System.Diagnostics.Debug.md) |
-[Video]()
-
-## System.Diagnostics.StackTrace
-
-[API Ref](System.Diagnostics.StackTrace.md) |
 [Video]()
 
 ## System.Diagnostics.Tools
