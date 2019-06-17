@@ -1,6 +1,6 @@
 # Nullability Annotations for System.Private.CoreLib
 
-Status: **Review in progress**
+Status: **Approved with feedback**
 
 ## General rules
 
@@ -29,6 +29,7 @@ Status: **Review in progress**
   After `Dispose()`, the behavior is undefined.
 * Extensions on nullable receivers seem odd, but the compiler will do the right
   thing.
+* Overrides of `object.ToString()` should take a nullable
 
 ## System.Runtime
 
@@ -254,39 +255,59 @@ Status: **Review in progress**
   last constructor should allow null-arrays for as the the other ones just
   forward to it.
 
-<!--
-
 ## System.Numerics.Vectors
 
 [API Ref](System.Numerics.Vectors.md) |
-[Video]()
+[Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=191)
+
+* The `Equals` override should take a nullable object.
+* `VectorXxx.ToString()` should take nullable format and nullable format provider
+
+## System.Reflection.Emit
+
+[API Ref](System.Reflection.Emit.md) |
+[Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=934)
+
+* `MethodBuilder.SetParameters()` should take a non-nullable.
+* `DyanamicMethod` ctor should take a nullable `Type[]` and return type
 
 ## System.Reflection.Emit.Lightweight
 
 [API Ref](System.Reflection.Emit.Lightweight.md) |
-[Video]()
+[Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=2318)
 
 ## System.Reflection.Primitives
 
 [API Ref](System.Reflection.Primitives.md) |
-[Video]()
+[Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=2735)
+
+* `OpCode.Name` returns null if Size is 0. Can this occur for-default structs.
+  Should this be non-nullable? Should we return a non-empty string?
 
 ## System.Resources.ResourceManager
 
 [API Ref](System.Resources.ResourceManager.md) |
-[Video]()
+[Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3060)
+
+* Should `ResourceManager.BaseName` by non-nullable?
+* `CreateFileBasedResourceManager` the parameter `usingResourceSet` should be
+  nullable
+* `ResourceManager.GetObject()` should take a nullable culture
 
 ## System.Security.Principal
 
 [API Ref](System.Security.Principal.md) |
-[Video]()
+[Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3660)
+
+* The nullable markers are unfortunate but consistent with use actual behavior
+  of built-in principals (such as `ClaimsPrincipal`).
 
 ## System.Text.Encoding.Extensions
 
 [API Ref](System.Text.Encoding.Extensions.md) |
-[Video]()
+[Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3874)
 
--->
+* Looks good.
 
 ## Follow-ups
 
