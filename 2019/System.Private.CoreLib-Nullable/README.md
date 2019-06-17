@@ -203,28 +203,28 @@ Status: **Review in progress**
 ## System.Collections.Concurrent
 
 [API Ref](System.Collections.Concurrent.md) |
-[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=0)
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=79)
 
 * Looks good as is.
 
 ## System.Buffers
 
 [API Ref](System.Buffers.md) |
-[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=0)
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=1996)
 
 * Looks good as is.
 
 ## System.Diagnostics.Tools
 
 [API Ref](System.Diagnostics.Tools.md) |
-[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=0)
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=2139)
 
 * Looks good as is.
 
 ## System.Diagnostics.Tracing
 
 [API Ref](System.Diagnostics.Tracing.md) |
-[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=0)
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=2379)
 
 * `DisplayName` should be not-null.
 * `DisplayUnits` ~~should be a bool~~ not-null.
@@ -248,7 +248,7 @@ Status: **Review in progress**
 ## System.Reflection.Emit.ILGeneration
 
 [API Ref](System.Reflection.Emit.ILGeneration.md) |
-[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=0)
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=4387)
 
 * `CustomAttributeBuilder` should take nullable elements in args. It seems the
   last constructor should allow null-arrays for as the the other ones just
