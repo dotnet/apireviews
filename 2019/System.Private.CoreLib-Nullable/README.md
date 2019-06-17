@@ -200,21 +200,65 @@ Status: **Review in progress**
 
 * Assuming everything is meant to be non-null, that looks good.
 
+## System.Collections.Concurrent
+
+[API Ref](System.Collections.Concurrent.md) |
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=79)
+
+* Looks good as is.
+
+## System.Buffers
+
+[API Ref](System.Buffers.md) |
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=1996)
+
+* Looks good as is.
+
+## System.Diagnostics.Tools
+
+[API Ref](System.Diagnostics.Tools.md) |
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=2139)
+
+* Looks good as is.
+
+## System.Diagnostics.Tracing
+
+[API Ref](System.Diagnostics.Tracing.md) |
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=2379)
+
+* `DisplayName` should be not-null.
+* `DisplayUnits` ~~should be a bool~~ not-null.
+* `AddMetadata(string key, string value)`. Seems like it should be nullable.
+* ~~`EventAttribute.Message` should be non-null~~ Looks like consuming  code
+  treat null and empty string differently.
+* `EventCommandEventArgs.Arguments` probably should be `IDictionary<string,
+  string?>`. Use sites look inconsistent.
+* `EventListener.EnableEvents` probable should take arguments typed as
+  `IDictionary<string, string?>`
+* `EventSource.ctor()` should take non-null param arrays. Should the array
+  elements be nullable?
+* `EventSource.SendCommand` probably should take a `IDictionary<string, string?>`
+* `EventSource.Write` and `EventSource.Write<T>` don't agree on the whether the
+  `eventName` can be null, which seems odd.
+* `EventSource.WriteEvent`. It seems inconsistent to accept nullable strings but
+  not nullable objects. Logically, one forwards to the other.
+* `EventWrittenEventArgs` it's unfortunate that the collections are marked as
+  null. We generally don't return null.
+
+## System.Reflection.Emit.ILGeneration
+
+[API Ref](System.Reflection.Emit.ILGeneration.md) |
+[Video](https://youtu.be/yOLk_VtdmL4?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=4387)
+
+* `CustomAttributeBuilder` should take nullable elements in args. It seems the
+  last constructor should allow null-arrays for as the the other ones just
+  forward to it.
+
 <!--
 
 ## System.Numerics.Vectors
 
 [API Ref](System.Numerics.Vectors.md) |
-[Video]()
-
-## System.Reflection.Emit
-
-[API Ref](System.Reflection.Emit.md) |
-[Video]()
-
-## System.Reflection.Emit.ILGeneration
-
-[API Ref](System.Reflection.Emit.ILGeneration.md) |
 [Video]()
 
 ## System.Reflection.Emit.Lightweight
@@ -242,26 +286,6 @@ Status: **Review in progress**
 [API Ref](System.Text.Encoding.Extensions.md) |
 [Video]()
 
-## System.Buffers
-
-[API Ref](System.Buffers.md) |
-[Video]()
-
-## System.Collections.Concurrent
-
-[API Ref](System.Collections.Concurrent.md) |
-[Video]()
-
-## System.Diagnostics.Tools
-
-[API Ref](System.Diagnostics.Tools.md) |
-[Video]()
-
-## System.Diagnostics.Tracing
-
-[API Ref](System.Diagnostics.Tracing.md) |
-[Video]()
-
 -->
 
 ## Follow-ups
@@ -279,4 +303,8 @@ Status: **Review in progress**
   annotations but use the attributes?
 * ~~Does `nonullable` mean non-nullable reference types only or does it also
   excluded nullable values type?~~ Yes.
-* Fix API Reviewer to not crash on attributes.
+* API Reviewer
+   - Make sure to pull the latest version of Arcade
+   - Fix attributes
+* What's the behavior of the IDE when implementing/overriding a member. Do
+  the attributes get copied? If not, they probably should.
