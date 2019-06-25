@@ -269,7 +269,7 @@ Status: **Approved with feedback**
 [Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=934)
 
 * `MethodBuilder.SetParameters()` should take a non-nullable.
-* `DyanamicMethod` ctor should take a nullable `Type[]` and return type
+* `DynamicMethod` ctor should take a nullable `Type[]` and return type
 
 ## System.Reflection.Emit.Lightweight
 
@@ -289,7 +289,7 @@ Status: **Approved with feedback**
 [API Ref](System.Resources.ResourceManager.md) |
 [Video](https://youtu.be/c2Ea_g2Jaqo?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=3060)
 
-* Should `ResourceManager.BaseName` by non-nullable?
+* Should `ResourceManager.BaseName` be non-nullable?
 * `CreateFileBasedResourceManager` the parameter `usingResourceSet` should be
   nullable
 * `ResourceManager.GetObject()` should take a nullable culture
