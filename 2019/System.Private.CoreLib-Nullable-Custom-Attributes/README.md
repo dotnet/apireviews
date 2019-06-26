@@ -9,6 +9,7 @@ analysis of the compiler.
 
 ## System.Runtime
 
+[Diff](System.Runtime.md) |
 [Video](https://youtu.be/t1MQePMqRmQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=1756)
 
 * Why does IDictionary's indexer have `[DisallowNull]`?
@@ -20,6 +21,7 @@ analysis of the compiler.
 
 ## System.Runtime.Extensions
 
+[Diff](System.Runtime.Extensions.md) |
 [Video](https://youtu.be/t1MQePMqRmQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=4154)
 
 * `Convert.ChangeType` user could return `null` for non-null inputs, but they
@@ -29,6 +31,7 @@ analysis of the compiler.
 
 ## System.Runtime.InteropServices
 
+[Diff](System.Runtime.InteropServices.md) |
 [Video](https://youtu.be/t1MQePMqRmQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=4653)
 
 * `Marshal.CreateWrapperOfType<T, TWrapper>` should probable attributed with
@@ -37,18 +40,21 @@ analysis of the compiler.
 
 ## System.Runtime.InteropServices.WindowsRuntime
 
+[Diff](System.Runtime.InteropServices.WindowsRuntime.md) |
 [Video](https://youtu.be/t1MQePMqRmQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=5548)
 
 * `EventRegistrationTokenTable<T>.InvocationList` should be declared `T?`
 
 ## System.Threading
 
+[Diff](System.Threading.md) |
 [Video](https://youtu.be/t1MQePMqRmQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=6246)
 
 * `Interlocked.Exchange` return attribute should refer to `location1`
 
 ## System.Threading.Thread
 
+[Diff](System.Threading.Thread.md) |
 [Video](https://youtu.be/t1MQePMqRmQ?list=PL1rZQsJPBU2S49OQPjupSJF-qeIEz9_ju&t=6854)
 
 * Looks good.
