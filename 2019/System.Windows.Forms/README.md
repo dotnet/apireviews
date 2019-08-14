@@ -29,9 +29,11 @@ Status: **Review not complete** |
   fields on `TaskDialogIcon`. Also instead of implicit operators, can we just
   have a constructor that takes an `Icon`?
     - Same for `TaskDialogStandardButton`.
-* Remove `TaskDialogButtonClickedEventArgs`, i.e. make `TaskDialogButton`
+* Remove `TaskDialogButtonClickedEventArgs` and add a Boolean property to
+  `TaskDialogButton` that allows to specify whether the dialog will close when
+  the button is clicked.
 * If we want to implement the WinForms Designer support for designing
-  TaskDialog, then we should avoid using methods, and use properties instead.
+  `TaskDialog`, then we should avoid using methods, and use properties instead.
     - We will consider adding designer support in .NET 5.0
     - Allow users to design the visuals and the flow between the pages in the
       designer and implement everything else programmatically
