@@ -33,9 +33,9 @@ namespace System.Text.Json.Serialization
 
 * It only supports case differences, but not additional characters like kebab
   cases, i.e. we can't map the strings `some-enum-value` to `SomeEnumValue`. In
-  that case we throw a `JsonException` with an appropriate error cases.
+  that case we throw a `JsonException` with an appropriate error message.
 * We match using `Enum.Parse()`. We first try case-sensitive matching and then
-  fall back to case-insensitive. This is not exactly how deal with casing for
+  fall back to case-insensitive. This is not exactly how we deal with casing for
   properties (where we do case-insensitive comparison after applying policy).
     - The proposed policy for enums matches JSON.NET
     - We can, if there is a need, support case-insensitive matching for
