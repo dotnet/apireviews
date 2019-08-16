@@ -10,7 +10,7 @@ analysis of the compiler.
 ## General rules
 
 * `TryParse`-style APIs for the `out` parameters:
-    - `[MayBeNullWhen(false)]` when `T` is unconstrained
+    - `[MaybeNullWhen(false)]` when `T` is unconstrained
     - `[NotNullWhen(true)]` when `T` is constrained to be a reference type
 
 ## System.Runtime
