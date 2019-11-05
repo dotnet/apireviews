@@ -29,11 +29,13 @@ Status: **Approved with feedback** |
       names are special in meaning, we'll keep them in their underscore fashion
 * `AdvSimd`
     - `AndNot` might not be the best name, it's different form x86's `AndNot`
-      Also, the manual calls it `BitwiseClear`
+      Also, the manual calls it `BitwiseClear`. We believe that makes sense.
     - We decided to not expose `CompareEqualZero` to redeuce bloat. The JIT can
       trivially handle a literal zero
     - We should remove the unsigned version of `LeadingSignCount`
-    - `Not` is called `MoveNot`. Should we call it `OnesComplement`?
+    - `Not` is called `MoveNot`. Should we call it `OnesComplement`? We didn't
+      reach a consensus here and determined leaving it as `Not` should be fine
+      (especially given the usage of `Not` elsewhere -- e.g. `AndNot`).
 * `AdvSimd.Arm64`
     - One of the `CompareXxx` for `Vector64` shuld be a `CompareXxxScalar` 
 
