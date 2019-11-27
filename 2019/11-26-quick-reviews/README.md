@@ -63,18 +63,6 @@ namespace System.Threading.Channels
     }
 }
 ```
-## Comparing Utf8JsonReader to default instance with the == operator
-
-**Needs Work** | [#corefx/37534](https://github.com/dotnet/corefx/issues/37534) | [Video](https://www.youtube.com/watch?v=b509D73mmGc&t=0h30m1s)
-
-## Rename string-like Span.Equals method to SequenceEqual
-
-**Needs Work** | [#corefx/28236](https://github.com/dotnet/corefx/issues/28236) | [Video](https://www.youtube.com/watch?v=b509D73mmGc&t=0h44m3s)
-
-## Modernize API shape of HtmlEncoder and related classes
-
-**Needs Work** | [#corefx/33509](https://github.com/dotnet/corefx/issues/33509) | [Video](https://www.youtube.com/watch?v=b509D73mmGc&t=0h45m57s)
-
 ## Support Rfc3279 signature format for DSA and EcDSA
 
 **Approved** | [#corefx/42684](https://github.com/dotnet/corefx/issues/42684#issuecomment-558782564) | [Video](https://www.youtube.com/watch?v=b509D73mmGc&t=1h1m14s)
