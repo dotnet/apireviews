@@ -29,7 +29,14 @@ Status: **Needs work** |
     - Seems rare
     - We recommend to wait until someone is asking for it.
 * We have to be careful with dictionaries where the keys contain `$id`
-    - We should escape the `$`.
+    - We should escape the `$`:
+      + On serialization, when a JSON property name, that is either a dictionary
+        key or a CLR class property, starts with a '$' character, we must write
+        the escaped character "\u0024" instead.
+      + On deserialization, metadata will be digested by using only the raw
+        bytes, so no encoded characters are allowed in metadata; to read JSON
+        properties that start with a '$' you will need to pass it with the
+        escaped '$' (\u0024).
     - This ensures we can read everything that we can write and it imposes no
       restrictions on the keys customers can have.
     - Same applies to `JsonPropertyNameAttribute`
