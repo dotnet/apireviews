@@ -45,7 +45,7 @@
 
 * Handler should probably not use delegates and instead take a raw method info
   if the implementation relies on the parameter names coming from the user
-  defined method. The compiler might create a wrapper delagate which would
+  defined method. The compiler might create a wrapper delegate which would
   result in loss of said names. According to Levi, that's what ASP.NET Core was
   running into.
 * `Option<T>` and `Argument<T>` are good names but too generic. We should come
