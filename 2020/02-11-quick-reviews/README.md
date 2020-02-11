@@ -18,6 +18,8 @@ public class HttpRequestException : Exception
     public HttpRequestException(string message, Exception inner, HttpStatusCode? statusCode);
     public HttpStatusCode? StatusCode { get; }
 }
+```
+
 ## Make System.Security.Cryptography.Oid write-once (initializable read-only)
 
 **Approved** | [#runtime/2043](https://github.com/dotnet/runtime/issues/2043#issuecomment-584786046) | [Video](https://www.youtube.com/watch?v=kGIsqCyWqa0&t=0h12m10s)
