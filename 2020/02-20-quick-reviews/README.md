@@ -116,9 +116,14 @@ namespace System.Drawing.Imaging
     }
 }
 ```
+## Add ParallelOptions constructor with MaxDegreeOfParallelism parameter
+
+**Rejected** | [#runtime/30652](https://github.com/dotnet/runtime/issues/30652#issuecomment-589246889) | [Video](https://www.youtube.com/watch?v=DWt2Dh5L-C0&t=0h29m12s)
+
+* After more discussion, it seems we prefer the current state because it's less ambiguous.
 ## SequenceReader<T>.TryRead overloads to read a specified number of elements
 
-**Approved** | [#runtime/30778](https://github.com/dotnet/runtime/issues/30778#issuecomment-589257975) | [Video](https://www.youtube.com/watch?v=DWt2Dh5L-C0&t=0h29m12s)
+**Approved** | [#runtime/30778](https://github.com/dotnet/runtime/issues/30778#issuecomment-589257975) | [Video](https://www.youtube.com/watch?v=DWt2Dh5L-C0&t=0h46m31s)
 
 * The first API will have to allocate when `count` causes spanning blocks in the sequence. The bigger the `count`, the more likely it is to cross such a boundary. This could be changed to allow the caller to pass in a pre-allocated span or we could change the semantics to only succeed if the data is available contiguously. This API will need more design.
 * The second overload is fine but we should change the name to `TryReadExact` to make it clear that returning less or more is both not possible.
