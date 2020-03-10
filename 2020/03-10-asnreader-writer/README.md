@@ -9,7 +9,7 @@
 * We're reading data that is encoded in that format, as opposed to the
   description language itself. In XML speak, we're building an
   `XmlReader`/`XmlWriter` as opposed to `XmlSchema`.
-* Why only a `ref struct` reader? Because `ref struct` writers are error prone
+* Why a `ref struct` reader but no `ref struct` writer? Because `ref struct` writers are error prone
   to use, see JSON writer
 * `Asn1Tag` looks good as proposed
 * `TagClass` should extend `int`
