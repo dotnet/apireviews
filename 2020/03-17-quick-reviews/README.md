@@ -2,7 +2,7 @@
 
 ## ARM additional arithmetic intrinsics
 
-**Approved** | [#runtime/32512](https://github.com/dotnet/runtime/issues/32512#issuecomment-600227857)
+**Approved** | [#runtime/32512](https://github.com/dotnet/runtime/issues/32512#issuecomment-600227857) | [Video](https://youtu.be/gGjTgHAHAKA?t=1020)
 
 * Looks good
 * We made some substantial changing in order of words
@@ -238,7 +238,7 @@ namespace System.Runtime.Intrinsics.Arm
 
 ## Arm TableVectorLookup and TableVectorExtension intrinsics
 
-**Approved** | [#runtime/1277](https://github.com/dotnet/runtime/issues/1277#issuecomment-600244479)
+**Approved** | [#runtime/1277](https://github.com/dotnet/runtime/issues/1277#issuecomment-600244479) | [Video](https://youtu.be/gGjTgHAHAKA?t=4710)
 
 * We should consider using a custom type rather than a tuple to repesent lists, because we can expose more operations later. It also means people can't do things like taking the address of the tuple field. However, the nice thing about using tuples is language syntax. But we can probably get the same benefits if we were to define implicit conversion between the two. We can also a `Deconstruct` directly on the custom type, allowing for tuple-style deconstructing into locals.
 * We don't think we're ready for the overloads that take multiple lists with more than value for .NET 5, due to necessary JIT implementation work
