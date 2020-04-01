@@ -48,6 +48,7 @@ Covered https://github.com/dotnet/designs/blob/894b79a4361145a3037cf70fdf50689e8
   * (WriteNamedBitList may be a better target)
 * WriteBitString: Remove the SpanAction overloads.
 * WriteOctetString: Remove the SpanAction overloads.
+* WriteObjectIdentifier: Remove `Oid`-typed overloads.
 * WriteEnumeratedValue: Change `object enumValue` to `Enum enumValue`
 * WriteEnumeratedValue: Rename `enumValue` parameters to `value`.
 * WriteNamedBitList: Like WriteEnumeratedValue, change to `Enum enumValue` and rename all `enumValue` parameters to `value`.
