@@ -2,11 +2,11 @@
 
 ## Don't forget about JsonSerializerOptions.CreateForWeb()
 
-**Approved** | [#runtime/34626](https://github.com/dotnet/runtime/issues/34626)
+**Approved** | [#runtime/34626](https://github.com/dotnet/runtime/issues/34626) | [Video](https://www.youtube.com/watch?v=Ttscz2mBl-c&t=0h0m0s)
 
 ## OSPlatform support for WASM/Blazor
 
-**Approved** | [#runtime/33328](https://github.com/dotnet/runtime/issues/33328#issuecomment-614802442)
+**Approved** | [#runtime/33328](https://github.com/dotnet/runtime/issues/33328#issuecomment-614802442) | [Video](https://www.youtube.com/watch?v=Ttscz2mBl-c&t=0h7m37s)
 
 * We considered expanding `Wasm` to `WebAssembly`, but the RIDs will use `wasm`, so it makes more sense to aling the names.
 * Should `OSPlatform.IsOSPlatform(OSPlatform.Windows)` return `true` when running inside a browser on Windows. We concluded no, because that would likely break more people. Parties who care, need to use a more specific API that returns, for example, the user agent string.
@@ -27,7 +27,7 @@ namespace System.Runtime.InteropServices
 ```
 ## Guarding calls to platform-specific APIs
 
-**Needs Work** | [#runtime/33331](https://github.com/dotnet/runtime/issues/33331#issuecomment-614826740)
+**Needs Work** | [#runtime/33331](https://github.com/dotnet/runtime/issues/33331#issuecomment-614826740) | [Video](https://www.youtube.com/watch?v=Ttscz2mBl-c&t=0h47m16s)
 
 Some notes:
 
@@ -37,7 +37,7 @@ Some notes:
 * Maybe we should move `Url` to `OSPlatformVersionAttribute`?
 ## New API: `InitOnlyAttribute`
 
-**Approved** | [#runtime/34978](https://github.com/dotnet/runtime/issues/34978#issuecomment-614845405)
+**Approved** | [#runtime/34978](https://github.com/dotnet/runtime/issues/34978#issuecomment-614845405) | [Video](https://www.youtube.com/watch?v=Ttscz2mBl-c&t=1h31m25s)
 
 * Seems like we should think about how reflections work with this feature
     - Reflection doesn't honor `modreq.
