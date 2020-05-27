@@ -1,6 +1,6 @@
 # ASN.1 BER/CER/DER Reader & Writer
 
-**In Progress** |
+**Approved** |
 [Spec](https://github.com/dotnet/designs/pull/93)
 
 
@@ -66,3 +66,16 @@ Covered https://github.com/dotnet/designs/blob/894b79a4361145a3037cf70fdf50689e8
 ### AsnValueReader
 
 * Consider replacing the mutable `ref struct` with a non-ref struct that only has stateless, static methods.
+
+## Round 3
+
+[Video](https://www.youtube.com/watch?v=CmF8g030Hno)
+
+* `AsnDecoder`
+    - Would benefit from `Range` but needs to be .NET Standard 2.0, where `Range` doesn't exist
+    - We should consider OOBing the type
+* `AsnReaderOptions`
+    - Remove `AsnEncodingRules`
+* `Push`/`Pop`
+    - It's a bit odd to have both disposable `Scope` that pops and a `Pop` method
+    - Seems fine though
