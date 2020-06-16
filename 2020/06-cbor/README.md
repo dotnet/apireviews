@@ -1,10 +1,11 @@
 # CBOR
 
-**In Progress** |
-[Spec](https://github.com/dotnet/designs/pull/128) |
-[Video](https://www.youtube.com/watch?v=W_fBGxryww4)
+**Approved** |
+[Spec](https://github.com/dotnet/designs/pull/128)
 
-## Notes
+## Round 1 (Writer)
+
+[Video](https://www.youtube.com/watch?v=W_fBGxryww4)
 
 * The namespace is `System.Formats.Cbor`
 * No support for `IDisposable` for `BeginMap`. This was considered but it seems
@@ -30,3 +31,34 @@
       or number of pairs times two.
     - We probably want to add `WriteHalf()`
     - `WriteEncodedValue` should take a `ReadOnlySpan<byte>` instead
+
+## Round 2 (Writer)
+
+[Video](https://www.youtube.com/watch?v=Ot8PTydQi2k)
+
+* `CborReaderState`
+    - `None` should be `Undefined`
+    - Consider making `PeekState()` a property called `State` or `NextState`
+    - Should `EndOfData` and `FormatError` be removed in favor of an exception* `CborReader`
+    - `BytesRead` and `HasData` should be collapsed into `ByteRemaining`
+* `CborReader`
+    - `BytesRead` and `HasData` should be collapsed into `ByteRemaining`
+    - `ReadCborNegativeIntegerEncoding` we should replacing `Encoding` with
+      `Representation` (same on writer)
+    - Consider a general "get the bytes" API similar to
+      `AsnReader.PeekEncodedValue()` (Note: it's there and it's called
+      `ReadEncodedValue()`)
+    - `TryReadByteString` for definite-sized-byte-strings it would be nice to
+      expose the size to that one doesn't have to guess the size of the span
+    - Consider exposing `ReadDefiniteLengthByteString(): ReadOnlyMemory<byte>`
+    - Consider exposing `ReadDefiniteTextStringUtf8(): ReadOnlyMemory<byte>`.
+      We'll validate that each chunk is a valid UTF8 string. If we ever need a
+      non-validating one we can still add `ReadDefiniteTextStringBytes()`.
+    - We probably want to add `ReadHalf()`
+    - `ReadEncodedValue()` should take a `bool disableConformanceModeChecks =
+      false` as well.
+    - `ReadEncodedValue` should return `ReadOnlyMemory<byte>`
+* Exceptions
+    - We shouldn't throw `FormatException`. Instead, create a CBOR specific
+      exception, such as `CborException` and use that for all errors related to
+      malformed CBOR.
