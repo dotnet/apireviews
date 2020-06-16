@@ -58,3 +58,7 @@
     - `ReadEncodedValue()` should take a `bool disableConformanceModeChecks =
       false` as well.
     - `ReadEncodedValue` should return `ReadOnlyMemory<byte>`
+* Exceptions
+    - We shouldn't throw `FormatException`. Instead, create a CBOR specific
+      exception, such as `CborException` and use that for all errors related to
+      malformed CBOR.
