@@ -102,3 +102,80 @@ public abstract class Connection
         public ValueTask<Connection> AcceptStream(IConnectionProperties? options = null, CancellationToken cancellationToken = default);
     }
     ```
+
+## Round 3
+
+[Video](https://www.youtube.com/watch?v=vEUndbRMOjQ)
+
+```C#
+public enum ConnectionCloseMethod
+{
+    GracefulShutdown,
+    Abort,
+    Immediate
+}
+
+public abstract class ConnectionBase : IAsyncDisposable, IDisposable
+{
+    public virtual IConnectionProperties ConnectionProperties { get; }
+    public virtual EndPoint? LocalEndPoint { get; }
+    public virtual EndPoint? RemoteEndPoint { get; }
+
+    public abstract ValueTask CloseAsync(ConnectionCloseMethod method = default, CancellationToken cancellationToken = default);
+}
+
+public abstract class Connection : ConnectionBase
+{
+    public Stream Stream { get; }
+    public IDuplexPipe Pipe { get; }
+
+    protected virtual Stream CreateStream();
+    protected virtual IDuplexPipe CreatePipe();
+
+    public static Connection FromStream(Stream stream, IConnectionProperties? properties = null, EndPoint? localEndPoint = null, EndPoint? remoteEndPoint = null);
+    public static Connection FromPipe(IDuplexPipe pipe, IConnectionProperties? properties = null, EndPoint? localEndPoint = null, EndPoint? remoteEndPoint = null);
+}
+
+public abstract class ConnectionFactory : IAsyncDisposable, IDisposable
+{
+	public abstract ValueTask<Connection> ConnectAsync(EndPoint? endPoint, IConnectionProperties? options = null, CancellationToken cancellationToken = default);
+
+	public void Dispose();
+	public ValueTask DisposeAsync();
+
+	protected abstract void Dispose(bool disposing);
+	protected abstract ValueTask DisposeAsyncCore();
+}
+
+public abstract class ConnectionListenerFactory : IAsyncDisposable, IDisposable
+{
+	public abstract ValueTask<ConnectionListener> BindAsync(EndPoint? endPoint, IConnectionProperties? options = null, CancellationToken cancellationToken = default);
+
+	public void Dispose();
+	public ValueTask DisposeAsync();
+
+	protected abstract void Dispose(bool disposing);
+	protected abstract ValueTask DisposeAsyncCore();
+}
+
+public abstract class ConnectionListener : IAsyncDisposable, IDisposable
+{
+	public IConnectionProperties ListenerProperties { get; }
+	public EndPoint? LocalEndPoint { get; }
+
+	public void Dispose();
+	public ValueTask DisposeAsync();
+
+	protected abstract void Dispose(bool disposing);
+	protected abstract ValueTask DisposeAsyncCore();
+
+	public abstract ValueTask<Connection> AcceptAsync(IConnectionProperties? options = null, CancellationToken cancellationToken = default);
+}
+
+public class SocketsHttpConnectionFactory : ConnectionFactory
+{
+    // For users of the above two APIs, they can call this if they just want to wrap the defaults.
+    public virtual Socket CreateSocket(HttpRequestMessage message, DnsEndPoint endPoint, IConnectionProperties options);
+    public virtual ValueTask<IConnection> EstablishConnection(HttpRequestMessage message, DnsEndPoint endPoint, IConnectionProperties options, CancellationToken cancellationToken);
+}
+```
