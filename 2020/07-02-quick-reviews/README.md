@@ -186,3 +186,24 @@ namespace System.Runtime.CompilerServices
 }
 ```
 
+## Flexible and efficient optionally-structured console logging out of the box
+
+**Approved** | [#runtime/34742](https://github.com/dotnet/runtime/issues/35088#issuecomment-653248184) | [Video](https://www.youtube.com/watch?v=7XhZsgJTywg&t=0h0m0s)
+
+Looks good as proposed.
+
+```C#
+namespace System.Net.Http
+{
+    public partial class SocketsHttpHandler : HttpMessageHandler
+    {
+        public int MaxHttp2ConnectionsPerServer { get; set; }
+    }   
+    public partial class WinHttpHandler : HttpMessageHandler
+    {
+        public bool EnableMultipleHttp2Connections { get; set; }
+    }
+}
+```
+
+
