@@ -186,7 +186,7 @@ namespace System.Runtime.CompilerServices
 }
 ```
 
-## Flexible and efficient optionally-structured console logging out of the box
+## HTTP2: Create additional connections when maximum active streams is reached
 
 **Approved** | [#runtime/34742](https://github.com/dotnet/runtime/issues/35088#issuecomment-653248184) | [Video](https://www.youtube.com/watch?v=7XhZsgJTywg&t=0h0m0s)
 
