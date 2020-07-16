@@ -16,6 +16,8 @@ namespace System.IO
         public static IAsyncEnumerable<string> ReadLinesAsync(string path, System.Text.Encoding encoding, CancellationToken cancellationToken = default);
     }
 }
+```
+
 ## Add `IDeviceContext` to events that hold `Graphics`
 
 **Approved** | [#winforms/3570](https://github.com/dotnet/winforms/issues/3570#issuecomment-659555018) | [Video](https://www.youtube.com/watch?v=7YpDyRMaDKE&t=0h13m58s)
