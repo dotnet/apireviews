@@ -203,9 +203,18 @@ namespace System.Net.Sockets
 **NeedsWork** | [#runtime/44213](https://github.com/dotnet/runtime/issues/44213#issuecomment-724914826) | [Video](https://www.youtube.com/watch?v=hhwOM5MzoTA&t=1h15m53s)
 
 @stephentoub believes that this is not in a ready state, transitioning to needs work.
+## Add static method to create an IEnumerable with one element
+
+**Rejected** | [#runtime/15136](https://github.com/dotnet/runtime/issues/15136#issuecomment-724922312) | [Video](https://www.youtube.com/watch?v=hhwOM5MzoTA&t=1h20m1s)
+
+API Review:
+
+We're not really clear how this would be used in practice, and why something other than `new[] { item }` would be better in that context.  It also seems like the best name for a single item is `Single`, but that has a bad collision with the existing `Single` semantics.  (Yield doesn't seem like it's discoverable, just easily explained.)
+
+With new data (e.g. sample usage) we might come to different conclusions, but it doesn't seem like there's enough utility and there's a dearth of good names.
 ## Allow for specify return value on System.Linq.Enumerable.*OrDefault methods
 
-**Approved** | [#runtime/20064](https://github.com/dotnet/runtime/issues/20064#issuecomment-724928896) | [Video](https://www.youtube.com/watch?v=hhwOM5MzoTA&t=1h20m1s)
+**Approved** | [#runtime/20064](https://github.com/dotnet/runtime/issues/20064#issuecomment-724928896) | [Video](https://www.youtube.com/watch?v=hhwOM5MzoTA&t=1h33m54s)
 
 Looks good as proposed, but there was a concern raised that the Queryable methods might have an impact on Linq-to-SQL, which would be good to verify (@ajcvickers do you have insight or contacts here?).
 
