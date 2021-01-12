@@ -79,3 +79,28 @@ namespace System.Security.Cryptography
 }
 ```
 
+## Add Memory support to SendPacketElements
+
+**Approved** | [#runtime/45267](https://github.com/dotnet/runtime/issues/45267#issuecomment-758919212)
+
+* Looks good as proposed
+ 
+```C#
+namespace System.Net.Sockets
+{
+    public partial class SendPacketsElement
+    {
+        // Existing APIs:
+        // public SendPacketsElement(byte[] buffer);
+        // public SendPacketsElement(byte[] buffer, int offset, int count);
+        // public SendPacketsElement(byte[] buffer, int offset, int count, bool endOfPacket);
+        // public byte[]? Buffer { get; }
+        // public int Offset { get; }
+        // public int Count { get; }
+
+        public SendPacketsElement(ReadOnlyMemory<byte> buffer);
+        public SendPacketsElement(ReadOnlyMemory<byte> buffer, bool endOfPacket);
+        public ReadOnlyMemory<byte>? MemoryBuffer { get; }
+    }
+}
+```
