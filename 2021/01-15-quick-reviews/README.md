@@ -215,7 +215,6 @@ namespace Microsoft.Extensions.Logging
     }
 }
 ```
-```
 ## System.Numerics.Vectors and Span<T>
 
 **Approved** | [#runtime/25608](https://github.com/dotnet/runtime/issues/25608#issuecomment-761168765) | [Video](https://www.youtube.com/watch?v=qi1HHJyPUEQ&t=1h27m48s)
