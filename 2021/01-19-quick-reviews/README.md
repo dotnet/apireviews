@@ -1,5 +1,17 @@
 # Quick Reviews 01/19/2021
 
+## Writable DOM and dynamic support for 6.0
+
+**NeedsWork** | [#designs/163](https://github.com/dotnet/designs/pull/163#issuecomment-763165357) | [Video 1](https://www.youtube.com/watch?v=-YO1L8CtNTM) | [Video 2](https://www.youtube.com/watch?v=JVKNdfFC4bI)
+
+* It seems the serializer and the DOM are quite intertwined in this design. It seems the DOM should have parsing/formatting methods as well, rather than requiring to serialize it.
+* In the design sketch it's unclear which members `JsonValue` and `JsonArray` expose from the interface implementations.
+* It seems a bit unclear if/when methods will implicitly serialize/deserialize, for example the `GetValue<T>` would implicitly deserialize the JSON to `T` using a converter.
+
+**Next steps:**
+
+* Detailed API proposal
+
 ## LINQ APIs to enable C# 8.0 index and range for IEnumerable<T>
 
 **NeedsWork** | [#runtime/28776](https://github.com/dotnet/runtime/issues/28776#issuecomment-763102398) | [Video](https://www.youtube.com/watch?v=JVKNdfFC4bI&t=0h0m0s)
