@@ -37,11 +37,6 @@ namespace System
     }
 }
 ```
-## Add strict validation to System.IO.Compression.GZipStream
-
-**NeedsWork** | [#runtime/47563](https://github.com/dotnet/runtime/issues/47563#issuecomment-769287654) | [Video](https://www.youtube.com/watch?v=ynpmIT-DlO0&t=0h14m25s)
-
-@mfkl is there any chance that you could research if other compression methods allow for such validation? In such a case, we should add overloads to other ctors too. Once we get there, we are going to mark the issue as ready for review, go through API Design Review, get the API accepted (with possible modifications of the proposal), and then re-open your PR. 
 ## Expose RoundUpToPowerOf2 from BitOperations and optimize it
 
 **Approved** | [#runtime/43135](https://github.com/dotnet/runtime/issues/43135#issuecomment-769289340) | [Video](https://www.youtube.com/watch?v=ynpmIT-DlO0&t=0h24m54s)
