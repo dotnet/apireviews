@@ -1,5 +1,23 @@
 # Quick Reviews 02/04/2021
 
+## Should we add support to ignore cycles on serialization?
+
+**Approved** | [#runtime/40099](https://github.com/dotnet/runtime/issues/40099#issuecomment-773497284)
+
+Changed to plural via email:
+
+```C#
+namespace System.Text.Json.Serialization
+{
+    public partial class ReferenceHandler
+    {   
+        // Existing:
+        // public static ReferenceHandler Preserve { get; }
+        public static ReferenceHandler IgnoreCycles { get; }
+    }
+}
+```
+
 ## Developers can get immediate feedback on validation problems
 
 **Approved** | [#runtime/36391](https://github.com/dotnet/runtime/issues/36391#issuecomment-773514511) | [Video](https://www.youtube.com/watch?v=JltNo-NKTlQ&t=0h0m0s)
