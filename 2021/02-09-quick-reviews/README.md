@@ -218,3 +218,60 @@ namespace System.Net
 }
 ```
 
+## Microsoft.Extensions.Configuration App binding adding to the initialized Collections, not replacing
+
+**Rejected** | [#runtime/46988](https://github.com/dotnet/runtime/issues/46988#issuecomment-776182332)
+
+* How important is this?
+    - This is getting into the realm of the complicated serialization behavior.
+    - It seems default values in collections are a bit of fringe behavior.
+    - Let's close it for now until there is more evidence that we need this.
+* General feedback:
+    - It seems a bit weird to ask developers to make their collections settable; it would be more natural if the binder would call a `Clear()` method.
+    - If the collection implements both `IList` and is settable, preferring the setter seems reasonable.
+
+```C#
+namespace Microsoft.Extensions.Configuration
+{
+    public partial class BinderOptions
+    {
+        // Already exists:
+        // public bool BindNonPublicProperties { get; set; }
+        public bool OverrideLists { get; set; }
+    }
+}
+```
+
+## Support customized Activity trace id generation
+
+**Approved** | [#runtime/46704](https://github.com/dotnet/runtime/issues/46704#issuecomment-776187733)
+
+* Let's name this property `TraceIdGenerator`
+* The method will neither throw when it's set more than once nor when it's set after an ID was generated. The consumer has to set it early, ideally in main. But if they don't we'll honor it next time an ID is generated. It just means that part of the activities may not be processable if the format of the ID is important to them.
+
+```C#
+namespace System.Diagnostics
+{
+    public partial class Activity
+    {
+        public static Func<ActivityTraceId>? TraceIdGenerator { get; set; } 
+    }
+}
+```
+
+## Add IsMacCatalyst() and IsMacCatalystVersionAtLeast() to System.Runtime
+
+**Approved** | [#runtime/47768](https://github.com/dotnet/runtime/issues/47768#issuecomment-776189841)
+
+* Looks good as proposed
+
+```C#
+namespace System.Diagnostics
+{
+    public partial class OperatingSystem
+    {
+        public static bool IsMacCatalyst();
+        public static bool IsMacCatalystVersionAtLeast(int major, int minor = 0, int build = 0);
+    }
+}
+```
