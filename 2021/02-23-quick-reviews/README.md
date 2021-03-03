@@ -47,7 +47,7 @@ namespace System.Reflection.Emit
 
 **Approved** | [#runtime/47599](https://github.com/dotnet/runtime/issues/47599#issuecomment-784429051) | [Video](https://www.youtube.com/watch?v=8kDxa8BfQmw&t=0h29m1s)
 
-    - We should also add it to `UnsupportedOSPlatformAttribute`
+* We should also add it to `UnsupportedOSPlatformAttribute`
 * Our analyzer should probably warn when types implement the interface but aren't marked as platform-specific for at least the version that the interface is constrained to.
     - If types don't want that, they can suppress the warning and implement the interface methods with guards
 
