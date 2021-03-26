@@ -2,7 +2,7 @@
 
 ## Time Zone IANA Ids to/From Windows Ids conversion APIs
 
-**Approved** | [#runtime/49407](https://github.com/dotnet/runtime/issues/49407#issuecomment-808455616)
+**Approved** | [#runtime/49407](https://github.com/dotnet/runtime/issues/49407#issuecomment-808455616) | [Video](https://www.youtube.com/watch?v=vNPybpatlUU&t=0h0m0s)
 
 * Looks good as proposed but please make sure to properly null-annotate them.
 
@@ -21,7 +21,7 @@ namespace System
 
 ## Add BaseUtcOffset to TimeZoneInfo.AdjustmentRule.
 
-**NeedsWork** | [#runtime/50256](https://github.com/dotnet/runtime/issues/50256#issuecomment-808463210)
+**NeedsWork** | [#runtime/50256](https://github.com/dotnet/runtime/issues/50256#issuecomment-808463210) | [Video](https://www.youtube.com/watch?v=vNPybpatlUU&t=0h12m34s)
 
 * We probably want an overload for `CreateAdjustmentRule` that allows people to construct an instance with an offset
 * We need to think about what this means for instances that were created without an offset. Should it be nullable?
@@ -49,7 +49,7 @@ namespace System
 
 ## General purpose non-cryptographic hashing API for .NET
 
-**Approved** | [#runtime/24328](https://github.com/dotnet/runtime/issues/24328#issuecomment-808489277)
+**Approved** | [#runtime/24328](https://github.com/dotnet/runtime/issues/24328#issuecomment-808489277) | [Video](https://www.youtube.com/watch?v=vNPybpatlUU&t=0h28m7s)
 
 * Namespace
     - We're not convinced it deserves a top level namespace like `System.Hashing`.
@@ -128,7 +128,7 @@ namespace System.IO.Hashing
 
 ## StringComparer.IsWellKnownComparer
 
-**Approved** | [#runtime/50059](https://github.com/dotnet/runtime/issues/50059#issuecomment-808496914)
+**Approved** | [#runtime/50059](https://github.com/dotnet/runtime/issues/50059#issuecomment-808496914)| [Video](https://www.youtube.com/watch?v=vNPybpatlUU&t=1h21m15s)
 
 * Looks good as proposed
 
@@ -149,7 +149,7 @@ namespace System
 
 ## Add CancellationTokenSource.TryReset()
 
-**Approved** | [#runtime/48492](https://github.com/dotnet/runtime/issues/48492#issuecomment-808499702)
+**Approved** | [#runtime/48492](https://github.com/dotnet/runtime/issues/48492#issuecomment-808499702) | [Video](https://www.youtube.com/watch?v=vNPybpatlUU&t=1h38m28s)
 
 * Looks good as proposed
 
@@ -164,7 +164,7 @@ namespace System.Threading
 ```
 ## Proposal: add a static, thread-static Random.Current instance
 
-**Approved** | [#runtime/43887](https://github.com/dotnet/runtime/issues/43887#issuecomment-808500968)
+**Approved** | [#runtime/43887](https://github.com/dotnet/runtime/issues/43887#issuecomment-808500968) | [Video](https://www.youtube.com/watch?v=vNPybpatlUU&t=1h44m50s)
 
 * Looks good as proposed
 
@@ -180,7 +180,7 @@ namespace System
 
 ## Inform client code when a BoundedChannel drops an item
 
-**Approved** | [#runtime/36522](https://github.com/dotnet/runtime/issues/36522#issuecomment-808502110)
+**Approved** | [#runtime/36522](https://github.com/dotnet/runtime/issues/36522#issuecomment-808502110) | [Video](https://www.youtube.com/watch?v=vNPybpatlUU&t=1h47m57s)
 
 * Looks good as proposed
 
@@ -198,7 +198,7 @@ namespace System.Threading.Channels
 ```
 ## Configuration > Binder - Support for binding by custom attribute names. 
 
-**Approved** | [#runtime/36010](https://github.com/dotnet/runtime/issues/36010#issuecomment-808504315)
+**Approved** | [#runtime/36010](https://github.com/dotnet/runtime/issues/36010#issuecomment-808504315) | [Video](https://www.youtube.com/watch?v=vNPybpatlUU&t=1h50m46s)
 
 * Looks good as proposed
     - Does this need an analyzer?
