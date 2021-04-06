@@ -2,7 +2,7 @@
 
 ## Compile-time source generation for System.Text.Json
 
-**NeedsWork** | [#runtime/45448](https://github.com/dotnet/runtime/issues/45448#issuecomment-814368729)
+**NeedsWork** | [#runtime/45448](https://github.com/dotnet/runtime/issues/45448#issuecomment-814368729) | [Video](https://www.youtube.com/watch?v=MNWITQvvMYU)
 
 * General notes
     - The current proposal is that building application that use linking by default (Blazor, iOS, Android)
