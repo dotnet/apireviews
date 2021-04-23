@@ -29,10 +29,6 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 ```
-## Writable DOM and dynamic support for 6.0
-
-**Approved** | [#designs/163](https://github.com/dotnet/designs/pull/163) | [Video](https://www.youtube.com/watch?v=CL7PuoLYiGM&t=0h8m8s)
-
 ## Expose top-level nullability information from reflection
 
 **NeedsWork** | [#runtime/29723](https://github.com/dotnet/runtime/issues/29723#issuecomment-825819967) | [Video](https://www.youtube.com/watch?v=CL7PuoLYiGM&t=0h18m6s)
