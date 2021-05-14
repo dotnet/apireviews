@@ -2,7 +2,7 @@
 
 ## Add new option bag for FileStream ctor
 
-**Approved** | [#runtime/52446](https://github.com/dotnet/runtime/issues/52446#issuecomment-841408090)
+**Approved** | [#runtime/52446](https://github.com/dotnet/runtime/issues/52446#issuecomment-841408090) | [Video](https://youtu.be/hIwar_l0x4g?t=78)
 
 * There is no notion of required properties for structs/classes
     - We should extract path and keep it as a constructor parameter
@@ -56,7 +56,7 @@ namespace System.IO
 
 ## Provide fast-path serialization logic in JSON source generator
 
-**NeedsWork** | [#runtime/51945](https://github.com/dotnet/runtime/issues/51945#issuecomment-841456779)
+**NeedsWork** | [#runtime/51945](https://github.com/dotnet/runtime/issues/51945#issuecomment-841456779) | [Video](https://youtu.be/hIwar_l0x4g?t=3434)
 
 * Instead of generating a single `JsonContext` type per assembly, we should let the user define the `JsonContext` type (controlling namespace, type name, etc.) and apply the assembly level attributes to this type and have the generator fill in the body of the body. This allows the user to have multiple different JSON options for different types in a single assembly, e.g.
     - `Fabrikam.Telemetry.TelemetryJsonContext`
