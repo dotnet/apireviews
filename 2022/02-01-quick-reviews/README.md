@@ -1,9 +1,5 @@
 # API Review 02/01/2022
 
-## Additional JsonNode functionality
-
-**NeedsWork** | [#runtime/56592](https://github.com/dotnet/runtime/issues/56592) | [Video](https://www.youtube.com/watch?v=hE7KsqWPFlE&t=0h0m0s)
-
 ## Nullable.RefValue, RefValueOrDefault
 
 **Approved** | [#runtime/1534](https://github.com/dotnet/runtime/issues/1534#issuecomment-1027214141) | [Video](https://www.youtube.com/watch?v=hE7KsqWPFlE&t=0h20m8s)
