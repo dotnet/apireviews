@@ -4,21 +4,46 @@
 
 **Approved** | [#aspnetcore/40438](https://github.com/dotnet/aspnetcore/issues/40438#issuecomment-1074210703)
 
-https://github.com/dotnet/aspnetcore/pull/40430
+This was alraedy approved via email and merged in https://github.com/dotnet/aspnetcore/pull/40430.
+
+
 ## SignalR SourceGenerator attribute API
 
-**Approved** | [#aspnetcore/39973](https://github.com/dotnet/aspnetcore/issues/39973)
+**Approved** | [#aspnetcore/39973](https://github.com/dotnet/aspnetcore/issues/39973#issuecomment-1039457979)
+
+
+```diff
+namespace Microsoft.AspNetCore.SignalR.Client
+{
++    [AttributeUsage(AttributeTargets.Method)]
++    public sealed class ClientRegistrationAttribute : Attribute
++    {
++    }
+
++    [AttributeUsage(AttributeTargets.Method)]
++    public sealed class ServerHubProxyAttribute : Attribute
++    {
++    }
+```
+
+Package Name:
+Microsoft.AspNetCore.SignalR.Client.SourceGenerator
+
+Attribute DLL Name:
+Microsoft.AspNetCore.SignalR.Client.SourceGenerator.HubProxyAttributes.dll
+
+@BrennanConroy will talk to the remaining SignalR team about the attribute names and resubmit for API review to suggest name changes if there are any.
 
 ## Support returning values from client invocations
 
 **Approved** | [#aspnetcore/5280](https://github.com/dotnet/aspnetcore/issues/5280#issuecomment-1074238170)
 
-## Review Notes
+### Review Notes
 
 - The suggestion of using `new` `Caller` and `Client` methods `ISingleClientProxy` would be source breaking with existing `IHubClients` and `IHubCallerClients` implementations, decorators etc... if someone replace the `IHubContext<>` in DI, so we'll stick with `Single`
 - We should reach out to the ASRS team soon to verify they're happy with this design.
 
-## Approved API
+### Approved API
 
 **Client side:**
 ```diff
