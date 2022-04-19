@@ -2,7 +2,7 @@
 
 ## Developers can customize the JSON serialization contracts of their types
 
-**NeedsWork** | [#runtime/63686](https://github.com/dotnet/runtime/issues/63686#issuecomment-1102979549)
+**NeedsWork** | [#runtime/63686](https://github.com/dotnet/runtime/issues/63686#issuecomment-1102979549) | [Video](https://www.youtube.com/watch?v=8szYS1MiuTM)
 
 * `CanSerialize` should be named `ShouldSerialize`
 * We should design the combinators pattern more; this would validate that the shape of the types is correct; also, this feature might be mainstream enough that we want to ship a way to combine them along with a set of best practices in V1 of this feature.
