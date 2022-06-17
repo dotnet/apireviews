@@ -18,7 +18,7 @@ API review notes from @captainsafia:
 
 ## Add Output Caching middleware
 
-**Approved** | [#aspnetcore/41955](https://github.com/dotnet/aspnetcore/issues/41955))
+**Approved** | [#aspnetcore/41955](https://github.com/dotnet/aspnetcore/issues/41955)
 
 Final preview6 API review notes:
 
