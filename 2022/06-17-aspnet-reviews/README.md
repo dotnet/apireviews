@@ -2,7 +2,7 @@
 
 ## Allow endpoint filter factories to manipulate endpoint metadata
 
-**Approved** | [#aspnetcore/41722](https://github.com/dotnet/aspnetcore/issues/41722)
+**Approved** | [#aspnetcore/41722](https://github.com/dotnet/aspnetcore/issues/41722#issuecomment-1158421830)
 
 API review notes from @captainsafia :
 
@@ -10,7 +10,7 @@ API review notes from @captainsafia :
 
 ## EndpointBuilder.ServiceProvider should be non-nullabe and renamed to ApplicationServices
 
-**Approved** | [#aspnetcore/42137](https://github.com/dotnet/aspnetcore/issues/42137)
+**Approved** | [#aspnetcore/42137](https://github.com/dotnet/aspnetcore/issues/42137#issuecomment-1158421583)
 
 API review notes from @captainsafia:
 
@@ -18,7 +18,7 @@ API review notes from @captainsafia:
 
 ## Add Output Caching middleware
 
-**Approved** | [#aspnetcore/41955](https://github.com/dotnet/aspnetcore/issues/41955)
+**Approved** | [#aspnetcore/41955](https://github.com/dotnet/aspnetcore/issues/41955#issuecomment-1158484702)
 
 Final preview6 API review notes:
 
@@ -135,6 +135,96 @@ public interface IOutputCacheStore
     ValueTask EvictByTagAsync(string tag, CancellationToken token);
     ValueTask<byte[]> GetAsync(string key, CancellationToken token);
     ValueTask SetAsync(string key, byte[] value, TimeSpan validFor, CancellationToken token);
+}
+```
+
+API Approved!
+
+## Make RateLimiterMiddleware endpoint-aware
+**Approved** | [#aspnetcore/41667](https://github.com/dotnet/aspnetcore/issues/41667#issuecomment-1159267825)
+
+API Review Notes:
+
+- `RateLimitPartition.CreateNoLimiter()` Makes it sound like a limiter or partition is being created every time the method is called.
+  - This is already approved runtime API, but it should change.
+  - We should communicate this is not creating a limiter or a partition necessarily. Most of the time it's just crating a key to look up an existing partition. It also happens to include information about how to create a partition if need be, but this happens less frequently.
+  -  We should submit a runtime API proposal for this. `RateLimitPartition.Choose()`?
+- Do we like "Custom" in `CustomRejectionStatusCode` and `CustomOnRejected`?
+    - Should the "Custom" properties be nullable?
+    - Yes to both.
+- Should `DefaultRejectionStatusCode` be `RejectionStatusCode`?
+  - Yes.
+- Can we just get rid of `IRateLimiterPolicy<TKey>.RejectionStatusCode`.
+- I can inject DI services into MyRateLimiterPolicy's constructors right?
+- `AddTokenBucketRateLimiter` ->  `AddTokenBucketLimiter`
+  - Remove `Rate` from all of these.
+- Should `HttpContext`, `RateLimitLease` be added to a context class for future proofing
+  - `OnRejectedContext` class?
+  - Yes. Let's use `required init` here too.
+- `IRateLimitMetadata` (not in the proposal currently, but in the PR) should be made internal for now.
+- `Task` to `ValueTask`.
+- `PartitionedRateLimiter<HttpContext> Limiter` to `PartitionedRateLimiter<HttpContext>? GlobalLimiter`
+- Add CancellationToken
+- `TKey` -> `TPartitionKey`
+
+```diff
+namespace Microsoft.AspNetCore.RateLimiting
+{
+-  public interface IRateLimitMetadata
+- {
+- }
+-
++   public interface IRateLimiterPolicy<TPartitionKey>
++   {
++       public Func<OnRejectedContext, CancellationToken, ValueTask>? OnRejected { get; }
++       public RateLimitPartition<TPartitionKey> GetPartition(HttpContext httpContext);
++   }
+
+    public sealed class RateLimiterOptions
+    {
+-        public PartitionedRateLimiter<HttpContext> Limiter { get; set; }
++        public PartitionedRateLimiter<HttpContext>? GlobalLimiter { get; set; }
+-        public Func<HttpContext, RateLimitLease, Task> OnRejected { get; set; }
++        public Func<OnRejectedContext, CancellationToken, ValueTask>? OnRejected { get; set; }
+-        public int DefaultRejectionStatusCode { get; set; }
++        public int RejectionStatusCode { get; set; }
++        public RateLimiterOptions AddPolicy<TPartitionKey>(string policyName, Func<HttpContext, RateLimitPartition<TPartitionKey>> partitioner)
++        public RateLimiterOptions AddPolicy<TPartitionKey, TPolicy>(string policyName) where TPolicy : IRateLimiterPolicy<TPartitionKey>
++        public RateLimiterOptions AddPolicy<TPartitionKey>(string policyName, IRateLimiterPolicy<TPartitionKey> policy);
+    }
+
++ // We could add the policy name to this in the future if we want.
++ public sealed class OnRejectedContext
++ {
++       public HttpContext HttpContext { get; required init; }
++       public RateLimitLease Lease { get; required init; }
++ }
++
++   public static class RateLimiterOptionsExtensions
++   {
++       public static RateLimiterOptions AddTokenBucketLimiter(this RateLimiterOptions options, string policyName, TokenBucketRateLimiterOptions tokenBucketRateLimiterOptions)
++       public static RateLimiterOptions AddFixedWindowLimiter(this RateLimiterOptions options, string policyName, FixedWindowRateLimiterOptions fixedWindowRateLimiterOptions)
++       public static RateLimiterOptions AddSlidingWindowLimiter(this RateLimiterOptions options, string policyName, SlidingWindowRateLimiterOptions slidingWindowRateLimiterOptions)
++       public static RateLimiterOptions AddConcurrencyLimiter(this RateLimiterOptions options, string policyName, ConcurrencyLimiterOptions concurrencyLimiterOptions)
++       public static RateLimiterOptions AddNoLimiter(this RateLimiterOptions options, string policyName)
++   }
+
+-   public static class RateLimitingApplicationBuilderExtensions
+-   {
+-       //...
+-   }
+}
++ namespace  Microsoft.AspNetCore.Builder
++ {
++   public static class RateLimitingApplicationBuilderExtensions
++ {
++     //...
++ }
++
++   public static class RateLimiterEndpointConventionBuilderExtensions
++   {
++       public static TBuilder RequireRateLimiting<TBuilder>(this TBuilder builder, string policyName) where TBuilder : IEndpointConventionBuilder
++   }
 }
 ```
 
