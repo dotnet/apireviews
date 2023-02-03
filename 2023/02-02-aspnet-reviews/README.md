@@ -10,7 +10,7 @@ API Review Notes:
 - Can we get away with only updating the `DefaultPooledObjectPolicy<T>`? `StringBuilderPooledObjectPolicy` exists, but `StringBuilder` is sealed.
 - Is there anything analogous for object creation? No.
 - Do we expect custom policies to respect this? No. If you are unsure what the `PooledPolicy<T>` will be, don't rely on this.
-- By removing the ResettablePooledObjectPolicy, we lose the generic type constraint. However, given a plain old `ObjectPool<T>` that you didn't construct, you can never know if it will call `IResettable.Reset()`.
+- By removing the ResettablePooledObjectPolicy, we lose the generic type constraint. However, given a plain old `ObjectPool<T>` that you didn't construct, you can never know if it will call `IResettable.TryReset()`.
 - The alternative is always calling reset yourself before returning. The upside of this proposal is that if you construct the ObjectPool and define the type yourself, you know you won't accidentally not reset. Or have others forget. This is already possible with custom polices, but it's more verbose.
 
 API Approved!
@@ -20,9 +20,12 @@ namespace Microsoft.Extensions.ObjectPool;
 
 public interface IResettable
 {
-    bool Reset();
+    bool TryReset();
 }
 ```
+
+Edit: The proposal was intended to be "TryReset" rather than "Reset" since IResettable returns a bool.
+
 ## UserManager and SignInManager cancellation tokens
 
 **NeedsWork** | [#aspnetcore/45869](https://github.com/dotnet/aspnetcore/issues/45869#issuecomment-1414513643)
