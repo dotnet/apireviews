@@ -2,7 +2,7 @@
 
 ## COM source generator APIs
 
-**NeedsWork** | [#runtime/79121](https://github.com/dotnet/runtime/issues/79121#issuecomment-1421555838)
+**NeedsWork** | [#runtime/79121](https://github.com/dotnet/runtime/issues/79121#issuecomment-1421555838) | [Video](https://www.youtube.com/watch?v=nbVCa-b7qrk)
 
 * `VirtualMethodTableInfo`
     - Do we need the `Deconstruct`? Yes, as it simplifies the generated code.
