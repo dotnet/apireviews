@@ -1,5 +1,130 @@
 # API Review 03/16/2023
 
+## Obsolete JsonSerializerOptions.AddContext
+
+**Approved** | [dotnet/runtime#83280](https://github.com/dotnet/runtime/issues/83280#issuecomment-1472379622)
+
+Looks good as proposed.
+
+Confirm with @terrajobst that System.Text.Json should use SYSLIB codes.
+
+## Add ability to get modern Windows icons to System.Drawing.SystemIcons.
+
+**Approved** | [dotnet/winforms#8802](https://github.com/dotnet/winforms/issues/8802#issuecomment-1472399939)
+
+We added a `None=0` value to `StockIconOptions`.
+
+Assuming that the shorter overload is passing `StockIconOptions.None`, consider collapsing into one overload with a defaulted parameter.
+
+Consider renaming `StockIcon` to `StockIconId`, just in case there would be a future situation warranting something like `public class StockIcon : Icon`.
+
+```C#
+namespace System.Drawing;
+
+public static class SystemIcons
+{
+    /// <summary>
+    ///  Gets the specified stock shell icon.
+    /// </summary>
+    public static Icon GetStockIcon(StockIcon stockIcon);
+    public static Icon GetStockIcon(StockIcon stockIcon, StockIconOptions options);
+}
+
+[Flags]
+public enum StockIconOptions
+{
+    None = 0,
+    SmallIcon = 0x000000001,
+    ShellIconSize = 0x000000004,
+    LinkOverlay = 0x000008000,
+    Selected = 0x000010000,
+}
+
+// Matching https://learn.microsoft.com/windows/win32/api/shellapi/ne-shellapi-shstockiconid with
+// Pascal casing and no abbreviations ("Assoc" to "Associations"), will still keep acronyms (CD, not CompactDisc).
+public enum StockIcon
+{
+    DocumentNoAssociation = 0,
+    DocumentWithAssociation = 1,
+    Application = 2,
+    Folder = 3,
+    OpenFolder = 4,
+    Drive525 = 5,
+    Drive35 = 6,
+    DriveRemovable = 7,
+    DriveFixed = 8,
+    DriveNetwork = 9,
+    DriveNetworkDisabled = 10,
+    DriveCD = 11,
+    DriveRAM = 12,
+    World = 13,
+    Server = 15,
+    Printer = 16,
+    // ...
+}
+```
+
+## Add ReadOnlySpan overloads to System.Drawing.Graphics
+
+**Approved** | [#winforms/8844](https://github.com/dotnet/winforms/issues/8844#issuecomment-1472405556)
+
+Assuming that all the underlying APIs take a (w)char and separate length (vs expecting null termination), looks good as proposed.
+
+```C#
+namespace System.Drawing
+{
+    public sealed partial class Graphics : System.MarshalByRefObject, System.Drawing.IDeviceContext, System.IDisposable
+    {
+        // Existing:
+        public void DrawString(string? s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.PointF point) { }
+        public void DrawString(string? s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.PointF point, System.Drawing.StringFormat? format) { }
+        public void DrawString(string? s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.RectangleF layoutRectangle) { }
+        public void DrawString(string? s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.RectangleF layoutRectangle, System.Drawing.StringFormat? format) { }
+        public void DrawString(string? s, System.Drawing.Font font, System.Drawing.Brush brush, float x, float y) { }
+        public void DrawString(string? s, System.Drawing.Font font, System.Drawing.Brush brush, float x, float y, System.Drawing.StringFormat? format) { }
+        public System.Drawing.Region[] MeasureCharacterRanges(string? text, System.Drawing.Font font, System.Drawing.RectangleF layoutRect, System.Drawing.StringFormat? stringFormat) { throw null; }
+        public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font) { throw null; }
+        public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font, System.Drawing.PointF origin, System.Drawing.StringFormat? stringFormat) { throw null; }
+        public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font, System.Drawing.SizeF layoutArea) { throw null; }
+        public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font, System.Drawing.SizeF layoutArea, System.Drawing.StringFormat? stringFormat) { throw null; }
+        public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font, System.Drawing.SizeF layoutArea, System.Drawing.StringFormat? stringFormat, out int charactersFitted, out int linesFilled) { throw null; }
+        public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font, int width) { throw null; }
+        public System.Drawing.SizeF MeasureString(string? text, System.Drawing.Font font, int width, System.Drawing.StringFormat? format) { throw null; }
+
+        // Proposal
+        public void DrawString(ReadOnlySpan<char> s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.PointF point) { }
+        public void DrawString(ReadOnlySpan<char> s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.PointF point, System.Drawing.StringFormat? format) { }
+        public void DrawString(ReadOnlySpan<char> s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.RectangleF layoutRectangle) { }
+        public void DrawString(ReadOnlySpan<char> s, System.Drawing.Font font, System.Drawing.Brush brush, System.Drawing.RectangleF layoutRectangle, System.Drawing.StringFormat? format) { }
+        public void DrawString(ReadOnlySpan<char> s, System.Drawing.Font font, System.Drawing.Brush brush, float x, float y) { }
+        public void DrawString(ReadOnlySpan<char> s, System.Drawing.Font font, System.Drawing.Brush brush, float x, float y, System.Drawing.StringFormat? format) { }
+        public System.Drawing.Region[] MeasureCharacterRanges(ReadOnlySpan<char> text, System.Drawing.Font font, System.Drawing.RectangleF layoutRect, System.Drawing.StringFormat? stringFormat) { throw null; }
+        public System.Drawing.SizeF MeasureString(ReadOnlySpan<char> text, System.Drawing.Font font) { throw null; }
+        public System.Drawing.SizeF MeasureString(ReadOnlySpan<char> text, System.Drawing.Font font, System.Drawing.PointF origin, System.Drawing.StringFormat? stringFormat) { throw null; }
+        public System.Drawing.SizeF MeasureString(ReadOnlySpan<char> text, System.Drawing.Font font, System.Drawing.SizeF layoutArea) { throw null; }
+        public System.Drawing.SizeF MeasureString(ReadOnlySpan<char> text, System.Drawing.Font font, System.Drawing.SizeF layoutArea, System.Drawing.StringFormat? stringFormat) { throw null; }
+        public System.Drawing.SizeF MeasureString(ReadOnlySpan<char> text, System.Drawing.Font font, System.Drawing.SizeF layoutArea, System.Drawing.StringFormat? stringFormat, out int charactersFitted, out int linesFilled) { throw null; }
+        public System.Drawing.SizeF MeasureString(ReadOnlySpan<char> text, System.Drawing.Font font, int width) { throw null; }
+        public System.Drawing.SizeF MeasureString(ReadOnlySpan<char> text, System.Drawing.Font font, int width, System.Drawing.StringFormat? format) { throw null; }
+    }
+
+    public sealed partial class GraphicsPath : System.MarshalByRefObject, System.ICloneable, System.IDisposable
+    {
+        // Existing:
+        public void AddString(string s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.Point origin, System.Drawing.StringFormat? format) { }
+        public void AddString(string s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.PointF origin, System.Drawing.StringFormat? format) { }
+        public void AddString(string s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.Rectangle layoutRect, System.Drawing.StringFormat? format) { }
+        public void AddString(string s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.RectangleF layoutRect, System.Drawing.StringFormat? format) { }
+
+        // Proposal
+        public void AddString(ReadOnlySpan<char> s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.Point origin, System.Drawing.StringFormat? format) { }
+        public void AddString(ReadOnlySpan<char> s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.PointF origin, System.Drawing.StringFormat? format) { }
+        public void AddString(ReadOnlySpan<char> s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.Rectangle layoutRect, System.Drawing.StringFormat? format) { }
+        public void AddString(ReadOnlySpan<char> s, System.Drawing.FontFamily family, int style, float emSize, System.Drawing.RectangleF layoutRect, System.Drawing.StringFormat? format) { }
+    }
+}
+```
+
 ## Support modifying already initialized properties and fields when deserializing JSON
 
 **Approved** | [#runtime/78556](https://github.com/dotnet/runtime/issues/78556#issuecomment-1472518084) | [Video](https://www.youtube.com/watch?v=2Z7MxaxQj0w&t=0h0m0s)
