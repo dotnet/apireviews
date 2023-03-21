@@ -74,24 +74,97 @@ public partial class JsonSerializerOptions
 ```
 ## APIs for source generating interop stubs for unmanaged virtual function tables
 
-**NeedsWork** | [#runtime/80204](https://github.com/dotnet/runtime/issues/80204#issuecomment-1478403421) | [Video](https://www.youtube.com/watch?v=hyyNUh4s3Qo&t=0h59m22s)
+**NeedsWork** | [#runtime/80204](https://github.com/dotnet/runtime/issues/80204#issuecomment-1478424502) | [Video](https://www.youtube.com/watch?v=hyyNUh4s3Qo&t=0h59m22s)
 
-From #79121,
+* The default is `ExceptionMarshalling.Custom`
+    - If the developer doesn't specify a behavior, should we give a warning?
+    - If the developer doesn't specify a behavior, what's the default? Swallow seems problematic. It seems a clean crash would be preferable.
+* Should we have a `ExceptionFailFastMarshaller`?
+    - Or should this be an enum member? If that's the default (`0` member) then this would nicely answer "what's the default behavior".
+* Should we add an SEH marshaller for Windows?
+* We should rename the marshallers by adding `As`
+* @AaronRobinsonMSFT would prefer to wait a bit to see whether we actually need it
 
-```csharp
-/// <summary>
-/// This interface allows another interface to define that it represents a managed projection of an unmanaged interface from some unmanaged type system and supports passing managed implementations of unmanaged interfaces to unmanaged code.
-/// </summary>
-public interface IUnmanagedInterfaceType<TSelf> where TSelf: IUnmanagedInterfaceType<TSelf>
+```C#
+namespace System.Runtime.InteropServices.Marshalling;
+
+public interface IUnmanagedObjectUnwrapper
 {
-    /// <summary>
-    /// Get a pointer to the virtual method table of managed implementations of the unmanaged interface type.
-    /// </summary>
-    /// <returns>A pointer to the virtual method table of managed implementations of the unmanaged interface type</returns>
-    /// <remarks>
-    /// Implementation will be provided by a source generator if not explicitly implemented.
-    /// This property can return <c>null</c>. If it does, then the interface is not supported for passing managed implementations to unmanaged code.
-    /// </remarks>
+    public static abstract object GetObjectForUnmanagedWrapper(void* ptr);
+}
+
+public interface IUnmanagedInterfaceType<TSelf>
+    where TSelf: IUnmanagedInterfaceType<TSelf>
+{
     public abstract static unsafe void** ManagedVirtualMethodTable { get; }
 }
-````
+
+[AttributeUsage(AttributeTargets.Interface)]
+public class UnmanagedObjectUnwrapperAttribute<TMapper> : Attribute
+    where TMapper : IUnmanagedObjectUnwrapper
+{
+}
+
+public sealed unsafe class ComWrappersUnwrapper : IUnmanagedObjectUnwrapper
+{
+    public static object GetObjectForUnmanagedWrapper(void* ptr);
+}
+
+[CustomMarshaller(typeof(Exception), MarshalMode.UnmanagedToManagedOut, typeof(ExceptionHResultMarshaller<>))]
+public static class ExceptionAsHResultMarshaller<T>
+    where T : unmanaged, INumber<T>
+{
+    public static T ConvertToUnmanaged(Exception e);
+}
+
+[CustomMarshaller(typeof(Exception), MarshalMode.UnmanagedToManagedOut, typeof(ExceptionNaNMarshaller<>))]
+public static class ExceptionAsNaNMarshaller<T>
+    where T : unmanaged, IFloatingPointIeee754<T>
+{
+    public static T ConvertToUnmanaged(Exception e);
+}
+
+[CustomMarshaller(typeof(Exception), MarshalMode.UnmanagedToManagedOut, typeof(ExceptionDefaultMarshaller<>))]
+public static class ExceptionAsDefaultMarshaller<T>
+    where T : unmanaged
+{
+    public static T ConvertToUnmanaged(Exception e);
+}
+
+[CustomMarshaller(typeof(Exception), MarshalMode.UnmanagedToManagedOut, typeof(SwallowExceptionMarshaller))]
+public static class ExceptionAsVoidMarshaller
+{
+    public static void ConvertToUnmanaged(Exception e);
+}
+
+public enum ExceptionMarshalling
+{
+    Custom = 0,
+    Com = 1
+}
+
+public enum MarshalDirection
+{
+    ManagedToUnmanaged = 0,
+    UnmanagedToManaged = 1,
+    Bidirectional = 2
+}
+
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+public sealed class VirtualMethodIndexAttribute : Attribute
+{
+    public VirtualMethodIndexAttribute(int index);
+
+    public int Index { get; }
+
+    public bool ImplicitThisParameter { get; set; } = true;
+    public StringMarshalling StringMarshalling { get; set; }
+    public Type? StringMarshallingCustomType { get; set; }
+    public bool SetLastError { get; set; }
+    
+    public MarshalDirection Direction { get; set; } = MarshalDirection.Bidirectional;
+
+    public ExceptionMarshalling ExceptionMarshalling { get; set; }
+    public Type? ExceptionMarshallingCustomType { get; set; }
+}
+```
