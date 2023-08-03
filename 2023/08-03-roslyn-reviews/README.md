@@ -10,6 +10,23 @@
     * Let's see if we can consolidate into `SuppressionInfo`. Passing a `Compilation` might be a problem?
 
 **Conclusion**: See if we can do that move, and send email to the api review alias to follow up with the results. If it can't be done, we can make sure we like the names proposed and then approve over email.
+
+## public API for roslyn features to expose the ability to report progress as they run
+
+**NeedsWork** | [#roslyn/69111](https://github.com/dotnet/roslyn/issues/69111)
+
+* What's the namespace?
+* Why is `CurrentScope` necessary?
+    * We could probably simplify and remove that?
+* Why not just pass in `IProgress`?
+    * Do we really need have the scoping? You're already in a code action, are there actually finer scopes?
+    * We do use it in one place, but we could probably simplify that case.
+    * We'll look at simplifying this.
+* If we simplify to IProgress, we can simplify the structs as well.
+    * CodeActionProgress, not LongRunningActionProgress, etc
+
+**Conclusion**: Will come back with a simplified proposal.
+
 ## Add async `SourceText` APIs
 
 **Rejected** | [#roslyn/61489](https://github.com/dotnet/roslyn/issues/61489#issuecomment-1664648377)
