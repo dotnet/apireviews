@@ -1,8 +1,25 @@
 # API Review 11/07/2023
 
+## `WasmImportLinkageAttribute` to control wasm module names 
+
+**NeedsWork** | [#runtime/93824](https://github.com/dotnet/runtime/issues/93824#issuecomment-1799517831) | [Video](https://youtu.be/5FVp8Mjuoog?t=47)
+
+* According to [this comment](https://github.com/dotnet/runtimelab/issues/2414#issuecomment-1772551025) it seems we decided that P/Invokes without this attribute would fail. Why don't we just make (1) behave like (3)? In other words, what does this attribute add?
+* If there is a good reason, we're OK with the proposed name and shape, but it would be nice if we didn't need it.
+
+```C#
+namespace System.Runtime.InteropServices;
+
+[AttributeUsage(AttributeTargets.Method, Inherited = false)]
+public sealed class WasmImportLinkageAttribute : Attribute
+{
+    public WasmImportLinkageAttribute();
+}
+```
+
 ## ElapsedEventArgs doesn't have a public constructor
 
-**Approved** | [#runtime/31204](https://github.com/dotnet/runtime/issues/31204#issuecomment-1799532061)
+**Approved** | [#runtime/31204](https://github.com/dotnet/runtime/issues/31204#issuecomment-1799532061) | [Video](https://youtu.be/5FVp8Mjuoog?t=1956)
 
 * Currently people can't derive from this type (because there are no public constructors), we should seal it
 * Do we need to add any argument validation?
@@ -17,7 +34,7 @@ public sealed class ElapsedEventArgs : EventArgs
 ```
 ## Provide support for alternative rounding modes for division and remainder of division.
 
-**Approved** | [#runtime/93568](https://github.com/dotnet/runtime/issues/93568#issuecomment-1799599570)
+**Approved** | [#runtime/93568](https://github.com/dotnet/runtime/issues/93568#issuecomment-1799599570) | [Video](https://youtu.be/5FVp8Mjuoog?t=2428)
 
 * Looks good as proposed
 * This implies those three methods become public statics on the primitives, such as `int`
@@ -44,16 +61,10 @@ public partial interface IBinaryInteger<T>
     static virtual TSelf Remainder(TSelf left, TSelf right, DivisionRounding mode);
 }
 ```
-## `WasmImportLinkageAttribute` to control wasm module names
 
-**NeedsWork** | [#runtime/93824](https://github.com/dotnet/runtime/issues/93824#issuecomment-1799532364)
-
-> Unresolved WASM imports in a binary will lead to a fail fast on some WASM hosts.
-
-So this is dependent on what WASM host is being used? Can you share an example of each?
 ## KMAC
 
-**Approved** | [#runtime/93494](https://github.com/dotnet/runtime/issues/93494#issuecomment-1799778242)
+**Approved** | [#runtime/93494](https://github.com/dotnet/runtime/issues/93494#issuecomment-1799778242) | [Video](https://youtu.be/5FVp8Mjuoog?t=3471)
 
 * Looks good as proposed
 * There is a spelling error in `desintation`, should be `destination`
@@ -183,7 +194,7 @@ public sealed class KmacXof256 : IDisposable
 ```
 ## Billboard Lefthanded APIs for System.Numerics.Matrix4x4
 
-**Approved** | [#runtime/93046](https://github.com/dotnet/runtime/issues/93046#issuecomment-1799787827)
+**Approved** | [#runtime/93046](https://github.com/dotnet/runtime/issues/93046#issuecomment-1799787827)| [Video](https://youtu.be/5FVp8Mjuoog?t=5649)
 
 * Looks good as proposed
 
@@ -198,7 +209,7 @@ public partial struct Matrix4x4
 ```
 ## IsInitOnly boolean property for PropertyDefinition in SDK
 
-**NeedsWork** | [#runtime/80205](https://github.com/dotnet/runtime/issues/80205#issuecomment-1799818209)
+**NeedsWork** | [#runtime/80205](https://github.com/dotnet/runtime/issues/80205#issuecomment-1799818209) | [Video](https://youtu.be/5FVp8Mjuoog?t=5886)
 
 * How much overhead does this add?
 * How about other concepts we recently added, such as `required`?
