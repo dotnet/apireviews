@@ -50,6 +50,7 @@ public class AuthorizationFailureReason
 +   public string Message { get; }
 +   public IAuthorizationHandler Handler { get; }
 }
+```
 
 API consideration: Can this type be sealed and use a `IDictionary` to pass additional data instead e.g.
 

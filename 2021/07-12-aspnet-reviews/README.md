@@ -13,8 +13,10 @@
 + {
 +     public IServiceProvider? ServiceProvider { get; init; }
 -     public IReadOnlyList<string>? RouteParameterNames { get; init; }
-+    public IEnumerable<string>? RouteParameterNames { get; init; }
++     public IEnumerable<string>? RouteParameterNames { get; init; }
 + }
+```
+
 ## Capture Endpoint and RouteValues  on ExceptionHandlerFeature
 
 **Approved** | [#aspnetcore/34205](https://github.com/dotnet/aspnetcore/pull/34205)

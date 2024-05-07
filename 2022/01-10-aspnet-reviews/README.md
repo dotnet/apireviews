@@ -118,7 +118,6 @@ public class ControllerBase
 +    public Func<Stream, Task> StreamWriterCallback { get; set; }
 + }
 }
-
+```
 
 We should also add PipeReader / PipeWriter overloads for controllers. @rafikiassumani-msft could we have someone propose the API for this and bring it to review?
-

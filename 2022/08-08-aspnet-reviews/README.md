@@ -34,6 +34,8 @@ class HubConnection {
 // Up to 8
 +    public <T1, ..., T8, TResult> Subscription onWithResult(String target, FunctionSingle<T1, ..., T8, TResult> callback, Class<T1> param1, ..., Class<T8> param8);
 }
+```
+
 ## Problem uploading large files with Kestrel + Docker
 
 **NeedsWork** | [#aspnetcore/6711](https://github.com/dotnet/aspnetcore/issues/6711#issuecomment-1208537157)

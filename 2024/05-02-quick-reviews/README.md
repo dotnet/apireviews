@@ -57,6 +57,7 @@ public partial class MetadataBuilder
 +        int guidHeapStartOffset = 0,
 +        Func<int, BlobBuilder>? createBlobBuilderFunc = null);
 }
+```
 
 ## TypeDescriptor-related trimming support
 

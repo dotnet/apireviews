@@ -215,10 +215,17 @@ public class GpioPin : GpioConnection
 
 This class will represent anything that will be plugged into a controller and
 that is capable to read and write values. This is an extensibility point for
-future sensor-specific classes. ```C# public abstract class GpioConnection :
-IDisposable { public IDictionary<int, PinMode> Pins { get; } public void
-Write(byte[] value, int offset, int count); public int Read(byte[] buffer, int
-offset, int count); public void Dispose(); }
+future sensor-specific classes.
+
+```C#
+public abstract class GpioConnection : IDisposable
+{
+    public IDictionary<int, PinMode> Pins { get; }
+    public void Write(byte[] value, int offset, int count);
+    public int Read(byte[] buffer, int offset, int count);
+    public void Dispose();
+}
+```
 
 ### GpioDriver classes
 
