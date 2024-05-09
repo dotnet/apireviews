@@ -140,3 +140,4 @@ namespace Microsoft.Extensions.FileProviders.Physical
     {
         // IDirectoryContents implementation
     }
+```

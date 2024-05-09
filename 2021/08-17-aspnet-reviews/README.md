@@ -18,11 +18,12 @@
 +        string contentType, 
 +        params string[] otherContentTypes);
  }
+```
 
 
 * Remove `init` property setters. 
 * Remove `<returns />` doc comment for property
-* 
+
 ```diff
 +   public sealed class RequestDelegateResult
 +    {
@@ -51,9 +52,9 @@
 + ConsumesAttribute : IApiRequestMetadataProvider, IAcceptMetadata
 {
      ConsumesAttribute(string[] contentTypes);
-+   ConsumesAttribute(Type requestType, string contentType, params string[] contentTypes);
++    ConsumesAttribute(Type requestType, string contentType, params string[] contentTypes);
 
-+   Type IApiRequestMetadataProvider.RequestType { get; set; }
++    Type IApiRequestMetadataProvider.RequestType { get; set; }
 }
 ```
 

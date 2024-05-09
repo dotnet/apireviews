@@ -75,4 +75,5 @@ namespace System.Security.Cryptography
      {
         public static IncrementalHash CreateHMAC(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> key);
      }
- }
+}
+```

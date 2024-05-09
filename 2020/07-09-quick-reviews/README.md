@@ -35,6 +35,8 @@ Adding the DefineScope T4-T6 for parity is approved.  If you want to add further
         public static System.Func<Microsoft.Extensions.Logging.ILogger, T1, T2, T3, T4, T5, System.IDisposable> DefineScope<T1, T2, T3, T4, T5>(string formatString) { throw null; }
         public static System.Func<Microsoft.Extensions.Logging.ILogger, T1, T2, T3, T4, T5, T6, System.IDisposable> DefineScope<T1, T2, T3, T4, T5, T6>(string formatString) { throw null; }
     }
+```
+
 ## Http header value Encoding selection
 
 **Approved** | [#runtime/38711](https://github.com/dotnet/runtime/issues/38711#issuecomment-656265904) | [Video](https://www.youtube.com/watch?v=Uu-vtMorrC0&t=0h23m21s)

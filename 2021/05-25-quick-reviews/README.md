@@ -134,6 +134,8 @@ public class PublicKey
 +   [Obsolete("The key property is no longer recommended for use. Use the appropriate GetPublicKey method instead.")]
     public AsymmetricAlgorithm Key { get; }
 }
+```
+
 ## Add PipeWriter.UnflushedBytes
 
 **Approved** | [#runtime/48913](https://github.com/dotnet/runtime/issues/48913#issuecomment-848161253) | [Video](https://www.youtube.com/watch?v=kO1HyNmi7ww&t=0h37m2s)

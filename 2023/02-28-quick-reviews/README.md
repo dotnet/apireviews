@@ -121,6 +121,7 @@ public partial class String : ISpanParsable<String>
 
     // also explicitly implement ISpanParsable
 }
+```
 
 ## MemoryExtensions.AsSpan(this string? text, Range range)
 
