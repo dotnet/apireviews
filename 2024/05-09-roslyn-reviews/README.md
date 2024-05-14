@@ -2,7 +2,7 @@
 
 ## SyntaxTokenParser API Additions
 
-**Rejected** | [#roslyn/73002](https://github.com/dotnet/roslyn/issues/73002#issuecomment-2103415731)
+**Approved** | [#roslyn/73002](https://github.com/dotnet/roslyn/issues/73002#issuecomment-2103415731)
 
 ### API Review
 
