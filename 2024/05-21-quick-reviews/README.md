@@ -175,7 +175,7 @@ public partial class JsonSerializerOptions
 {
     // Existing
     // public class bool RespectRequiredConstructorParameters { get; set; } = false;
-    public class RespectNullableAnnotations { get; set; } = false;
+    public bool RespectNullableAnnotations { get; set; } = false;
 }
 
 public partial class JsonPropertyInfo
