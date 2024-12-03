@@ -2,7 +2,7 @@
 
 ## Introduce LeftJoin LINQ operator
 
-**Approved** | [#runtime/110292](https://github.com/dotnet/runtime/issues/110292#issuecomment-2515329399)
+**Approved** | [#runtime/110292](https://github.com/dotnet/runtime/issues/110292#issuecomment-2515329399) | [Video](https://www.youtube.com/watch?v=itbo6fSB9nA&t=10m43s)
 
 * We should do both `LeftJoin` and `RightJoin` as reordering the Linq query expression is much more involved than it would be in SQL
 * We could do an overload that doesn't take a result selector and returns a tuple. But we decided to keep this separate as we should do the same for the existing `Join` method
@@ -80,7 +80,7 @@ public static class Queryable
 
 ## allow collection expressions for 'System.Collections.ObjectModel' collection types
 
-**Approved** | [#runtime/110161](https://github.com/dotnet/runtime/issues/110161#issuecomment-2515391504)
+**Approved** | [#runtime/110161](https://github.com/dotnet/runtime/issues/110161#issuecomment-2515391504) | [Video](https://www.youtube.com/watch?v=itbo6fSB9nA&t=34m54s)
 
 * We can't put the methods on `CollectionExtensions` because the object model ones live in a higher assembly
 * We could add another type (e.g. `System.Collections.ObjectModel.Collection` or one non-generic type per collection (like we do in immutable).
@@ -107,7 +107,7 @@ namespace System.Collections.ObjectModel
 ```
 ## Add API to enable BackgroundService startup to avoid blocking host startup
 
-**Rejected** | [#runtime/36063](https://github.com/dotnet/runtime/issues/36063#issuecomment-2515480657)
+**Rejected** | [#runtime/36063](https://github.com/dotnet/runtime/issues/36063#issuecomment-2515480657) | [Video](https://www.youtube.com/watch?v=itbo6fSB9nA&1h9m21s)
 
 * We don't believe many people will be broken by the new behavior
     - People who are, can either implement `IHostedService` or do their own dependency handling
@@ -124,7 +124,7 @@ public class BackgroundService : IHostedService
 ```
 ## Add a `JsonObject.TryAdd` method.
 
-**Approved** | [#runtime/110244](https://github.com/dotnet/runtime/issues/110244#issuecomment-2515481213)
+**Approved** | [#runtime/110244](https://github.com/dotnet/runtime/issues/110244#issuecomment-2515481213) | [Video](https://www.youtube.com/watch?v=itbo6fSB9nA&t=1h30m36s)
 
 * Looks good as proposed but we should add an overload of `TryAdd` without the index for consistency and ergonomics
 * The behavior of what we return for the index should match `OrderedDictionary<TKey, TValue>`
