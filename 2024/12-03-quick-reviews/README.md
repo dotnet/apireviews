@@ -107,7 +107,7 @@ namespace System.Collections.ObjectModel
 ```
 ## Add API to enable BackgroundService startup to avoid blocking host startup
 
-**Rejected** | [#runtime/36063](https://github.com/dotnet/runtime/issues/36063#issuecomment-2515480657) | [Video](https://www.youtube.com/watch?v=itbo6fSB9nA&1h9m21s)
+**Rejected** | [#runtime/36063](https://github.com/dotnet/runtime/issues/36063#issuecomment-2515480657) | [Video](https://www.youtube.com/watch?v=itbo6fSB9nA&t=1h9m21s)
 
 * We don't believe many people will be broken by the new behavior
     - People who are, can either implement `IHostedService` or do their own dependency handling
