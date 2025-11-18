@@ -39,6 +39,7 @@ public enum ZipCompressionMethod : ushort
 //    Lzma = 0xE,
 //    Zstandard = 0x5D,
 }
+```
 ## Be able to specify window size in BrotliCompressionOptions and let use large window size as native brotli encoder
 
 **Approved** | [#runtime/116227](https://github.com/dotnet/runtime/issues/116227#issuecomment-3549085412) | [Video](https://www.youtube.com/watch?v=NzqIFvMFxWg&t=0h33m42s)
